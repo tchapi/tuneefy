@@ -1,0 +1,179 @@
+body{
+  font: normal normal normal 1em/1em arial,helvetica,sans-serif;
+}
+
+
+/* Button CSS 3 */
+a.btn{
+  position: relative;
+  color: white;
+  text-transform: lowercase;
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  background: #222;
+  background-image: -moz-linear-gradient(center top , #262626 0%, #1B1B1B 100%);
+  background-image: -webkit-gradient(linear, left top,left bottom, color-stop(0,#262626), color-stop(1,#1B1B1B));
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 6px 15px 7px 15px;
+  cursor: pointer;
+  text-shadow: 0 -2px black;
+  box-shadow: 0 1px #333333 inset,  0 1px #171717;
+}
+a.btn:hover{ color: #76bad0; }
+a.btn:active{ box-shadow: 0 3px 3px #171717 inset,  0 1px #171717;  }
+
+a.btns{
+  display: inline-block;
+  width: 36px;
+  height: 31px; 
+  cursor: pointer;
+}
+
+a.btns:hover{ background-position: 0px -32px; }
+a.btns.off{ background-position: 0px -64px; }
+
+a.btn_0{ background: url("../img/platforms/platform_0.png") no-repeat;}
+a.btn_1{ background: url("../img/platforms/platform_1.png") no-repeat;}
+a.btn_2{ background: url("../img/platforms/platform_2.png") no-repeat;}
+a.btn_3{ background: url("../img/platforms/platform_3.png") no-repeat;}
+a.btn_4{ background: url("../img/platforms/platform_4.png") no-repeat;}
+a.btn_5{ background: url("../img/platforms/platform_5.png") no-repeat;}
+a.btn_6{ background: url("../img/platforms/platform_6.png") no-repeat;}
+a.btn_7{ background: url("../img/platforms/platform_7.png") no-repeat;}
+a.btn_8{ background: url("../img/platforms/platform_8.png") no-repeat;}
+a.btn_9{ background: url("../img/platforms/platform_9.png") no-repeat;}
+a.btn_10{ background: url("../img/platforms/platform_10.png") no-repeat;}
+a.btn_11{ background: url("../img/platforms/platform_11.png") no-repeat;}
+a.btn_12{ background: url("../img/platforms/platform_12.png") no-repeat;}
+a.btn_13{ background: url("../img/platforms/platform_13.png") no-repeat;}
+
+.txtS{    text-shadow: 0 -1px black !important; } /*standard*/
+
+ul li.tHeader{
+  display: none;
+}
+
+#waiting{
+  background: #1A1A1A;
+  height: 100%;
+  left: 0;
+  opacity: 0.8;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+#waiting img{
+  position: absolute;
+  left: 200px;
+  top: 66px;
+}
+
+#results{
+  padding: 16px;
+}
+
+.nbResults{
+  color: #76bad0;
+  font-size: 18px;
+  text-shadow: 0 -1px black;
+  margin-bottom: 10px;
+}
+
+li.tResult{
+  box-shadow: 0 1px #070707 inset, 0 1px #333333;
+  border-radius: 3px;
+  background: #151515;
+  height: 60px;
+  padding: 10px;
+}
+
+li.tResult .coverlay{
+  position:absolute;
+  top:4px;
+  left:4px; 
+  width: 48px;
+  height: 48px;
+  border: 1px solid #AAA;
+  background: url("../img/coverlay.png") center center;
+}
+
+li.tResult .tImage{
+  float: left;
+  position: relative;
+  margin-right: 20px;
+}
+
+li.tResult .tImage img{
+  width: 50px;
+  height: 50px;
+  border: 4px solid white;
+  box-shadow: 0px 0px 3px black;
+  display: block;
+}
+
+li.tResult .tTitle{
+  font-weight: bold;
+  font-size: 16px;
+  color: #A2A2A2;
+  padding-top: 4px;
+}
+
+li.tResult .tFeat{
+  display: none;
+}
+
+li.tResult .tArtist{
+  color: #474747;
+  font-size: 12px;
+  padding-top: 4px;
+}
+
+li.tResult .tAlbum{
+  color: #474747;
+  font-size: 10px;
+  padding-top: 2px;
+  text-transform: uppercase;
+}
+
+li.tResult .tShare{
+  position: absolute;
+  bottom: 14px;
+  right: 138px;
+}
+
+.tLinks{
+  position: absolute;
+  bottom: 11px;
+  left: 14px;
+}
+
+.tLinks .wrapper{
+  height: 33px;
+  overflow: hidden;
+  width: 205px;
+}
+
+#more {
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+}
+
+#alerts{
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  padding-top: 66px;
+}
+#alerts span{
+  text-shadow: 0 -1px black !important;
+  color: #76bad0;
+}
+
+a.backToTop{
+  display: none !important;
+}

@@ -1,0 +1,133 @@
+a.btn{
+  -pie-background: linear-gradient(#262626, #1B1B1B);
+  behavior: url("/css/PIE.htc");
+}
+#header-wrapper {
+  -pie-background: linear-gradient(#8bc6d8, #62aec8);
+  behavior: url("/css/PIE.htc");
+}
+#navigation li a{
+  behavior: url("/css/PIE.htc");
+}
+#navigation li a:hover{
+  -pie-background: linear-gradient(#51a9c4, #3085ac);
+  behavior: url("/css/PIE.htc");
+}
+.shd{
+  behavior: url("/css/PIE.htc");
+}
+.boxed{
+  behavior: url("/css/PIE.htc");
+}
+#preSearch .boxed{
+  height: 168px;
+}
+#basic, #todaysPick, .pickPagerItem{
+  behavior: url("/css/PIE.htc");
+}
+
+#query{
+  height: 46px;
+  line-height: 46px;
+  background-position-y: 13px;
+  margin-left: 1px;
+  behavior: url("/css/PIE.htc");
+}
+#launch{
+  height: 49px;
+  -pie-background: linear-gradient(#646464, #444444);
+  behavior: url("/css/PIE.htc");
+}
+#launch:hover{
+  -pie-background: linear-gradient(#444444, #646464);
+  behavior: url("/css/PIE.htc");
+}
+#resetQuery{
+  top: 7px;
+}
+
+#searchType{
+  height: 50px;
+  top: 8px;
+  box-shadow: none;
+}
+
+#searchTypeInner{
+  margin: 0 9px 0;
+}
+
+.otherHandle{
+  -pie-background: linear-gradient(#333333, #181818);
+  behavior: url("/css/PIE.htc");
+ }
+
+#options{
+  top: 8px;
+  height: 49px;
+}
+#options.shd{
+  right: 8px;
+  top: 8px;
+  z-index: 201;
+}
+#hideMisere{
+  right: 9px;
+}
+#advanced{
+  right: 9px;
+  top: 80px;
+}
+#availablePlatforms, #mergeResults{
+  behavior: url("/css/PIE.htc");
+}
+#waiting{
+  margin-top: -3px;
+}
+#help, #help .neverAgain, #help .moreHelp, #help .searchForIt{
+  behavior: url("/css/PIE.htc");
+}
+.helpTriangle{
+  display: none;
+}
+.tHeader{
+  behavior: url("/css/PIE.htc");
+}
+/* SHARE */
+#linkHolder, #socialHolder {
+  behavior: url("/css/PIE.htc");
+}
+
+/* ABOUT */
+#contactFormWrapper, #email, #message {
+  behavior: url("/css/PIE.htc");
+}
+
+#about-wrapper ul.platformsPatterns li.platform {
+  border-top: 1px solid #262626;
+  border-bottom: none;
+}
+
+#about-wrapper ul.platformsPatterns li.platform ul{
+  border: 1px solid #101010;
+  border-left: none;
+  height: 148px;
+}
+
+/* COMING SOON */
+#mail_signin{ behavior: url("/css/PIE.htc"); }
+#mail_signin_notify{
+  height: 48px;
+  line-height: 48px;
+  behavior: url("/css/PIE.htc");
+}
+#mail_signin_notify_submit{
+  height: 50px;
+  -pie-background: linear-gradient(#91cadb, #5baac5);
+  behavior: url("/css/PIE.htc");
+}
+#mail_signin_notify_submit:hover{
+  -pie-background: linear-gradient(#5baac5, #91cadb);
+  behavior: url("/css/PIE.htc");
+}
+.alert, .focused{ behavior: url("/css/PIE.htc"); }
+.triangle{ display: none; }

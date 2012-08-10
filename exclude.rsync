@@ -1,0 +1,20 @@
+# exclude.rsync
+.svn
+*.swp
+svn-commit*
+.DS_Store
+htaccess
+.htaccess
+deploy_beta.sh
+deploy_prod.sh
+_SOURCES_
+_FEEDBACK_
+test*
+config.php
+exclude.rsync
+toutCeQuOnPeutFaire.txt
+mail.html
+spotify/*
+js/min/tuneefy.min.js*
+TODO*
+nbproject*

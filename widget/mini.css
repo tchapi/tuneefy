@@ -1,0 +1,42 @@
+div#tuneefy_overlay {
+  position: fixed;
+  display: block;
+  width: 450px;
+  height: 180px;
+  /*top: -180px;*/
+  top:0;
+  right: -2px;
+  background: #1c1c1c;
+  border: 1px solid black;
+  border-radius: 0 0 0 4px;
+  box-shadow: 0 0 6px black;
+  z-index: 1000000001 !important;
+}
+
+#tuneefy_overlay div.closeButton {
+  position: absolute;
+  display: block;
+  top: 10px;
+  right: 11px;
+  background: url("http://tuneefy.com/img/close.png") no-repeat scroll center top transparent;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+}
+
+#tuneefy_overlay div.closeButton:hover{
+  background-position: 0px -32px;
+}
+
+#tuneefy_overlay iframe{
+  border: none;
+  background: transparent;
+  height: 100%;
+  width: 100%;
+}
+
+#tuneefy_overlay .middleBox{
+  position: relative;
+  top: 66px;
+  left: 200px;
+}

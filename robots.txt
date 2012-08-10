@@ -1,0 +1,10 @@
+User-Agent: *
+Disallow: /include/
+Disallow: /js/
+Disallow: /css/
+Disallow: /admin/
+Disallow: /img/
+Disallow: /widget/
+
+
+Allow: /

@@ -1,0 +1,247 @@
+/* GENERAL */
+* { margin: 0; }
+
+html, body {
+  height: 100%;
+  font: normal normal normal 1em/1em arial,helvetica,sans-serif;
+  color: white;
+}
+
+.wrap{
+  width: 684px;
+  margin: 0 auto;
+}
+.full{ width: 100%; }
+.clear{ clear: both; }
+
+.hideAll{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: black;
+  display: none;
+}
+
+/* Main colors */
+.color{ color: #76bad0; }
+.Fcolor{ background: #76bad0; }
+.Bcolor{ background: url('../img/background.png') repeat scroll 0 0 #1D1D1D; }
+
+/* Borders - separators */
+.bdTop{ border-top: 1px solid #303030; }
+.bdBot{ border-bottom: 1px solid black; }
+
+/* Text-shadow */
+.txtS{    text-shadow: 0 -1px black !important; } /*standard*/
+.txtSinv{ text-shadow: 0  1px #7A7A7A !important; } /*inverted*/
+.txtColor{text-shadow: 0  -1px #409ec0; } /*inverted*/
+.txtColor:hover{text-shadow: 0  1px #409ec0; } /*standard*/
+
+/* box shadow */
+.boxS5 { box-shadow: 0 1px 3px #2F2F2F inset,  0 1px #5E5E5E;}
+.boxS2 { box-shadow: 0 -1px #2e2e2e inset, 0 1px #bbe1ed inset;}
+
+/* Specific Box Shadow */
+#mail_signin, .alert, .triangle{ box-shadow: 0 1px #1B1B1B inset, 0 1px #171717, 0 0 10px black;}
+
+.focused { box-shadow: 0 1px #1B1B1B inset, 0 0 50px 5px #646464, 0 1px #171717 !important;}
+
+#mail_signin_notify_submit:active{
+  box-shadow: 0 0 10px black inset;
+}
+
+#wrapper{
+  position: absolute;
+  left: 50%;
+  margin-left: -342px;
+  margin-top: 50px;
+}
+
+/* TAG LINE */
+#tagline{
+  padding: 25px 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+p.tagline{
+  font-size: 1em;
+  color: #696969;
+  margin-top: -22px;
+}
+
+.tip{
+  font-size: 0.75em;
+  display: block;
+  margin-top: 5px;
+  color: #AAA;
+}
+
+/* EMAIL */
+#mailForm{
+  padding-top: 25px;
+  margin-bottom: 25px;
+  position: relative;
+  min-height: 140px;
+}
+
+#mail_signin{
+  background: #101010;
+  border: 1px solid black;
+  padding: 11px;
+  position: relative;
+  border-radius: 4px;
+  z-index: 200;
+}
+
+#mail_signin_notify{
+  background: #c3c3c3;
+  height: 52px;
+  width: 514px;
+  font-size: 1.5em;
+  line-height: 52px;
+  padding-left: 16px;
+  color: #727272;
+  border: none;
+  border-radius: 4px;
+  -webkit-transition: background-color 1s; /* -- -- -- -- -- -- -- -- CSS 3 ONLY */
+  -moz-transition: background-color 1s; /* -- -- -- -- -- -- -- -- CSS 3 ONLY */
+	transition: background-color 1s; /* -- -- -- -- -- -- -- -- CSS 3 ONLY */
+}
+
+#mail_signin_notify:hover{ background-color: #ddd; }
+
+#mail_signin_notify:focus{
+  outline: none; /* for Safari */
+  background-color: white;
+}
+
+#mail_signin_notify_submit{
+  float: right;
+  height: 55px;
+  width: auto;
+  vertical-align: top;
+  text-align: center;
+  padding: 13px 14px 14px 19px;
+  border: none;
+  font-size: 1em;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  background: #5E5E5E;
+  background-image: -moz-linear-gradient(center top , #91cadb 0%, #5baac5 100%);
+  background-image: -webkit-gradient(linear, left top,left bottom, color-stop(0, #91cadb), color-stop(1,  #5baac5));
+}
+#mail_signin_notify_submit:hover{
+  background-image: -moz-linear-gradient(center top , #5baac5 0%, #91cadb 100%);
+  background-image: -webkit-gradient(linear, left top,left bottom, color-stop(0, #5baac5), color-stop(1,  #91cadb));
+}
+
+/* ALERTS */
+#waiting{
+  position: absolute;
+  right: 156px;
+  top: 53px;
+  z-index: 300;
+}
+
+.alert{
+  background: #101010;
+  color: #696969;
+  font-size: .75em;
+  border: 1px solid black;
+  padding: 11px;
+  margin-top: 20px;
+  position: relative;
+  border-radius: 4px;
+}
+
+.triangle{
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: -8px;
+  left: 48px;
+  background: #090909;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  border-radius: 0 0 20px 0px;
+}
+
+#info_message{ display: none; }
+
+#success_message {
+  height: 74px;
+  margin: 40px 0;
+  font-size: 1.1em;
+  padding: 0;
+  font-weight: bold;
+}
+
+.alert img{
+  float: left;
+  margin-left: 20px;
+}
+
+#success_message .message{
+  float: left;
+  height: 74px;
+  line-height: 74px;
+}
+
+#error_message {
+  height: 40px;
+  padding: 0;
+}
+#error_message  .message{
+  float: left;
+  height: 40px;
+  line-height: 40px;
+}
+
+/* FOOTER */
+#footer{
+  height: 90px;
+  padding-top: 12px;
+  color: #696969;
+  font-size: .75em;
+}
+
+#footer .endorsement{
+  width: 100%;
+  padding-bottom: 10px;
+  font-size: .85em;
+  color: #555;
+  text-align: justify;
+}
+
+#footer .copycon{ text-align: center; }
+#footer a{ color: #696969; }
+#footer a:hover{ color: #AAAAAA; }
+
+#footer a.twitterLink{
+  background: url('../img/twitter.png') no-repeat scroll 0px 1px;
+  height: 12px;
+  padding-left: 18px;
+}
+#footer a.twitterLink:hover{
+  background-position: 0px -13px;
+  color: #AAAAAA;
+}
+
+/* Social */
+#social{
+  margin-top: 10px;
+  left: 205px;
+  position: relative;
+  width: 400px;
+  height: 40px;
+}
+#share_plusone, #share_twitter, #share_facebook {
+  float: left;
+}

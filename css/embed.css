@@ -1,0 +1,121 @@
+/* OVER RIDE */
+body {font-size: 0.7em;}
+.wrap {width: auto; margin: 0;}
+.wrap.bdBot, #trackInfo.bdBot{border: none;}
+.Bcolor{background: transparent;}
+
+
+/* TAG LINE */
+#tagline{
+  height: 36px;
+}
+
+h1.logo{
+  display: inline-block;
+  margin-left: -6px;
+  margin-top: -6px;
+}
+
+p.tagline{
+  float: right;
+  padding-top: 12px;
+  padding-right: 10px;
+  font-size: 1em;
+  color: #696969;
+}
+
+/* SHARE */
+#shareTitle{
+  font-size: 1.7em;
+  text-align: center;
+  padding-top: 50px;
+}
+
+#shareBox{
+  width: 100%;
+  margin: 0;
+}
+
+#trackInfo{
+  height: 90px;
+  padding: 8px;
+}
+
+#trackInfo .cover{
+  float: left;
+  position: relative;
+  margin-right: 8px;
+}
+
+#trackInfo .coverlay{
+  width: 80px;
+  height: 80px;
+}
+
+#trackInfo .info{
+}
+
+#trackInfo .infoWrapper{
+
+}
+
+#trackInfo .infoContent{
+  vertical-align: middle;
+}
+
+#trackInfo .title{
+  font-weight: bold;
+  font-size:1.5em;
+  line-height: 0.9em;
+  color: #A2A2A2;
+  padding-top: 4px;
+}
+
+#trackInfo .artist{
+  font-size: 1.2em;
+  line-height: 1.3em;
+  color: #474747;
+  padding-top: 0;
+}
+
+#trackInfo .album{
+  font-size: 0.75em;
+  color: #474747;
+  text-transform: uppercase;
+}
+
+#platforms, #share{
+  padding: 0px;
+}
+#platforms{
+  padding-top: 1px;
+}
+
+#platforms .listenTitle, #share .shareTitle{
+  text-transform: uppercase;
+  font-size: 0.75em;
+  color: #AAAAAA;
+  margin-bottom: 5px;
+}
+
+#platforms .btns_full{
+  margin-right: 3px;
+  margin-bottom: 0px;
+}
+
+#linkHolder, #socialHolder{
+  background: #1F1F1F;
+  float: left;
+  border: 1px solid black;
+  padding: 8px;
+  position: relative;
+  border-radius: 3px;
+}
+#linkHolder{
+  margin-right: 10px;
+}
+
+.newWindow{
+  opacity: 0.9;
+  margin-left: 3px;
+}
