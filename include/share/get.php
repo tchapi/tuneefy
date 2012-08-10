@@ -36,10 +36,15 @@ if (isset($_GET['id']) && isset($_GET['query'])){
     $status = 200;
   }
 
-  RestUtils::sendResponse($status, $retour, "json", false, $_GET['json_key']); // false = not api mode
+  if (isset($_GET['json_key']))
+    $json_key = $_GET['json_key'];
+  else
+    $json_key = null;
+
+  RestUtils::sendResponse($status, $retour, "json", false, $json_key); // false = not api mode
   
 } else {
 
-  RestUtils::sendResponse(404, null, "json", false, $_GET['json_key']); // false = not api mode
+  RestUtils::sendResponse(404, null, "json", false, $json_key); // false = not api mode
 
 }  
