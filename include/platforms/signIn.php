@@ -14,10 +14,22 @@ if (strtolower(@$_SERVER['HTTP_X_REQUESTED_WITH']) != "xmlhttprequest" ||
 
 if (isset($_GET['id']) && isset($_GET['username']) && isset($_GET['password'])){
  
-  //$retour = API::getPlatform($_GET['id'])->signIn($_GET['username'], $_GET['password']); 
-  $retour = "test";
-  // $retour = false ou NULL : failed
-  // else array : succeeded
+  
+  // Actual search
+  try {
+
+    $retour = API::getPlatform($_GET['id'])->signIn($_GET['username'], $_GET['password']); 
+    if ($retour == null) $retour = array( 'error' => true);
+
+  } catch (PlatformTimeoutException $e) {
+
+    $retour = array( 'error' => true);
+
+  } catch (Exception $eGeneral) {
+
+    $retour = array( 'error' => true);
+
+  }
 
   RestUtils::sendResponse(200, $retour, "json", false, null); // false = not api mode, null = no key for json
   

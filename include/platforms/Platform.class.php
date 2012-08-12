@@ -37,16 +37,16 @@ abstract class Platform {
   protected $api_endpoint;
   protected $api_method;
 
-  // Query
+  // Query Track
   protected $query_endpoint;
   protected $query_term;
   protected $query_options;
 
-  // Query
+  // Query Album
   protected $query_album_endpoint;
   protected $query_album_term;
   protected $query_album_options;
-    
+
   // Lookup 
   protected $lookup_endpoint;
   protected $lookup_term;
@@ -137,7 +137,19 @@ abstract class Platform {
     
     // Build the query for params
     $params = null;
-    if ($call['data'] != null) $params = http_build_query($call['data']);
+    if ($call['data'] != null) {
+      if ($call['method'] == 'POST_JSON') {
+        $params = json_encode($call['data'], JSON_FORCE_OBJECT);
+
+        // KINDA SPECIFIC TO GROOVESHARK
+        $signature = hash_hmac('md5', $params, $this->api_secret);
+        $call['url'] = $call['url'].'?sig='.$signature;
+        // __ SPECIFIC END __
+        
+      } else {
+        $params = http_build_query($call['data']);
+      }
+    }
     
     // Depending on the method, we make the request
     if ($call['method'] == 'GET') {
@@ -154,7 +166,7 @@ abstract class Platform {
       $context = stream_context_create($opts); 
       $result = @file_get_contents($call['url'].'?'.$params,0,$context,null);
 
-    } else if ($call['method'] == 'POST') {
+    } else if ($call['method'] == 'POST' || $call['method'] == 'POST_JSON') {
 
       // Parse the given URL
       $url = parse_url($call['url']);

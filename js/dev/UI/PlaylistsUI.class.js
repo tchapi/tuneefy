@@ -17,6 +17,8 @@ function PlaylistsUI(initialController){
   
   this.initUIInitialState();
   this.bindObjects();
+
+  this.currentAccessToken = null;
   
 };
 
@@ -56,8 +58,54 @@ PlaylistsUI.prototype.bindObjects = function() {
   $("#log").click($.proxy(function(e){
   
     console.log('PlaylistsUI >>> login.playlist');
-    $(this.controller).trigger("tuneefy.login.playlist", [$("#platform").val(), $("#username").val(), $("#passwd").val()]);
-    
+
+    if ($("#platform").val() == 0) { // DEEZER
+
+      DZ.login($.proxy(function(response) {
+        if (response.authResponse) {
+          DZ.api('/user/me', $.proxy(function(response) {
+            
+            DZ.getLoginStatus($.proxy(function(response) {
+              if (response.authResponse) {
+
+                this.currentAccessToken = response.authResponse.accessToken;
+
+                console.log('INLINE >>> login.succeeded');
+                console.log('INLINE >>> '+this.currentAccessToken);
+                $(this.controller).trigger("tuneefy.login.succeeded");
+              }
+            }, this));
+
+          }, this));
+        } else {
+          console.log('Tuneefy >>> login.failed');
+          $(this.controller).trigger("tuneefy.login.failed");
+        }
+      }, this), {perms: 'manage_library, offline_access'});
+
+    } else { // Platforms with no JS SDK, eg QOBUZ
+
+      $.getJSON("/include/platforms/signIn.php", {id: $("#platform").val(), username: $("#username").val(), password: hex_md5($("#passwd").val())},$.proxy(function(data, status){
+           
+        if (data.data && data.data.access_token != null) {
+
+          this.currentAccessToken = data.data.access_token;
+
+          console.log('INLINE >>> login.succeeded');
+          console.log('INLINE >>> '+this.currentAccessToken);
+          $(this.controller).trigger("tuneefy.login.succeeded");
+
+        } else {
+
+          console.log('Tuneefy >>> login.failed');
+          $(this.controller).trigger("tuneefy.login.failed");
+
+        }
+
+      }, this));
+
+    }
+
     e.preventDefault();
         
   }, this));
@@ -70,7 +118,8 @@ PlaylistsUI.prototype.bindObjects = function() {
     $("#logged").hide();
     this.form.hide();
     this.platformButtons.fadeIn();
-    
+    this.currentAccessToken = false;
+
     e.preventDefault();
         
   }, this));

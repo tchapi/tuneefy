@@ -54,16 +54,6 @@ Tuneefy.prototype.bindObjects = function() {
     this.getPlaylistData();
     
   }, this));
-  
-    
-  /******* PLAYLIST LOGIN *******/
-  $(this.controller).bind("tuneefy.login.playlist", $.proxy(function(e, platform, username, password){
-    
-    console.log('   Tuneefy <<< login.playlist');
-    
-    this.signIn(platform, username, password);
-    
-  }, this));
 
 };
 
@@ -209,25 +199,6 @@ Tuneefy.prototype.parseDataFromPlatform = function(type, raw){
   
 };
 
-Tuneefy.prototype.signIn = function(platform, username, password){
-
-  $.getJSON("/include/platforms/signIn.php", {id: platform, username: username, password: hex_md5(password)},$.proxy(function(data, status){
-          
-          // FIX ME FIX ME FIX ME
-    if (data.data != null ) {     
-          
-      console.log('Tuneefy >>> login.succeeded');
-      $(this.controller).trigger("tuneefy.login.succeeded");
- 
-    } else {  
-      
-      console.log('Tuneefy >>> login.failed');
-      $(this.controller).trigger("tuneefy.login.failed");
-    }
- 
-  }, this));
-
-};
 
 Tuneefy.prototype.getPlaylistData = function(){
 

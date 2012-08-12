@@ -199,7 +199,7 @@ class API {
       // We look for the permalink
       while (list($pId, $pObject) = each(API::$platforms))
       {
-        if ($pObject->isActiveForLookup()) {
+        if ($pObject->isActiveForLookup() || $from == "playlist") {
         // Is the platform active for lookup ?
         
           if($pObject->hasPermalink($query)) {

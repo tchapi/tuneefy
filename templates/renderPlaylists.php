@@ -8,12 +8,21 @@
   <div id="login">
     <div id="explication"><?php echo $i18n->playlists_login_label; ?></div>
     <div id="loginButtons">
+      <!-- DEEZER -->
+        <div id="dz-root"></div>
+        <script src="http://cdn-files.deezer.com/js/min/dz.js"></script>
+        <script>
+          DZ.init({
+            appId  : '105411',
+            channelUrl : '<?php echo _SITE_URL; ?>/channels/deezer.html'
+          });
+        </script>
       <a class="btns_full btn_full_0" title="Deezer" rel="0"></a>
-      <a class="btns_full btn_full_1" title="Spotify" rel="1" ></a>
+      <!-- DEEZER END -->
+      <a class="btns_full btn_full_13" title="Qobuz" rel="13" ></a>
       <a class="btns_full btn_full_3" title="Grooveshark" rel="3" ></a>
       <a class="btns_full btn_full_7" title="Youtube" rel="7" ></a>
       <a class="btns_full btn_full_10" title="Rdio" rel="10" ></a>
-      <a class="btns_full btn_full_13" title="Qobuz" rel="13" ></a>
     </div>
     <div id="loginFields" style="display: none;">
       <input type="text" id="username" name="username" class="boxS5 playlists" value="" />

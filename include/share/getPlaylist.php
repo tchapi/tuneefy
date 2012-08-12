@@ -19,11 +19,19 @@ if (strtolower(@$_SERVER['HTTP_X_REQUESTED_WITH']) != "xmlhttprequest" ||
 
 if (isset($_GET['str'])){
  
-  $retour = API::lookup($_GET['str'], "site");
+  $retour = API::lookup($_GET['str'], "playlist");
 
   if ($retour['lookedUpPlatform'] != -1 ) {
 
-    $retour = API::getPlatform($retour['lookedUpPlatform'])->retrievePlaylist($_GET['str']);
+    try {
+
+      $retour = API::getPlatform($retour['lookedUpPlatform'])->retrievePlaylist($_GET['str']);
+
+    } catch (PlatformTimeoutException $e){
+
+      $retour = null;
+
+    }
   
   } else {
     
