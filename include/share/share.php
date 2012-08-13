@@ -45,7 +45,7 @@
   
   while (list($pId, $pObject) = each($platforms))
   {
-    $postName = _TABLE_LINK_PREFIX.$pId;
+    $postName = _TABLE_LINK_PREFIX.$pObject->getId();
     $lookupName = _TABLE_LINK_PREFIX.$pObject->getSafeName();
     
     // If there is no POST parameter for this platform

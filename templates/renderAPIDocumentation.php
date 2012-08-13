@@ -41,7 +41,7 @@
               $imgAS = $pObject->isActiveForAlbumSearch()?"success":"error";
               $imgL  = $pObject->isActiveForLookup()?"success":"error";
               
-              $rowC  .= "<td>".$pId."</td>";
+              $rowC  .= "<td>".$pObject->getId()."</td>";
               
               $rowS  .= "<td>".sprintf($imgBase, $imgS)."</td>";
               $rowAS .= "<td>".sprintf($imgBase, $imgAS)."</td>";

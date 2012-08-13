@@ -26,25 +26,26 @@ class API {
     
   }
     
-  public static function addPlatform($platform, $id){
+  public static function addPlatform($platform, $order){
   
-    API::$platforms[$id] = $platform;
+    API::$platforms[$order] = $platform;
     API::$nbPlatforms += 1;
+
+    ksort(API::$platforms);
     
   }
   
   public static function getPlatform($id){
   
-    if (isset(API::$platforms[$id])) {
-    
-      return API::$platforms[$id];
-    
-    } else {
-    
-      return false;
-      
+    reset(API::$platforms);
+    while (list($pId, $pObject) = each(API::$platforms))
+    {
+      if ($pObject->getId() == $id)
+        return $pObject;
     }
-      
+
+    return false;
+
   }
   
   public static function getNbOfPlatforms(){
@@ -90,7 +91,7 @@ class API {
   
   public static function processAPICall($calledMethod, $data) {
     
-    $valid = true;//API::validateCall($calledMethod, $data);
+    $valid = API::validateCall($calledMethod, $data);
     
     if (!$valid) {
     
@@ -215,7 +216,7 @@ class API {
               // We have a non-null result
               $query = $result['query'];
               $lookedUpItem = $result['track'];
-              $lookedUpPlatform = $pId;
+              $lookedUpPlatform = $pObject->getId();
             }
             
             // We break anyway because we won't find anything else
@@ -295,17 +296,17 @@ class API {
     // Actual search
     $platforms = API::$platforms;
     
-    while (list($key, $value) = each($platforms)) {
+    while (list($pId, $pObject) = each($platforms)) {
     
-      if ( $platforms[$key] == false || 
-         (!$platforms[$key]->isActiveForSearch() && $itemType == 'track') || 
-         (!$platforms[$key]->isActiveForAlbumSearch() && $itemType == 'album')) {
+      if ( $pObject == false || 
+         (!$pObject->isActiveForSearch() && $itemType == 'track') || 
+         (!$pObject->isActiveForAlbumSearch() && $itemType == 'album')) {
         continue;
       }
 
       try {
         
-        $result = $platforms[$key]->getNormalizedResults($itemType, $query, $limit);
+        $result = $pObject->getNormalizedResults($itemType, $query, $limit);
         $nbResults = count($result);
         
         if ($finalResult == null) {

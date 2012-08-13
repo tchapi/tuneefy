@@ -534,7 +534,7 @@ class DBStats {
       while (list($pId, $pObject) = each($platforms))
       {
         $linkProperty = _TABLE_LINK_PREFIX.$pObject->getSafeName();
-        $result[$pId] = intval($row[$linkProperty]);
+        $result[$pObject->getId()] = intval($row[$linkProperty]);
       }
       
       return $result;

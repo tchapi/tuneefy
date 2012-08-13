@@ -3,11 +3,11 @@
   $platforms_html = "";
   
   $platforms = API::getPlatforms();
-  
+
   while (list($pId, $pObject) = each($platforms))
   {
     if ($pObject->isActiveForSearch())
-      $platforms_html .= "<a class=\"btns btn_".$pId." off\" rel=\"".$pId."\" id=\"pltf".$pId."\" title=\"".$pObject->getName()."\" ></a>";
+      $platforms_html .= "<a class=\"btns btn_".$pObject->getId()." off\" rel=\"".$pObject->getId()."\" id=\"pltf".$pObject->getId()."\" title=\"".$pObject->getName()."\" ></a>";
   }
   reset($platforms);
 

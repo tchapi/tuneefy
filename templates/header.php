@@ -173,9 +173,9 @@
   
   while (list($pId, $pObject) = each($platforms))
   {
-    $defaultPlatforms .= ($pObject->isDefault() && $pObject->isActiveForSearch())?$pId.",":"";
-    $allPlatforms .= $pObject->isActiveForSearch()?$pId.",":"";
-    $jsAllPlatforms .= $pObject->isActiveForSearch()?'_p['.$pId.'] = "'.$pObject->getName().'";':"";
+    $defaultPlatforms .= ($pObject->isDefault() && $pObject->isActiveForSearch())?$pObject->getId().",":"";
+    $allPlatforms .= $pObject->isActiveForSearch()?$pObject->getId().",":"";
+    $jsAllPlatforms .= $pObject->isActiveForSearch()?'_p['.$pObject->getId().'] = "'.$pObject->getName().'";':"";
   }
   reset($platforms);
 ?>

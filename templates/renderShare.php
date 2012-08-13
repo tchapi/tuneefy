@@ -17,7 +17,7 @@
   // ------------------
   
   $linksForDisplay = $item['links'];
-  
+
   // String for results
   $results = "";
 
@@ -36,7 +36,7 @@
           $alt_title = str_replace('#p#',$current->getName(),str_replace('#name#', htmlentities($album), $i18n->get('listen_to')));
         }
         
-        $results .= "<a target=\"".$target."\" class=\"btns".$fullButtons." btn".$fullButtons."_".$key."\" href=\"/include/share/listen.php?t=".urlencode($linksForDisplay[$key])."&p=".$key."&i=".$request."\" title=\"".$alt_title."\" >";
+        $results .= "<a target=\"".$target."\" class=\"btns".$fullButtons." btn".$fullButtons."_".$current->getId()."\" href=\"/include/share/listen.php?t=".urlencode($linksForDisplay[$key])."&p=".$current->getId()."&i=".$request."\" title=\"".$alt_title."\" >";
         $results .= "</a>";
         
       }

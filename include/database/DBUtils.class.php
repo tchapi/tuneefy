@@ -56,7 +56,7 @@ class DBUtils {
       {
         if (!$pObject->isActiveForSearch()) continue; 
         $linkProperty = _TABLE_LINK_PREFIX.$pObject->getSafeName();
-        $links[$pId] = web(trim(stripslashes($row[$linkProperty])));
+        $links[$pObject->getId()] = web(trim(stripslashes($row[$linkProperty])));
       }
       
       return array("name" => $row["name"], "album" => $row["album"], "artist" => $row["artist"], "image" => $row["image"], "type" => $row["type"],"links" => $links);

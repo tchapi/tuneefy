@@ -24,6 +24,7 @@ abstract class Platform {
   protected $name;
   protected $safe_name;
   protected $color;
+  protected $id = null;
   
   // Utility
   protected $type = _LISTEN;
@@ -75,6 +76,7 @@ abstract class Platform {
   public function getName(){ return $this->name; }
   public function getSafeName(){ return $this->safe_name; }
   public function getColor(){ return $this->color; }
+  public function getId(){ return $this->id; }
   public function isDefault(){ return $this->isDefault; }
   public function isActiveForSearch(){ return $this->isActiveForSearch; }
   public function isActiveForAlbumSearch(){ return $this->isActiveForAlbumSearch; }
