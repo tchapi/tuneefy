@@ -12,6 +12,8 @@ function PlaylistsUI(initialController){
   this.selectedPlatforms = ""; // By default
   */
   this.platformButtons = $("#loginButtons a");
+  this.platformButtonsNotDirect = $("#loginButtons a.notDirect");
+  this.platformButtonsDirect = $("#loginButtons a.direct");
   this.loginFields = $("#loginFields");
   this.resetField = $("#resetQuery");
   
@@ -32,7 +34,7 @@ PlaylistsUI.prototype.initUIInitialState = function() {
 PlaylistsUI.prototype.bindObjects = function() {
   
   /******* PLATFORM CHOICE BUTTON *******/
-  this.platformButtons.click($.proxy(function(event){
+  this.platformButtonsNotDirect.click($.proxy(function(event){
   
     this.platformButtons.hide();
     this.loginFields.show();
@@ -43,12 +45,26 @@ PlaylistsUI.prototype.bindObjects = function() {
         
   }, this));
 
+  /******* PLATFORM CHOICE BUTTON *******/
+  this.platformButtonsDirect.click($.proxy(function(event){
+  
+    this.platformButtons.hide();
+
+    $("#platform").val($(event.target).attr("rel"));
+    $("#log").trigger('click');
+
+    event.stopPropagation();
+        
+  }, this));
+
   /******* BACK TO PLATFORM CHOICE BUTTON *******/
   $("#back").click($.proxy(function(e){
   
     this.loginFields.hide();
     this.platformButtons.fadeIn();
-    
+    $("#platform").val("");
+    this.currentAccessToken = false;
+
     e.preventDefault();
         
   }, this));
@@ -118,6 +134,7 @@ PlaylistsUI.prototype.bindObjects = function() {
     $("#logged").hide();
     this.form.hide();
     this.platformButtons.fadeIn();
+    $("#platform").val("");
     this.currentAccessToken = false;
 
     e.preventDefault();
@@ -148,7 +165,7 @@ PlaylistsUI.prototype.bindObjects = function() {
     
   }, this));
           
-  /******* SEARCH INITIATED *******/
+  /******* PLAYLIST RETRIEVAL INITIATED *******/
   this.form.submit($.proxy(function(e){
   
     e.preventDefault();

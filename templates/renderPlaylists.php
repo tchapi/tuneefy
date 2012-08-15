@@ -17,12 +17,12 @@
             channelUrl : '<?php echo _SITE_URL; ?>/channels/deezer.html'
           });
         </script>
-      <a class="btns_full btn_full_0" title="Deezer" rel="0"></a>
+      <a class="btns_full btn_full_0 direct" title="Deezer" rel="0"></a>
       <!-- DEEZER END -->
-      <a class="btns_full btn_full_13" title="Qobuz" rel="13" ></a>
-      <a class="btns_full btn_full_3" title="Grooveshark" rel="3" ></a>
-      <a class="btns_full btn_full_7" title="Youtube" rel="7" ></a>
-      <a class="btns_full btn_full_10" title="Rdio" rel="10" ></a>
+      <a class="btns_full btn_full_13 notDirect" title="Qobuz" rel="13" ></a>
+      <a class="btns_full btn_full_3 notDirect" title="Grooveshark" rel="3" ></a>
+      <a class="btns_full btn_full_7 notDirect" title="Youtube" rel="7" ></a>
+      <a class="btns_full btn_full_10 notDirect" title="Rdio" rel="10" ></a>
     </div>
     <div id="loginFields" style="display: none;">
       <input type="text" id="username" name="username" class="boxS5 playlists" value="" />

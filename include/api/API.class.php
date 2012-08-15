@@ -196,16 +196,23 @@ class API {
       
       // We log the search query
       DBLogger::logSearchQuery($query, $from);
-    
+
       // We look for the permalink
-      while (list($pId, $pObject) = each(API::$platforms))
+      $platforms = API::getPlatforms();
+
+      while (list($pId, $pObject) = each($platforms))
       {
+
         if ($pObject->isActiveForLookup() || $from == "playlist") {
         // Is the platform active for lookup ?
-        
           if($pObject->hasPermalink($query)) {
           // The permalink is correct for this platform
-          
+
+            if ($from == "playlist") {
+              $lookedUpPlatform = $pObject->getId();
+              break;
+            }
+
             try {
               
               $result = $pObject->lookupPermalink($query);
