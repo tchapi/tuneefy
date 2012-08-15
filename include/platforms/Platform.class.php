@@ -142,12 +142,6 @@ abstract class Platform {
     if ($call['data'] != null) {
       if ($call['method'] == 'POST_JSON') {
         $params = json_encode($call['data'], JSON_FORCE_OBJECT);
-
-        // KINDA SPECIFIC TO GROOVESHARK
-        $signature = hash_hmac('md5', $params, $this->api_secret);
-        $call['url'] = $call['url'].'?sig='.$signature;
-        // __ SPECIFIC END __
-        
       } else {
         $params = http_build_query($call['data']);
       }
@@ -177,9 +171,14 @@ abstract class Platform {
       $host = $url['host'];
       $path = $url['path'];
       
-      // Open a socket connection on port 80 - timeout: 3 sec
-      $fp = fsockopen($host, 80, $errno, $errstr, 3);
-
+      if ($url['scheme'] == 'https') {
+        // Open a socket connection on port 80 - timeout: 3 sec
+        $fp = fsockopen('ssl://'.$host, 443, $errno, $errstr, 3);
+      } else {
+        // Open a socket connection on port 80 - timeout: 3 sec
+        $fp = fsockopen($host, 80, $errno, $errstr, 3);
+      }
+      
       if ($fp){
 
         // Send the request headers:
