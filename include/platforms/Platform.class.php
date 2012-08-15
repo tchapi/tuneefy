@@ -141,7 +141,7 @@ abstract class Platform {
     $params = null;
     if ($call['data'] != null) {
       if ($call['method'] == 'POST_JSON') {
-        $params = json_encode($call['data'], JSON_FORCE_OBJECT);
+        $params = json_encode($call['data']);
       } else {
         $params = http_build_query($call['data']);
       }
@@ -178,7 +178,7 @@ abstract class Platform {
         // Open a socket connection on port 80 - timeout: 3 sec
         $fp = fsockopen($host, 80, $errno, $errstr, 3);
       }
-      
+
       if ($fp){
 
         // Send the request headers:
