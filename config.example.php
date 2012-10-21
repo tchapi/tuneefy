@@ -22,7 +22,6 @@
   const _FB_PAGE_ID = "UUUUUUUUUU";
   const _GPLUS_PUBLISHER_ID = "https://plus.google.com/TTTTTTTTTTT";
 
-
   // Site base url :
   const _SITE_BASE_URL = "";
   const _SITE_URL = "http://www.tuneefy-on-git.com";
