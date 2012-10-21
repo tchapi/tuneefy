@@ -36,34 +36,41 @@ function Item(itemType, artist, name, album, image, links, score) {
  */
 Item.prototype.hash = function(strictMode){
 
+  var title = this.name;
+  var artist = this.artist;
+
+  // Find "feats" in artist
+  var regex_feat_p = /^(.*)(\(|\[)(\s*)(feat\s|feat\.|featuring\s|ft.|ft\s)([^\)^\]]*)(\)|\])(.*)$/gi;
+  var regex_feat_s = /^(.*)\s(feat\s|feat\.|featuring\s|ft.|ft\s)([^\(^\[^\]^\)]*)(.*)$/gi;
+
+  if (regex_feat_p.test(artist)) {
+    artist = artist.replace(regex_feat_p, "$1").replace(/\s\-$/,'') + artist.replace(regex_feat_p, "$7");
+  } else if (regex_feat_s.test(artist)) {
+    artist = artist.replace(regex_feat_s, "$1").replace(/\s\-$/,'') + artist.replace(regex_feat_s, "$4");
+  }
+
   if (this.type == 0) { // Track
 
     // Strip "(Album Version)" from track names
     var regex_album_version = /^(.*)(\(|\[)(\s*)(album\sversion|version\salbum)([^\)^\]]*)(\)|\])(.*)$/gi;
-    var text = this.name
 
-    if (regex_album_version.test(text)) {
-      text = text.replace(regex_album_version, "$1").replace(/\s\-$/,'') + text.replace(regex_album_version, "$7");
+    if (regex_album_version.test(title)) {
+      title = title.replace(regex_album_version, "$1").replace(/\s\-$/,'') + title.replace(regex_album_version, "$7");
     }
 
-    // Find "feats"
-    var regex_feat_p = /^(.*)(\(|\[)(\s*)(feat\s|feat\.|featuring\s|ft.|ft\s)([^\)^\]]*)(\)|\])(.*)$/gi;
-    var regex_feat_s = /^(.*)\s(feat\s|feat\.|featuring\s|ft.|ft\s)([^\(^\[^\]^\)]*)(.*)$/gi;
-    var feat = "";
+    // Find "feats" in track name
 
-    if (regex_feat_p.test(text)) {
-      feat = text.replace(regex_feat_p, "$5");
-      text = text.replace(regex_feat_p, "$1").replace(/\s\-$/,'') + text.replace(regex_feat_p, "$7");
-    } else if (regex_feat_s.test(text)) {
-      feat = text.replace(regex_feat_s, "$3");
-      text = text.replace(regex_feat_s, "$1").replace(/\s\-$/,'') + text.replace(regex_feat_s, "$4");
+    if (regex_feat_p.test(title)) {
+      title = title.replace(regex_feat_p, "$1").replace(/\s\-$/,'') + title.replace(regex_feat_p, "$7");
+    } else if (regex_feat_s.test(title)) {
+      title = title.replace(regex_feat_s, "$1").replace(/\s\-$/,'') + title.replace(regex_feat_s, "$4");
     }
   
-    return flatten((this.artist + '' + text + feat + (strictMode?'':this.album)).split(/[ ,;\-]/g).join('').toLowerCase());
+    return flatten((artist + '' + title + (strictMode?'':this.album)).split(/[ ,;\-]/g).join('').toLowerCase());
 
   } else if (this.type == 1) { // Album
 
-    return flatten((this.artist + '' + this.album).split(/[ ,;\-]/g).join('').toLowerCase());
+    return flatten((artist + '' + this.album).split(/[ ,;\-]/g).join('').toLowerCase());
 
   }
 
@@ -83,7 +90,7 @@ Item.prototype.addToItems = function(items, strictMode){
     
   // We keep the length somewhere safe in case items gets modified asynchronously
   var depth = items.length;
-  
+
   // For each item already given
   for(var i = 0; i < depth; i++){
   
