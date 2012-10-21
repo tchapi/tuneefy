@@ -1,0 +1,61 @@
+Options +FollowSymLinks
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  
+# TEMPORARY FOR COMING SOON
+# RewriteCond %{REQUEST_URI} !/(teaser|coming_soon.php)$ [NC]
+# RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|ico|gif|js|css) [NC]
+# RewriteRule .* /teaser [R=302,L]
+# RewriteRule ^teaser$ coming_soon.php [L]
+# END TEMP
+
+
+RewriteCond %{HTTP_HOST} ^www.tuneefy.com
+RewriteRule (.*) http://tuneefy.com/$1 [R=301,L]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  RewriteRule ^home$ . [L]
+  RewriteRule ^search$ . [L]
+  RewriteRule ^facts$ ?r=facts [L]
+   RewriteRule ^facts/$ ?r=facts [L]
+  RewriteRule ^about$ ?r=about [L]
+   RewriteRule ^about/$ ?r=about [L]
+  RewriteRule ^trends$ ?r=trends [L]
+   RewriteRule ^trends/$ ?r=trends [L]
+  RewriteRule ^playlists$ ?r=playlists [L]
+   RewriteRule ^playlists/$ ?r=playlists [L]
+
+
+  RewriteRule ^woops$ ?woops=indeed [L]
+   RewriteRule ^woops/$ ?woops=indeed [L]
+
+  RewriteRule ^404$ ?e=404 [L]
+   RewriteRule ^404/$ ?e=404 [L]
+
+  RewriteRule ^503$ ?e=503 [L]
+   RewriteRule ^503/$ ?e=503 [L]
+
+  RewriteRule ^home/(.*) index.php?q=$1
+  RewriteRule ^search/(.*) index.php?q=$1 [B]
+  RewriteRule ^t/(.*) index.php?t=$1
+  RewriteRule ^a/(.*) index.php?a=$1
+
+</IfModule>
+
+ErrorDocument 404 /404
+ErrorDocument 403 /404
+ErrorDocument 503 /503
+
+#Prevent viewing of .htaccess file
+<Files .htaccess>
+  order allow,deny
+  deny from all
+</Files>
+
+#Prevent directory listings
+Options All -Indexes
