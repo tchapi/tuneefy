@@ -5,10 +5,7 @@ svn-commit*
 .DS_Store
 .gitignore
 .git
-htaccess
-.htaccess
 test*
-config.php
 exclude.rsync
 README.md
 mail.html
