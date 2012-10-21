@@ -7,14 +7,10 @@ svn-commit*
 .git
 htaccess
 .htaccess
-_SOURCES_
-_FEEDBACK_
 test*
 config.php
 exclude.rsync
-toutCeQuOnPeutFaire.txt
+README.md
 mail.html
-spotify/*
 js/min/tuneefy.min.js*
 TODO*
-nbproject*
