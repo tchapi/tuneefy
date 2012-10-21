@@ -127,6 +127,20 @@ abstract class Platform {
   
   }
   
+  protected static function unchunkHttp11($data) {
+    $fp = 0;
+    $outData = "";
+    while ($fp < strlen($data)) {
+        $rawnum = substr($data, $fp, strpos(substr($data, $fp), "\r\n") + 2);
+        $num = hexdec(trim($rawnum));
+        $fp += strlen($rawnum);
+        $chunk = substr($data, $fp, $num);
+        $outData .= $chunk;
+        $fp += strlen($chunk);
+    }
+    return $outData;
+  }
+
   protected function makeCall($call, $needsOAuth){
     
     // In case we need OAuth (simple signed request)
@@ -141,7 +155,7 @@ abstract class Platform {
     $params = null;
     if ($call['data'] != null) {
       if ($call['method'] == 'POST_JSON') {
-        $params = json_encode($call['data']);
+        $params = $call['data'];
       } else {
         $params = http_build_query($call['data']);
       }
@@ -170,7 +184,8 @@ abstract class Platform {
       // Extract host and path:
       $host = $url['host'];
       $path = $url['path'];
-      
+        if ($url['query']) $path .= '?'.$url['query'];
+
       if ($url['scheme'] == 'https') {
         // Open a socket connection on port 80 - timeout: 3 sec
         $fp = fsockopen('ssl://'.$host, 443, $errno, $errstr, 3);
@@ -184,7 +199,7 @@ abstract class Platform {
         // Send the request headers:
         fputs($fp, "POST $path HTTP/1.1\r\n");
         fputs($fp, "Host: $host\r\n");
-        fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n");
+        fputs($fp, "Content-type: application/x-www-form-urlencoded; charset=utf-8\r\n");
         fputs($fp, "Content-length: ". strlen($params) ."\r\n");
         fputs($fp, "Connection: close\r\n\r\n");
         fputs($fp, $params);
@@ -192,13 +207,22 @@ abstract class Platform {
         $result = ''; 
         while(!feof($fp)) {
           // Receive the results of the request
-          $result .= fgets($fp, 128);
+          $result .= fgets($fp, 1024);
         }
-        
+
+        $mustUnchunk = false;
+        if (strpos(strtolower($result), "transfer-encoding: chunked") !== FALSE) {
+            $mustUnchunk = true;
+        }
+
         // Split the result header from the content
         $result = explode("\r\n\r\n", $result, 2);
         $result = isset($result[1]) ? $result[1] : null;
 
+        if ($mustUnchunk === true) {
+          $result = self::unchunkHttp11($result);
+        }
+        
       } else { 
         $result = null;
       }
