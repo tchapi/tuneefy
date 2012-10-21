@@ -1,5 +1,6 @@
 config.php
 admin/send.php
+.htpasswd
 _SOURCES_
 _FEEDBACK_
 TODO*
