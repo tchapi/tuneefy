@@ -3,10 +3,10 @@
 *.swp
 svn-commit*
 .DS_Store
+.gitignore
+.git
 htaccess
 .htaccess
-deploy_beta.sh
-deploy_prod.sh
 _SOURCES_
 _FEEDBACK_
 test*
