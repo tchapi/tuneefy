@@ -8,7 +8,6 @@ svn-commit*
 htaccess
 .htaccess
 test*
-config.php
 exclude.rsync
 README.md
 mail.html
