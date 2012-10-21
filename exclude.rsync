@@ -5,8 +5,6 @@ svn-commit*
 .DS_Store
 .gitignore
 .git
-htaccess
-.htaccess
 test*
 exclude.rsync
 README.md
