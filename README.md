@@ -115,6 +115,14 @@ The following javascript regexp are used to find these patterns:
 
 The hash is currently a concatenation of the lowercased cleaned title, artist and name when available. All accented / non alphanumeric characters are replaced by their equivalent.
 
+## A word on patterns ##
+
+To cut a long story short, I used :
+
+  * A `facade` patterns, with templates, to display the different pages
+  * A `proxy pattern` for the data handling from the different platforms
+  * An `event pooling` pattern in a (light) `MVC` pattern to display the results and aggregate them for the user
+
 <a name="permalinks"></a>
 ## Supported Permalinks ##
 
@@ -161,7 +169,9 @@ The bookmarklet recognizes what you're listening to on the following platforms /
   * Qobuz Player
   * Rdio
   * Youtube (only for tracks available on iTunes via Youtube)
-  * Myspace (music player)
-  * Myspace (artist page - first track only)
+  * Myspace (music player and artist page - first track only)
   * Spotify (in a web browser only)
 
+## Contact me ##
+
+Do not hesitate to drop me a line at tchap(@)tuneefy.com or to fork this repo and make pull requests.
