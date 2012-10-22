@@ -14,10 +14,8 @@
     $mode = $_GET['mode'];
   } else $mode = 'compiled_code';
   
-  if (isset($_GET['include_build_version']) && $_GET['include_build_version'] == true) {
-    $now = time();
-    $build_version = " (build ".$now.")";
-  } else $build_version = "";
+  $now = time();
+  $build_version = " (build ".$now.")";
 
   $closureUrl = "http://closure-compiler.appspot.com/compile";
   
