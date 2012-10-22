@@ -1,39 +1,97 @@
-## Supported ##
+# Tuneefy #
 
- * "standard" keyword search (artist, album, song, etc ...)
+Tuneefy is a music sharing service allowing you to easily share tracks and albums regardless of any music platforms.
+
+
+- - - -
+
+## Supported Permalinks ##
+
+The following permalinks are supported when searching on tuneefy :
+
  * Permalink search including :
-    * deezer song link (e.g. http://www.deezer.com/listen-10236179 )
-    * deezer artist link (e.g. http://www.deezer.com/fr/music/radiohead )
-    * deezer album link (e.g. http://www.deezer.com/fr/music/rjd2/deadringer-144183 )
+    * __Deezer__ song link
 
-    * spotify song link (e.g. http://open.spotify.com/track/5jhJur5n4fasblLSCOcrTp
-                        or  spotify:track:5jhJur5n4fasblLSCOcrTp )
-    * spotify artist link (e.g. http://open.spotify.com/artist/6UUrUCIZtQeOf8tC0WuzRy
-                        or  spotify:artist:6UUrUCIZtQeOf8tC0WuzRy )
-    * spotify album link (e.g. http://open.spotify.com/album/2bRcCP8NYDgO7gtRbkcqdk
-                        or   spotify:album:2bRcCP8NYDgO7gtRbkcqdk )
+            http://www.deezer.com/listen-10236179
 
-    * lastfm song link (e.g. http://www.last.fm/music/The+Clash/London+Calling/London+Calling)
-    * lastfm album link (e.g. http://www.last.fm/music/The+Clash/London+Calling )
-    * lastfm artist link (e.g. http://www.lastfm.fr/music/Sex+Pistols )
+    * __Deezer__ artist link
 
-    * grooveshark verbose song link (e.g. http://grooveshark.com/s/Sweet+Sweet+Heartkiller/2GVBvD?src=5 )
-    * grooveshark album link (e.g. http://grooveshark.com/album/Impeccable+Blahs/1529354 )
-    * grooveshark artist link (e.g. http://grooveshark.com/artist/Say+Hi+To+Your+Mom/401373 )
+            http://www.deezer.com/fr/music/radiohead
 
-    * soundcloud simple song link (e.g. http://soundcloud.com/fuckmylife/radiohead-codex-deadmau5-cover )
+    * __Deezer__ album link
 
-### Deprecated ###
+            http://www.deezer.com/fr/music/rjd2/deadringer-144183
 
-    * jiwa song link (e.g. http://www.jiwa.fr/#track/52575 )
-    * jiwa artist link (e.g. http://www.jiwa.fr/#artist/3814 )
-    * jiwa album link (e.g. http://www.jiwa.fr/#album/328122 )
-    * jiwa permalink (e.g. http://jiwa.fr/track/The-Who-749/Who-s-Next-70366/Baba-O-Riley-400388.html)
+    * __Spotify__ song link
 
+            http://open.spotify.com/track/5jhJur5n4fasblLSCOcrTp
+            or spotify:track:5jhJur5n4fasblLSCOcrTp
 
-## Widget ##
+    * __Spotify__ artist link
 
-It gets what you're listening to in :
+            http://open.spotify.com/artist/6UUrUCIZtQeOf8tC0WuzRy
+            or spotify:artist:6UUrUCIZtQeOf8tC0WuzRy
+
+    * __Spotify__ album link
+
+            http://open.spotify.com/album/2bRcCP8NYDgO7gtRbkcqdk
+            or spotify:album:2bRcCP8NYDgO7gtRbkcqdk
+
+    * __Last.fm__ song link
+
+            http://www.last.fm/music/The+Clash/London+Calling/London+Calling
+
+    * __Last.fm__ album link
+
+            http://www.last.fm/music/The+Clash/London+Calling
+
+    * __Last.fm__ artist link
+
+            http://www.lastfm.fr/music/Sex+Pistols
+
+    * __Grooveshark__ verbose song link
+
+            http://grooveshark.com/s/Sweet+Sweet+Heartkiller/2GVBvD?src=5
+
+    * __Grooveshark__ album link
+
+            http://grooveshark.com/album/Impeccable+Blahs/1529354
+
+    * __Grooveshark__ artist link
+
+            http://grooveshark.com/artist/Say+Hi+To+Your+Mom/401373
+
+    * __Soundcloud__ simple song link
+
+            http://soundcloud.com/fuckmylife/radiohead-codex-deadmau5-cover
+
+    * __Hypemachine__ track link
+
+            http://hypem.com/item/1g079/
+
+    * __Youtube__ music link
+
+            http://www.youtube.com/watch?v=_FOyHhU0i7k
+
+    * __Rdio__ link
+
+            http://www.rdio.com/#/artist/Crash_Test_Dummies
+
+    * __Qobuz__ track link
+
+            http://player.qobuz.com/#!/track/5280111
+
+## Tuneefy bookmarklet ##
+
+The tuneefy bookmarklet is a quick and convenient way to share tuneefy links directly from the page you're listening music in.
+
+The standard production bookmarklet code is :
+
+    javascript:(function(){tuneefy_bkmrklt=document.createElement('SCRIPT');tuneefy_bkmrklt.type='text/javascript';
+    tuneefy_bkmrklt.src='http://tuneefy.com/widget/share.js.php?x='+(Math.random());
+    document.getElementsByTagName('head')[0].appendChild(tuneefy_bkmrklt);})();
+
+The bookmarklet recognizes what you're listening to on the following platforms / websites :
 
   * Deezer
   * Jiwa
@@ -41,21 +99,10 @@ It gets what you're listening to in :
   * Radionomy
   * Stereomood
   * Musicmaze
-  * Youtube (only for tracks available on itunes via youtube)
+  * Qobuz Player
+  * Rdio
+  * Youtube (only for tracks available on iTunes via Youtube)
   * Myspace (music player)
   * Myspace (artist page - first track only)
-
-If you're on a Spotify link in your browser too
-
-## TODO ##
-
-Grooveshark song link (e.g. http://grooveshark.com/#/s/~/2AI9Hq?src=11 ) via native API
-
-Tinysong song link (e.g. http://tinysong.com/3BZ (besoin d'un reverse lookup => pas possible now))
-
-itunes :
-album
-http://itunes.apple.com/us/album/say-yeah-single/id271501530
-artist:
-http://itunes.apple.com/us/artist/mac-miller/id419944559
+  * Spotify (in a web browser only)
 
