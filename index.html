@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Tuneefy : tuneefy is a unified way to share music with your friends, over various online music services" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Tuneefy</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/tchapi/tuneefy">View on GitHub</a>
+
+          <h1 id="project_title">Tuneefy</h1>
+          <h2 id="project_tagline">tuneefy is a unified way to share music with your friends, over various online music services</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/tchapi/tuneefy/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/tchapi/tuneefy/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>tuneefy</h1>
+
+<p>tuneefy is a music sharing service allowing you to easily share tracks and albums regardless of any music platforms.</p>
+
+<h3><a href="http://tuneefy.com">http://tuneefy.com</a></h3>
+
+<hr><p>In a nutshell, tuneefy is a server-side proxy that will aggregate results from different music APIs, and display the consolidated result as a tracks list or albums list. Each item can then be shared.</p>
+
+<h2>Server-side</h2>
+
+<p>Three main actions are done server-side :</p>
+
+<ol>
+<li>Reverse searching the query, when the user searches for a permalink (see below : <a href="#permalinks">supported permalinks</a>)</li>
+<li>Querying music APIs and platforms for results</li>
+<li>Sharing a specific result</li>
+</ol><h4>Reverse search</h4>
+
+<p>The proxy performs a reverse-search on the query to retrieve the real title, artist and name behind a permalink</p>
+
+<p>Example for the query "<a href="http://open.spotify.com/track/5jhJur5n4fasblLSCOcrTp">http://open.spotify.com/track/5jhJur5n4fasblLSCOcrTp</a>" :</p>
+
+<div class="highlight"><pre>    <span class="p">{</span>
+        <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">lookedUpPlatform</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nx">query</span><span class="o">:</span> <span class="s2">"Kasabian+Test+Transmission"</span><span class="p">,</span>
+            <span class="nx">lookedUpItem</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="s2">"Test Transmission"</span><span class="p">,</span>
+                <span class="nx">artist</span><span class="o">:</span> <span class="s2">"Kasabian"</span><span class="p">,</span>
+                <span class="nx">album</span><span class="o">:</span> <span class="s2">"Kasabian"</span><span class="p">,</span>
+                <span class="nx">picture</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+                <span class="nx">link</span><span class="o">:</span> <span class="s2">"http://open.spotify.com/track/5jhJur5n4fasblLSCOcrTp"</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+
+<h4>Fecthing data</h4>
+
+<p>The server-side proxy retrieves tracks and albums listing from the different APIs and returns them in a common format.</p>
+
+<p>Example (returning data when proxying results from Deezer for the search "Jackson") :</p>
+
+<div class="highlight"><pre>    <span class="p">{</span>
+        <span class="nx">data</span><span class="o">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nx">title</span><span class="o">:</span> <span class="s2">"Billie Jean"</span><span class="p">,</span>
+                <span class="nx">artist</span><span class="o">:</span> <span class="s2">"Michael Jackson"</span><span class="p">,</span>
+                <span class="nx">album</span><span class="o">:</span> <span class="s2">"HIStory - PAST, PRESENT AND FUTURE - Book I"</span><span class="p">,</span>
+                <span class="nx">picture</span><span class="o">:</span> <span class="s2">"http://api.deezer.com/2.0/album/71623/image"</span><span class="p">,</span>
+                <span class="nx">link</span><span class="o">:</span> <span class="s2">"http://www.deezer.com/track/540980"</span><span class="p">,</span>
+                <span class="nx">score</span><span class="o">:</span> <span class="mi">1</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="nx">title</span><span class="o">:</span> <span class="s2">"Beat It"</span><span class="p">,</span>
+                <span class="nx">artist</span><span class="o">:</span> <span class="s2">"Michael Jackson"</span><span class="p">,</span>
+                <span class="nx">album</span><span class="o">:</span> <span class="s2">"HIStory - PAST, PRESENT AND FUTURE - Book I"</span><span class="p">,</span>
+                <span class="nx">picture</span><span class="o">:</span> <span class="s2">"http://api.deezer.com/2.0/album/71623/image"</span><span class="p">,</span>
+                <span class="nx">link</span><span class="o">:</span> <span class="s2">"http://www.deezer.com/track/541002"</span><span class="p">,</span>
+                <span class="nx">score</span><span class="o">:</span> <span class="mf">0.910</span>
+            <span class="p">},</span>
+
+              <span class="p">...</span>
+
+            <span class="p">{</span>
+                <span class="nx">title</span><span class="o">:</span> <span class="s2">"Beat It"</span><span class="p">,</span>
+                <span class="nx">artist</span><span class="o">:</span> <span class="s2">"Michael Jackson"</span><span class="p">,</span>
+                <span class="nx">album</span><span class="o">:</span> <span class="s2">"Bad 25th Anniversary (Deluxe)"</span><span class="p">,</span>
+                <span class="nx">picture</span><span class="o">:</span> <span class="s2">"http://api.deezer.com/2.0/album/5814021/image"</span><span class="p">,</span>
+                <span class="nx">link</span><span class="o">:</span> <span class="s2">"http://www.deezer.com/track/59510131"</span><span class="p">,</span>
+                <span class="nx">score</span><span class="o">:</span> <span class="mf">0.0899</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+</pre></div>
+
+<h4>Sharing</h4>
+
+<p>The server creates a permanent share link (e.g. <a href="http://tuneefy.com/t/8r2h9">http://tuneefy.com/t/8r2h9</a> or <a href="http://tuneefy.com/a/3zlp9">http://tuneefy.com/a/3zlp9</a>) upon request by the client.</p>
+
+<h2>Client-side</h2>
+
+<p>The main thing happening client-side is the aggregation of the proxied results to get a comprehensive list of results for the user.</p>
+
+<p>The client calls the proxy for each platform the user wants to search on. This allows for :</p>
+
+<ul>
+<li>No cross-platform restriction on the APIs (all is done server-side)</li>
+<li>Results are being updated real-time when each call returns (no need to way until all calls are finished)</li>
+<li>Effective Caching</li>
+</ul><p>Unfortunately, as a side-effect, rate-limited APIs limit the number of calls the proxy can make.</p>
+
+<h4>Aggregation method</h4>
+
+<p>Aggregation is done client-side, in two steps :</p>
+
+<ol>
+<li>
+<code>cleaning</code> Cleaning the title, artist, name of a track or album</li>
+<li>
+<code>hashing</code> Creating a hash of these info for comparison</li>
+</ol><p>Cleaning includes trimming of course, and finding common patterns in the strings, such as :</p>
+
+<ul>
+<li><em>(album version)</em></li>
+<li><em>(featuring ...)</em></li>
+<li><em>etc ...</em></li>
+</ul><p>The following javascript regexp are used to find these patterns:</p>
+
+<div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">regex_feat_p</span> <span class="o">=</span> <span class="sr">/^(.*)(\(|\[)(\s*)(feat\s|feat\.|featuring\s|ft.|ft\s)([^\)^\]]*)(\)|\])(.*)$/gi</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">regex_album_version</span> <span class="o">=</span> <span class="sr">/^(.*)(\(|\[)(\s*)(album\sversion|version\salbum)([^\)^\]]*)(\)|\])(.*)$/gi</span><span class="p">;</span>
+</pre></div>
+
+<p>The hash is currently a concatenation of the lowercased cleaned title, artist and name when available. All accented / non alphanumeric characters are replaced by their equivalent.</p>
+
+<h2>A word on patterns</h2>
+
+<p>To cut a long story short, I used :</p>
+
+<ul>
+<li>A <code>facade</code> patterns, with templates, to display the different pages</li>
+<li>A <code>proxy pattern</code> for the data handling from the different platforms</li>
+<li>An <code>event pooling</code> pattern in a (light) <code>MVC</code> pattern to display the results and aggregate them for the user</li>
+</ul><p><a name="permalinks"></a></p>
+
+<h2>Supported Permalinks</h2>
+
+<p>The following permalinks are supported when searching on tuneefy :</p>
+
+<ul>
+<li>
+<strong>Deezer</strong> song link : <a href="http://www.deezer.com/listen-10236179">http://www.deezer.com/listen-10236179</a>
+</li>
+<li>
+<strong>Deezer</strong> artist link : <a href="http://www.deezer.com/fr/music/radiohead">http://www.deezer.com/fr/music/radiohead</a>
+</li>
+<li>
+<strong>Deezer</strong> album link : <a href="http://www.deezer.com/fr/music/rjd2/deadringer-144183">http://www.deezer.com/fr/music/rjd2/deadringer-144183</a>
+</li>
+<li>
+<strong>Spotify</strong> song link : <a href="http://open.spotify.com/track/5jhJur5n4fasblLSCOcrTp">http://open.spotify.com/track/5jhJur5n4fasblLSCOcrTp</a> or spotify:track:5jhJur5n4fasblLSCOcrTp</li>
+<li>
+<strong>Spotify</strong> artist link : <a href="http://open.spotify.com/artist/6UUrUCIZtQeOf8tC0WuzRy">http://open.spotify.com/artist/6UUrUCIZtQeOf8tC0WuzRy</a> or spotify:artist:6UUrUCIZtQeOf8tC0WuzRy</li>
+<li>
+<strong>Spotify</strong> album link : <a href="http://open.spotify.com/album/2bRcCP8NYDgO7gtRbkcqdk">http://open.spotify.com/album/2bRcCP8NYDgO7gtRbkcqdk</a> or spotify:album:2bRcCP8NYDgO7gtRbkcqdk</li>
+<li>
+<strong>Last.fm</strong> song link : <a href="http://www.last.fm/music/The+Clash/London+Calling/London+Calling">http://www.last.fm/music/The+Clash/London+Calling/London+Calling</a>
+</li>
+<li>
+<strong>Last.fm</strong> album link : <a href="http://www.last.fm/music/The+Clash/London+Calling">http://www.last.fm/music/The+Clash/London+Calling</a>
+</li>
+<li>
+<strong>Last.fm</strong> artist link : <a href="http://www.lastfm.fr/music/Sex+Pistols">http://www.lastfm.fr/music/Sex+Pistols</a>
+</li>
+<li>
+<strong>Grooveshark</strong> verbose song link : <a href="http://grooveshark.com/s/Sweet+Sweet+Heartkiller/2GVBvD?src=5">http://grooveshark.com/s/Sweet+Sweet+Heartkiller/2GVBvD?src=5</a>
+</li>
+<li>
+<strong>Grooveshark</strong> album link : <a href="http://grooveshark.com/album/Impeccable+Blahs/1529354">http://grooveshark.com/album/Impeccable+Blahs/1529354</a>
+</li>
+<li>
+<strong>Grooveshark</strong> artist link : <a href="http://grooveshark.com/artist/Say+Hi+To+Your+Mom/401373">http://grooveshark.com/artist/Say+Hi+To+Your+Mom/401373</a>
+</li>
+<li>
+<strong>Soundcloud</strong> simple song link : <a href="http://soundcloud.com/fuckmylife/radiohead-codex-deadmau5-cover">http://soundcloud.com/fuckmylife/radiohead-codex-deadmau5-cover</a>
+</li>
+<li>
+<strong>Hypemachine</strong> track link : <a href="http://hypem.com/item/1g079/">http://hypem.com/item/1g079/</a>
+</li>
+<li>
+<strong>Youtube</strong> music link : <a href="http://www.youtube.com/watch?v=_FOyHhU0i7k">http://www.youtube.com/watch?v=_FOyHhU0i7k</a>
+</li>
+<li>
+<strong>Rdio</strong> link : <a href="http://www.rdio.com/#/artist/Crash_Test_Dummies">http://www.rdio.com/#/artist/Crash_Test_Dummies</a>
+</li>
+<li>
+<strong>Qobuz</strong> track link : <a href="http://player.qobuz.com/#!/track/5280111">http://player.qobuz.com/#!/track/5280111</a>
+</li>
+</ul><h2>tuneefy bookmarklet</h2>
+
+<p>The tuneefy bookmarklet is a quick and convenient way to share tuneefy links directly from the page you're listening music in.</p>
+
+<p>The standard production bookmarklet code is :</p>
+
+<div class="highlight"><pre>    <span class="nx">javascript</span><span class="o">:</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="nx">tuneefy_bkmrklt</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'SCRIPT'</span><span class="p">);</span><span class="nx">tuneefy_bkmrklt</span><span class="p">.</span><span class="nx">type</span><span class="o">=</span><span class="s1">'text/javascript'</span><span class="p">;</span>
+    <span class="nx">tuneefy_bkmrklt</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="s1">'http://tuneefy.com/widget/share.js.php?x='</span><span class="o">+</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">());</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'head'</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tuneefy_bkmrklt</span><span class="p">);})();</span>
+</pre></div>
+
+<p>The bookmarklet recognizes what you're listening to on the following platforms / websites :</p>
+
+<ul>
+<li>Deezer</li>
+<li>Jiwa</li>
+<li>Grooveshark</li>
+<li>Radionomy</li>
+<li>Stereomood</li>
+<li>Musicmaze</li>
+<li>Qobuz Player</li>
+<li>Rdio</li>
+<li>Youtube (only for tracks available on iTunes via Youtube)</li>
+<li>Myspace (music player and artist page - first track only)</li>
+<li>Spotify (in a web browser only)</li>
+</ul><h2>Contact me</h2>
+
+<p>Do not hesitate to drop me a line at tchap(@)tuneefy.com or to fork this repo and make pull requests.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Tuneefy maintained by <a href="https://github.com/tchapi">tchapi</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-26203753-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
