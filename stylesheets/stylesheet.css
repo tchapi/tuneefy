@@ -307,12 +307,20 @@ Full-Width Styles
   width: 267px;
 }
 
+#project_title img {
+  position: absolute;
+  top: 0;
+  left: -38px;
+  width: 267px;
+}
+
 #project_tagline {
   color: #fff;
   font-size: 24px;
   font-weight: 300;
   background: none;
   text-shadow: #111 0px 0px 10px;
+  margin-top: 70px;
 }
 
 #downloads {
