@@ -22,7 +22,18 @@ $lang['api_overview_title'] = "Overview";
 $lang['api_overview'] = "<p>The tuneefy API is a RESTful API that allows you to lookup, search, and aggregate tracks via tuneefy.</p><p>Two response formats are available : </p><ul><li><span class=\"color\">JSON</span></li><li><span class=\"color\">XML</span></li></ul><p>The server will first check if an '<span class=\"color\">HTTP_ACCEPT</span>' header is present, containing one of the two supported MIME-types. The response type can be overriden with the 'alt' parameter available for each method (see below). By default, the API will return XML.</p><p>All the responses are <span class=\"color\">UTF-8</span> encoded, and so must be all the calls.</p>";
 $lang['api_endpoint_title'] = "API Endpoint";
 $lang['api_auth_title'] = "Authentication";
-$lang['api_auth'] = "<p>Every request to the API must be signed with <span class=\"color\">2-legged </span><a href='http://oauth.net/documentation/getting-started/' target='_blank'><span class=\"color\">OAuth</span></a> authentication.</p><p>To request a consumer key and secret, drop us a line at <a href='mailto:api@tuneefy.com' class='color'>api@tuneefy.com</a>.</p>";
+$lang['api_auth'] = "<p>Every request to the API must be signed with <span class=\"color\"><a href='http://oauth.net/documentation/getting-started/' target='_blank'>2-legged OAuth</span></a> authentication.</p><p>OAuth allows a server to accept requests only from a client that knows the consumer secret. This is done by a requiring a signature that's a hash of:</p>
+
+<ul>
+<li>the HTTP method, host, path, parameters and body</li>
+<li>a timestamp and a unique nonce to block replay attacks</li>
+<li>the consumer key to identify the caller, and</li>
+<li>the consumer secret to verify the identity of the caller</li>
+</ul>
+
+<p><span class=\"color\"><a href=\"http://tools.ietf.org/html/rfc5849#section-3.4\">Section 3.4</a></span> of the OAuth specification describes in detail how to sign requests.</p>
+
+</p><p>To request a consumer key and secret, drop us a line at <a href='mailto:api@tuneefy.com' class='color'>api@tuneefy.com</a>.</p>";
 $lang['api_platforms_title'] = "Available platforms and platforms ids";
 $lang['api_platforms'] = "<p>tuneefy actually supports at most <span class=\"color\">%d</span> platforms (or music services) for search, lookup and/or aggregation.</p><p>Each platform has a unique id that is identified below, along with the supported methods :</p>";
 $lang['api_methods_title'] = "Available methods";
