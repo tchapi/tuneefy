@@ -1503,8 +1503,9 @@ tr.platformsEnum{
 }
 
 #apiMethods h4 {
-  font-size: 1.25em;
+  font-size: 2.5em;
   padding: 15px 0;
+  margin: 30px 0 10px -40px;
 }
 
 #apiMethods h5 {
