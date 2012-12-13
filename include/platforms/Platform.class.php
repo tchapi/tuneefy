@@ -184,7 +184,7 @@ abstract class Platform {
       // Extract host and path:
       $host = $url['host'];
       $path = $url['path'];
-        if ($url['query']) $path .= '?'.$url['query'];
+        if (isset($url['query']) &&  $url['query']) $path .= '?'.$url['query'];
 
       if ($url['scheme'] == 'https') {
         // Open a socket connection on port 80 - timeout: 3 sec
