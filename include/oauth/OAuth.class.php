@@ -29,7 +29,7 @@ class OAuth {
     
     // We create the secret key.
     if (!$token)
-      $key = $private_secret."&";
+      $key = $private_secret;
     else
       $key = $private_secret."&".$token;
     
