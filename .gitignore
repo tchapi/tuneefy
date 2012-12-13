@@ -1,9 +1,9 @@
 config.php
 admin/send.php
 js/min/tuneefy.min.js
+include/api/test.php
 .htpasswd
 /.htaccess
 _SOURCES_
 _FEEDBACK_
 TODO*
-include/api/test.php

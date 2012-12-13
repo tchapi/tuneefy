@@ -7,11 +7,11 @@
   require(_PATH.'include/database/DBConnection.class.php');
 
   // What type of share is it ?
-  if (isset($_POST['itemType'])) {
-    if ($_POST['itemType'] == _TABLE_TRACK) {
+  if (isset($_REQUEST['itemType'])) {
+    if ($_REQUEST['itemType'] == _TABLE_TRACK) {
       $itemType = _TABLE_TRACK;
       $shortCode = '/t/';
-    } else if ($_POST['itemType'] == _TABLE_ALBUM) {
+    } else if ($_REQUEST['itemType'] == _TABLE_ALBUM) {
       $itemType = _TABLE_ALBUM;
       $shortCode = '/a/';
     } else {
@@ -24,17 +24,17 @@
   }
 
   // We check we have some info
-  if ( ((!isset($_POST['name']) || $_POST['name'] == "") && $itemType == 'track') || 
-       ((!isset($_POST['album']) || $_POST['album'] == "") && $itemType == 'album') ||
-         !isset($_POST['artist']) || $_POST['artist'] == "") {
+  if ( ((!isset($_REQUEST['name']) || $_REQUEST['name'] == "") && $itemType == 'track') || 
+       ((!isset($_REQUEST['album']) || $_REQUEST['album'] == "") && $itemType == 'album') ||
+         !isset($_REQUEST['artist']) || $_REQUEST['artist'] == "") {
     header('Location: '._SITE_URL);
     die(0);
   }
   
-  $name = trim(html_entity_decode($_POST['name'], ENT_COMPAT, "UTF-8"));
-  $artist = trim(html_entity_decode($_POST['artist'], ENT_COMPAT, "UTF-8"));
-  $album = trim(html_entity_decode($_POST['album'], ENT_COMPAT, "UTF-8"));
-  $image = trim($_POST['image']);
+  $name = trim(html_entity_decode($_REQUEST['name'], ENT_COMPAT, "UTF-8"));
+  $artist = trim(html_entity_decode($_REQUEST['artist'], ENT_COMPAT, "UTF-8"));
+  $album = trim(html_entity_decode($_REQUEST['album'], ENT_COMPAT, "UTF-8"));
+  $image = trim($_REQUEST['image']);
 
   // We arrange the future $query values that we are going to insert into our final lookup and insert queries
   $insertQueryColumns = "";
@@ -49,11 +49,11 @@
     $lookupName = _TABLE_LINK_PREFIX.$pObject->getSafeName();
     
     // If there is no POST parameter for this platform
-    if (!$pObject->isActiveForSearch() || !isset($_POST[$postName])) continue;
+    if (!$pObject->isActiveForSearch() || !isset($_REQUEST[$postName])) continue;
     
     $insertQueryColumns .= ", ".$lookupName;
     
-    $postValue = trim($_POST[$postName]);
+    $postValue = trim($_REQUEST[$postName]);
 
     $lookupQuery .= sprintf(" AND `".$lookupName."`='%s'",
                             mysql_real_escape_string($postValue)
@@ -81,7 +81,15 @@
   
     $found = true;
     $row = mysql_fetch_row($exe);
-    echo _SITE_URL.$shortCode.DBUtils::toUId($row[0], _BASE_MULTIPLIER);
+
+    $shortUrl = _SITE_URL.$shortCode.DBUtils::toUId($row[0], _BASE_MULTIPLIER);
+
+    if (isset($_REQUEST['redirect']) && $_REQUEST['redirect'] == 1){
+      header('Location: '.$shortUrl);
+    } else {
+      echo $shortUrl;
+    }
+
     return;
   }
   
@@ -107,7 +115,13 @@
   	  	
   } else {
   
-    echo _SITE_URL.$shortCode.DBUtils::toUId($id, _BASE_MULTIPLIER);
+    $shortUrl = _SITE_URL.$shortCode.DBUtils::toUId($id, _BASE_MULTIPLIER);
+
+    if (isset($_REQUEST['redirect']) && $_REQUEST['redirect'] == 1){
+      header('Location: '.$shortUrl);
+    } else {
+      echo $shortUrl;
+    }
 
   }
   

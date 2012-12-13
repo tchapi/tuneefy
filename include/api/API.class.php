@@ -91,7 +91,7 @@ class API {
   
   public static function processAPICall($calledMethod, $data) {
     
-    $valid = API::validateCall($calledMethod, $data);
+    $valid = true; //API::validateCall($calledMethod, $data);
     
     if (!$valid) {
     
@@ -311,8 +311,8 @@ class API {
     while (list($pId, $pObject) = each($platforms)) {
     
       if ( $pObject == false || 
-         (!$pObject->isActiveForSearch() && $itemType == 'track') || 
-         (!$pObject->isActiveForAlbumSearch() && $itemType == 'album')) {
+         (!($pObject->isActiveForSearch()) && $itemType == 'track') || 
+         (!($pObject->isActiveForAlbumSearch()) && $itemType == 'album')) {
         continue;
       }
 
@@ -325,10 +325,10 @@ class API {
         
             $finalResult = $result;
             
-            //BEcause the first results doesn't go through 'merge'
+            //Because the first results doesn't go through 'merge'
             for ($i=0; $i<$nbResults; $i++) {
         
-              $finalResult[$i]['link'] = array($key => $finalResult[$i]['link']);
+              $finalResult[$i]['link'] = array(_TABLE_LINK_PREFIX.$pObject->getId() => $finalResult[$i]['link']);
           
             }
             
@@ -337,7 +337,7 @@ class API {
           for ($i=0; $i<$nbResults; $i++) {
           
             // Merging the final result with the item returned
-            $finalResult = API::merge($finalResult, $result[$i], $itemType, $key);
+            $finalResult = API::merge($finalResult, $result[$i], $itemType, $pObject->getId());
           
           }
         
@@ -355,6 +355,8 @@ class API {
       return ($a['score']  < $b['score'] ) ? 1 : -1;
     } 
     uasort($finalResult, 'cmp');
+
+    $finalResult = API::addTuneefyLinks($finalResult, $itemType);
     
     return $finalResult;
 
@@ -391,10 +393,8 @@ class API {
         }
         
         // Adding the link
-        if (!is_array($items[$k]['link']))
-          $items[$k]['link'] = array($platform => $newItemToMerge['link']);
-        else
-          $items[$k]['link'] = array_diff_key($items[$k]['link'], array($platform => $newItemToMerge['link'])) + array($platform => $newItemToMerge['link']);
+        if ( !($items[$k]['link'][$platform]))
+          $items[$k]['link'][_TABLE_LINK_PREFIX.$platform] = $newItemToMerge['link'];
 
         // Adding score
         $items[$k]['score'] += $newItemToMerge['score'];
@@ -404,6 +404,30 @@ class API {
     
     return $items;
   
+  }
+
+  private static function addTuneefyLinks($array, $itemType){
+
+    foreach ($array as $key => $value) {
+
+      $params = array( 'itemType' => ($itemType=='track')?_TABLE_TRACK:_TABLE_ALBUM,
+                       'name' => $array[$key]['title'],
+                       'artist' => $array[$key]['artist'],
+                       'album' => $array[$key]['album'],
+                       'image' => $array[$key]['picture'],
+                       'redirect' => 1
+                      );
+
+      $platforms = $array[$key]['link'];
+
+      $fullParams = http_build_query(array_merge($params, $platforms));
+
+      $array[$key]['shareLink'] = _SITE_URL.'/include/share/share.php?'.$fullParams;
+
+    }
+
+    return $array;
+
   }
   
 }

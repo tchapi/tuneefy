@@ -41,6 +41,7 @@ $lang['api_methods'] = "The following methods can be used on tuneefy : <a href=\
 
 $lang['api_arguments'] = "Arguments";
 $lang['api_returns'] = "Returns";
+$lang['api_warning'] = "Warning";
 $lang['api_integer'] = "integer";
 $lang['api_string'] = "string";
 $lang['api_object'] = "object";
@@ -68,8 +69,11 @@ $lang['api_lookup_description'] = "This method returns a track object correspond
 
 $lang['api_search_description'] = "This method searches for a track or album, for one or more terms, on the specified platform.";
 $lang['api_track_results'] = "an object containing the tracks or albums, if found, null otherwise. The object properties are <span class=\"color\">name</span> (the title of the song or null in the case of an album search), <span class=\"color\">artist</span> (the interpreter), <span class=\"color\">album</span> (one album where the song is, if found, in the case of a track search, or the album searched in the case of an album search), <span class=\"color\">picture</span> (an image for this track - usually the cover of the album, if found), <span class=\"color\">link</span> (the link to the song or album on the platform from which the permalink was coming - usually matches the given permalink) and the <span class=\"color\">score</span> (1: most relevant match).";
+$lang['api_share_link'] = "each object has a <span class=\"color\">shareLink</span> property that allows for a direct sharing. Accessing this link will create a new entry on tuneefy and redirect you to the corresponding tuneefy short link.";
 
 $lang['api_aggregate_description'] = "This method aggregates searches for a track or album, for one or more terms, on all the possible platforms for the type of search.";
+
+$lang['api_aggregate_warning'] ="<span class=\"color\">This method is extremely slow since it relies on synchronous calls to various third-party APIs. A typical request can take up to 20 secs. You've been warned.</span>";
 
 $lang['api_disclaimer_title'] = "Disclaimer";
 $lang['api_disclaimer'] = "The tuneefy API relies on various APIs, and is thus highly dependent on their availability, health, return codes, timeout, will to respond, apathy, etc ..";
