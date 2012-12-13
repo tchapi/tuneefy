@@ -67,11 +67,11 @@ Tuneefy.prototype.runQuery = function(){
     // Calling the callback to launch search
     if (data != null) {
     
-      this.query = data.data.query;
+      this.query = data.data.query.transformed;
       this.lookedUpPlatform = data.data.lookedUpPlatform;
       this.lookedUpItem = data.data.lookedUpItem;
       
-      console.log('Tuneefy >>> query.updated with ' + this.query);
+      console.log('Tuneefy >>> query.updated with ' + this.query.transformed);
       $(this.controller).trigger("tuneefy.query.updated", [this.query]);
       this.runGets();
       

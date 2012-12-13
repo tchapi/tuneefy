@@ -186,6 +186,12 @@ class API {
     // Return value (default) 
     $retour = null;
     
+    // For now we have not transformed
+    $queryArray = array( 
+      'initial' => $query, 
+      'transformed' => $query
+    );
+
     // Check that the request is well-formed
     if ($query){
       
@@ -221,7 +227,8 @@ class API {
                       
             if ($result) {
               // We have a non-null result
-              $query = $result['query'];
+              $queryArray['transformed'] = str_replace(" ","+",trim($result['query']));
+
               $lookedUpItem = $result['track'];
               $lookedUpPlatform = $pObject->getId();
             }
@@ -235,10 +242,8 @@ class API {
         }
       }
       
-      $query = str_replace(" ","+",trim($query));
-      
       // We create the PHP array containing the good values
-      $retour = array('lookedUpPlatform' => $lookedUpPlatform, 'query' => $query, 'lookedUpItem' => $lookedUpItem);
+      $retour = array('lookedUpPlatform' => $lookedUpPlatform, 'query' => $queryArray, 'lookedUpItem' => $lookedUpItem);
     
     } 
     
