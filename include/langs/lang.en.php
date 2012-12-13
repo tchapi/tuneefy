@@ -62,7 +62,7 @@ $lang['api_platform_search'] = "the platform id on which to search";
 $lang['api_type_search'] = "the type of search (track or album)";
 
 $lang['api_lookedup_platform'] = "the platform of the permalink, or -1 if a basic search is requested";
-$lang['api_query_cleaned'] = "the cleaned query";
+$lang['api_query_cleaned'] = "an array containing the initial query and the transformed ('cleaned') query";
 $lang['api_lookedup_item'] = "an object containing the track, if found, null otherwise. The object properties are <span class=\"color\">name</span> (the title of the song), <span class=\"color\">artist</span> (the interpreter), <span class=\"color\">album</span> (one album where the song is, if found), <span class=\"color\">picture</span> (an image for this track - usually the cover of the album, if found) and <span class=\"color\">link</span> (the link to the song on the platform from which the permalink was coming - usually matches the given permalink).";
 
 $lang['api_lookup_description'] = "This method returns a track object corresponding to the permalink requested, if found.";
