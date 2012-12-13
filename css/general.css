@@ -104,6 +104,7 @@ a.btn_full_13{ background: url("../img/platforms/platform_full_13.png") no-repea
 
 /* Main colors */
 .color{ color: #76bad0; }
+.color a{ color: #76bad0; }
 .Fcolor{ background: #76bad0; }
 .Bcolor{ background: url('../img/background.png') repeat scroll 0 0 #1D1D1D; }
 
