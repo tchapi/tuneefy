@@ -16,7 +16,8 @@ $lang['about_title']= "À propos";
 $lang['about_tip']= "C'est quoi, ce truc ?"; 
 
 // API
-$lang['api_intro']="API tuneefy";
+$lang['api_title']="API";
+$lang['api_intro']="Documentation de l'API Rest tuneefy";
 
 // Search
 $lang['query_label']= "Cherchez une chanson, un album, .. ou collez un lien"; 
