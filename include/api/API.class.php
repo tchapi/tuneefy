@@ -91,7 +91,7 @@ class API {
   
   public static function processAPICall($calledMethod, $data) {
     
-    $valid = true; //API::validateCall($calledMethod, $data);
+    $valid = API::validateCall($calledMethod, $data);
     
     if (!$valid) {
     
