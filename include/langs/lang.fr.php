@@ -18,6 +18,55 @@ $lang['about_tip']= "C'est quoi, ce truc ?";
 // API
 $lang['api_title']="API";
 $lang['api_intro']="Documentation de l'API Rest tuneefy";
+$lang['api_overview_title'] = "Généralités";
+
+$lang['api_overview'] = "<p>L'API tuneefy est une API RESTful vous permettant de rechercher des pistes et albums, traduire des permaliens et aggréger des résultats.</p><p>L'API peut renvoyer ses résultats sous deux formats : </p><ul><li><span class=\"color\">JSON</span></li><li><span class=\"color\">XML</span></li></ul><p>Le serveur vérifiera d'abord la présence d'un header '<span class=\"color\">HTTP_ACCEPT</span>' dans la requête, contenant un des MIME-types correspondants ci-dessus. Le type de retour peut être forcé grace au paramètre 'alt' disponible pour toutes les methodes détaillées ci-dessous. Par défaut, l'API retournera de l'XML.</p><p>Toutes les réponses sont encodées en <span class=\"color\">UTF-8</span>, toutes les requêtes doivent également l'être.</p>";
+$lang['api_endpoint_title'] = "Endpoint principal";
+$lang['api_auth_title'] = "Authentification";
+$lang['api_auth'] = "<p>Chaque requête à l'API doit être signée suivant le protocole <span class=\"color\">2-legged <a href='http://oauth.net/documentation/getting-started/' target='_blank'>OAuth</a></span>.</p><p>Demandez dès aujourd'hui votre clé publique et privée en nous envoyant un mail : <a href='mailto:api@tuneefy.com' class='color'>api@tuneefy.com</a>.</p>";
+$lang['api_platforms_title'] = "Plateformes disponibles via l'API et leur id correspondant";
+$lang['api_platforms'] = "<p>tuneefy supporte actuellement <span class=\"color\">%d</span> plateformes (ou sites musicaux) pour la recherche, la traduction et l'aggregation.</p><p>Chaque plateforme a un id unique qui est détaillé ci-dessous, avec les méthodes disponibles pour chaque plateforme :</p>";
+$lang['api_methods_title'] = "Méthodes disponibles";
+$lang['api_methods'] = "Les méthodes suivantes sont disponibles : <a href=\"#lookup\"><span class=\"color\">lookup</span></a>, <a href=\"#search\"><span class=\"color\">search</span></a> et <a href=\"#aggregate\"><span class=\"color\">aggregate</span></a>.";
+
+$lang['api_arguments'] = "Paramètres";
+$lang['api_returns'] = "Retour";
+$lang['api_integer'] = "entier";
+$lang['api_string'] = "chaîne";
+$lang['api_object'] = "objet";
+$lang['api_ex_call'] = "Exemple d'appel à l'API";
+$lang['api_ex_response'] = "Exemple de réponse";
+$lang['api_required'] = "obligatoire";
+$lang['api_optional'] = "optionnel";
+
+# ----- TRANSLATION -- WIP
+
+$lang['api_platforms_platform'] = "Plateforme";
+$lang['api_platforms_search_tracks'] = "search / agg. (tracks)";
+$lang['api_platforms_search_albums'] = "search / agg. (album)";
+$lang['api_platforms_lookup'] = "lookup (tracks)";
+
+$lang['api_query_terms'] = "the query terms (url-encoded)";
+$lang['api_max_results'] = "the maximum number of results returned (0 - 100)";
+$lang['api_alt'] = "the alternative response format ('json' or 'xml')";
+$lang['api_platform_search'] = "the platform id on which to search";
+$lang['api_type_search'] = "the type of search (track or album)";
+
+$lang['api_lookedup_platform'] = "the platform of the permalink, or -1 if a basic search is requested";
+$lang['api_query_cleaned'] = "the cleaned query";
+$lang['api_lookedup_item'] = "an object containing the track, if found, null otherwise. The object properties are <span class=\"color\">name</span> (the title of the song), <span class=\"color\">artist</span> (the interpreter), <span class=\"color\">album</span> (one album where the song is, if found), <span class=\"color\">picture</span> (an image for this track - usually the cover of the album, if found) and <span class=\"color\">link</span> (the link to the song on the platform from which the permalink was coming - usually matches the given permalink).";
+
+$lang['api_lookup_description'] = "This method returns a track object corresponding to the permalink requested, if found.";
+
+$lang['api_search_description'] = "This method searches for a track or album, for one or more terms, on the specified platform.";
+$lang['api_track_results'] = "an object containing the tracks or albums, if found, null otherwise. The object properties are <span class=\"color\">name</span> (the title of the song or null in the case of an album search), <span class=\"color\">artist</span> (the interpreter), <span class=\"color\">album</span> (one album where the song is, if found, in the case of a track search, or the album searched in the case of an album search), <span class=\"color\">picture</span> (an image for this track - usually the cover of the album, if found), <span class=\"color\">link</span> (the link to the song or album on the platform from which the permalink was coming - usually matches the given permalink) and the <span class=\"color\">score</span> (1: most relevant match).";
+
+$lang['api_aggregate_description'] = "This method aggregates searches for a track or album, for one or more terms, on all the possible platforms for the type of search.";
+
+$lang['api_disclaimer_title'] = "Disclaimer";
+$lang['api_disclaimer'] = "The tuneefy API relies on various APIs, and is thus highly dependent on their availability, health, return codes, timeout, will to respond, apathy, etc ..";
+
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 
 // Search
 $lang['query_label']= "Cherchez une chanson, un album, .. ou collez un lien"; 
