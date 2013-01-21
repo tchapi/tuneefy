@@ -120,7 +120,7 @@ class RestUtils
         // Now we add some metadata
         $response = array("provider" => "tuneefy", 
                           "api" => true, 
-                          "version" => "1.2a", 
+                          "version" => "0.9b", 
                           "status" => $status==200?"splendid":"bloody hell", 
                           "data" => $body);
       } else {
@@ -147,7 +147,7 @@ class RestUtils
       // Adding the metadata
       $xml->push('response', array("provider" => "tuneefy", 
                                    "api" => true, 
-                                   "version" => "1.2a", 
+                                   "version" => "0.9b", 
                                    "status" => $status==200?"splendid":"bloody hell"));
       $xml->push('data');
       

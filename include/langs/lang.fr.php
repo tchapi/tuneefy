@@ -52,6 +52,7 @@ $lang['api_query_terms'] = "les termes recherchés (url-encodés)";
 $lang['api_max_results'] = "nombre maximum de résultats (0 - 100)";
 $lang['api_alt'] = "format de réponse alternatif ('json' ou 'xml')";
 $lang['api_platform_search'] = "l'id de la plateforme sur laquelle chercher";
+$lang['api_platforms_aggregate'] = "les ids des plateformes sur lesquelles chercher (séparées par des virgules)";
 $lang['api_type_search'] = "le type d'objet recherché (track (piste) ou album)";
 
 $lang['api_lookedup_platform'] = "la plateforme du permalien, ou -1 si la recherche est standard";
@@ -61,7 +62,7 @@ $lang['api_lookedup_item'] = "un objet contenant la piste, si trouvée, ou null 
 $lang['api_lookup_description'] = "Cette méthode retourne un objet piste correspondant au permalien recherché.";
 
 $lang['api_search_description'] = "Cette méthode recherche une piste ou un album avec les termes fournis, sur la plateforme spécifiée.";
-$lang['api_track_results'] = "un objet contenant les pistes ou albums, ou null. Les propriétés de chaque objet sont : <span class=\"color\">name</span> (le titre de la piste ou null dans le cas d'un album), <span class=\"color\">artist</span> (l'interprète), <span class=\"color\">album</span> (un album sur lequel se trouve la piste dans le cas d'une piste, l'album sinon), <span class=\"color\">picture</span> (une illustration pour la piste ou l'album - généralement la pochette de l'album correspondant), <span class=\"color\">link</span> (le lien vers la piste sur la plateforme identifiée) et <span class=\"color\">score</span> (1: résultat le plus pertinent).";
+$lang['api_track_results'] = "un objet contenant les pistes ou albums, ou null. Les propriétés de chaque objet sont : <span class=\"color\">name</span> (le titre de la piste ou null dans le cas d'un album), <span class=\"color\">artist</span> (l'interprète), <span class=\"color\">album</span> (un album sur lequel se trouve la piste dans le cas d'une piste, l'album sinon), <span class=\"color\">picture</span> (une illustration pour la piste ou l'album - généralement la pochette de l'album correspondant), <span class=\"color\">link</span> (le lien vers la piste sur la plateforme identifiée) et <span class=\"color\">score</span> (score plus grand <=> résultat plus pertinent).";
 
 $lang['api_aggregate_description'] = "Cette méthode aggrège les résultats pour une piste ou un album pour les termes recherchés, sur toutes les plateformes possibles pour ce type de recherche.";
 

@@ -147,8 +147,13 @@ class API {
               $limit = $data->getData()->limit;
             else
               $limit = 999;
+
+            if (isset($data->getData()->platforms))
+              $platforms = explode(',',$data->getData()->platforms);
+            else
+              $platforms = null;
             
-            $returnedData = API::aggregate($data->getData()->q, $data->getData()->type, $limit);
+            $returnedData = API::aggregate($data->getData()->q, $data->getData()->type, $platforms, $limit);
             $statusCode = 200;
           } else {
             // bad request, lacking query
@@ -295,7 +300,7 @@ class API {
    *
    */
    
-  public static function aggregate($query, $itemType, $limit = 999) {
+  public static function aggregate($query, $itemType, $askedPlatforms, $limit = 999) {
   
     // Limits
     $limit = min(999,max(0,intval($limit)));
@@ -312,12 +317,14 @@ class API {
     
       if ( $pObject == false || 
          (!($pObject->isActiveForSearch()) && $itemType == 'track') || 
-         (!($pObject->isActiveForAlbumSearch()) && $itemType == 'album')) {
+         (!($pObject->isActiveForAlbumSearch()) && $itemType == 'album') ||
+         ($askedPlatforms != null && !in_array($pObject->getId(), $askedPlatforms))
+         ) {
         continue;
       }
 
       try {
-        
+        // error_log("Trying platform ".$pObject->getId()." from ".json_encode($askedPlatforms), 0);
         $result = $pObject->getNormalizedResults($itemType, $query, $limit);
         $nbResults = count($result);
         
@@ -393,7 +400,7 @@ class API {
         }
         
         // Adding the link
-        if ( !($items[$k]['link'][$platform]))
+        if ( !isset($items[$k]['link'][$platform]))
           $items[$k]['link'][_TABLE_LINK_PREFIX.$platform] = $newItemToMerge['link'];
 
         // Adding score

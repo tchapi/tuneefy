@@ -62,6 +62,7 @@ $lang['api_query_terms'] = "the query terms (url-encoded)";
 $lang['api_max_results'] = "the maximum number of results returned (0 - 100)";
 $lang['api_alt'] = "the alternative response format ('json' or 'xml')";
 $lang['api_platform_search'] = "the platform id on which to search";
+$lang['api_platforms_aggregate'] = "the platforms ids (comma-delimited) on which to search";
 $lang['api_type_search'] = "the type of search (track or album)";
 
 $lang['api_lookedup_platform'] = "the platform of the permalink, or -1 if a basic search is requested";
@@ -71,7 +72,7 @@ $lang['api_lookedup_item'] = "an object containing the track, if found, null oth
 $lang['api_lookup_description'] = "This method returns a track object corresponding to the permalink requested, if found.";
 
 $lang['api_search_description'] = "This method searches for a track or album, for one or more terms, on the specified platform.";
-$lang['api_track_results'] = "an object containing the tracks or albums, if found, null otherwise. The object properties are <span class=\"color\">name</span> (the title of the song or null in the case of an album search), <span class=\"color\">artist</span> (the interpreter), <span class=\"color\">album</span> (one album where the song is, if found, in the case of a track search, or the album searched in the case of an album search), <span class=\"color\">picture</span> (an image for this track - usually the cover of the album, if found), <span class=\"color\">link</span> (the link to the song or album on the platform from which the permalink was coming - usually matches the given permalink) and the <span class=\"color\">score</span> (1: most relevant match).";
+$lang['api_track_results'] = "an object containing the tracks or albums, if found, null otherwise. The object properties are <span class=\"color\">name</span> (the title of the song or null in the case of an album search), <span class=\"color\">artist</span> (the interpreter), <span class=\"color\">album</span> (one album where the song is, if found, in the case of a track search, or the album searched in the case of an album search), <span class=\"color\">picture</span> (an image for this track - usually the cover of the album, if found), <span class=\"color\">link</span> (the link to the song or album on the platform from which the permalink was coming - usually matches the given permalink) and the <span class=\"color\">score</span> (highest score <=> most relevant match).";
 $lang['api_share_link'] = "each object has a <span class=\"color\">shareLink</span> property that allows for a direct sharing. Accessing this link will create a new entry on tuneefy and redirect you to the corresponding tuneefy short link.";
 
 $lang['api_aggregate_description'] = "This method aggregates searches for a track or album, for one or more terms, on all the possible platforms for the type of search.";

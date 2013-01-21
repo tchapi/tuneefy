@@ -134,6 +134,7 @@
       <ul>
         <li><span class="parameter">q</span> - <span class="required"><?php $i18n->api_required; ?></span> : <?php $i18n->api_query_terms; ?></li>
         <li><span class="parameter">type</span> - <span class="required"><?php $i18n->api_required; ?></span> : <?php $i18n->api_type_search; ?></li>
+        <li><span class="parameter">platforms</span> - <span class="optional"><?php $i18n->api_optional; ?></span> : <?php $i18n->api_platforms_aggregate; ?></li>
         <li><span class="parameter">limit</span> - <span class="optional"><?php $i18n->api_optional; ?></span> : <?php $i18n->api_max_results; ?></li>
         <li><span class="parameter">alt</span> - <span class="optional"><?php $i18n->api_optional; ?></span> : <?php $i18n->api_alt; ?></li>
       </ul>
