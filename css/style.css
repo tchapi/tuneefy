@@ -1541,6 +1541,11 @@ tr.platformsEnum{
   color: #999;
 }
 
+#api .warning{
+  color: orange;
+  font-size: 1.1em;
+}
+
 /* FOOTER */
 #footer{
   height: 118px;

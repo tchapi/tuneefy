@@ -17,7 +17,7 @@ $lang['about_tip']= "What is it, yo ?";
 
 // API
 $lang['api_title']="API";
-$lang['api_intro']="Introducing the tuneefy API";
+$lang['api_intro']="Introducing the tuneefy API (beta)";
 $lang['api_overview_title'] = "Overview";
 $lang['api_overview'] = "<p>The tuneefy API is a RESTful API that allows you to lookup, search, and aggregate tracks via tuneefy.</p><p>Two response formats are available : </p><ul><li><span class=\"color\">JSON</span></li><li><span class=\"color\">XML</span></li></ul><p>The server will first check if an '<span class=\"color\">HTTP_ACCEPT</span>' header is present, containing one of the two supported MIME-types. The response type can be overriden with the 'alt' parameter available for each method (see below). By default, the API will return XML.</p><p>All the responses are <span class=\"color\">UTF-8</span> encoded, and so must be all the calls.</p>";
 $lang['api_endpoint_title'] = "API Endpoint";
@@ -38,6 +38,9 @@ $lang['api_platforms_title'] = "Available platforms and platforms ids";
 $lang['api_platforms'] = "<p>tuneefy actually supports at most <span class=\"color\">%d</span> platforms (or music services) for search, lookup and/or aggregation.</p><p>Each platform has a unique id that is identified below, along with the supported methods :</p>";
 $lang['api_methods_title'] = "Available methods";
 $lang['api_methods'] = "The following methods can be used on tuneefy : <a href=\"#lookup\"><span class=\"color\">lookup</span></a>, <a href=\"#search\"><span class=\"color\">search</span></a> and <a href=\"#aggregate\"><span class=\"color\">aggregate</span></a>.";
+
+$lang['api_problems_title'] = "Bugs ? Problems ?";
+$lang['api_problems'] = "<p>If you encounter any problem or bug in the API, or have any idea for improving it, we're listening ! Drop us an email at <a href='mailto:team@tuneefy.com' class='color'>team@tuneefy.com</a></p>";
 
 $lang['api_arguments'] = "Arguments";
 $lang['api_returns'] = "Returns";
@@ -76,7 +79,7 @@ $lang['api_aggregate_description'] = "This method aggregates searches for a trac
 $lang['api_aggregate_warning'] ="<span class=\"color\">This method is extremely slow since it relies on synchronous calls to various third-party APIs. A typical request can take up to 20 secs. You've been warned.</span>";
 
 $lang['api_disclaimer_title'] = "Disclaimer";
-$lang['api_disclaimer'] = "The tuneefy API relies on various APIs, and is thus highly dependent on their availability, health, return codes, timeout, will to respond, apathy, etc ..";
+$lang['api_disclaimer'] = "<strong>This is work in progress (as of Jan' 13).</strong> The specifications should not change that much in the meantime but the underlying code may well do, thus changing the response times, parameters, calls, etc .. of the API. This API relies on various APIs, and is thus highly dependent on their availability, health, return codes, timeout, will to respond, apathy, etc ..<br/><br/>The aggregate method is particularly slow for now, but hopefully this will be improved in a near future.";
 
 // Search
 $lang['query_label']= "Search for a track, album or paste a link here"; 

@@ -1,6 +1,11 @@
 <div id="api" class="bdTop txtS">
   <h2 class="color apiTitle"><?php $i18n->api_intro; ?></h2>
 
+  <div id="apiDisclaimer" class="apiBloc">
+    <h3 class="color"><?php $i18n->api_disclaimer_title; ?></h3>
+    <p class="boxed boxS warning"><?php $i18n->api_disclaimer; ?></p>
+  </div>
+ 
   <div id="apiExplanation" class="apiBloc">
     <h3 class="color"><?php $i18n->api_overview_title; ?></h3>
     <div><?php $i18n->api_overview; ?></div>
@@ -69,6 +74,9 @@
     <h3 class="color"><?php $i18n->api_methods_title; ?></h3>
     <p><?php $i18n->api_methods; ?></p>
     
+    <h3 class="color"><?php $i18n->api_problems_title; ?></h3>
+    <p><?php $i18n->api_problems; ?></p>
+
     <h4 class="color"><a name="lookup">lookup</a></h4>
     <div class="method">
       <p><?php $i18n->api_lookup_description; ?></p>
@@ -148,9 +156,4 @@
     
   </div>
   
-  <div id="apiDisclaimer" class="apiBloc">
-    <h3 class="color"><?php $i18n->api_disclaimer_title; ?></h3>
-    <div><?php $i18n->api_disclaimer; ?></div>
-  </div>
- 
 </div>
