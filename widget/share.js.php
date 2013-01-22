@@ -58,15 +58,15 @@ function el(id){return document.getElementById(id);}
       artist = el("current-artist").innerHTML;
       song = el("current-track").innerHTML;
 
-    } else if (uri.indexOf(".jiwa.") && el("player") != null) {
+    } /*else if (uri.indexOf(".jiwa.") && el("player") != null) {
     
       artist = el("player").childNodes[5].childNodes[1].innerHTML.replace(" /","");
       song = el("player").childNodes[5].childNodes[3].innerHTML;
 
-    } else if (uri.indexOf(".grooveshark.") && el("playerDetails_current_song") != null) {
+    }*/ else if (uri.indexOf(".grooveshark.") && el("now-playing-metadata") != null) {
     
-      artist = el("playerDetails_current_song").firstChild.innerHTML;
-      song = el("playerDetails_current_song").childNodes[2].innerHTML;
+      artist = el("now-playing-metadata").childNodes[4].innerHTML;
+      song = el("now-playing-metadata").firstChild.innerHTML;
 
     } else if (uri.indexOf(".radionomy.") && el("track-name") != null) {
     
