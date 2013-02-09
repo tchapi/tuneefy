@@ -26,9 +26,11 @@
   if (isset($_REQUEST['type']) && $_REQUEST['type'] == "tracks") {
     $type = _TABLE_TRACK;
     $items = DBStats::getTracks($startOffset, $limit);
+    $postType = 'tracks';
   } else {
     $type = _TABLE_ALBUM;
     $items = DBStats::getAlbums($startOffset, $limit);
+    $postType = 'albums';
   }
   
 ?><!DOCTYPE html>
@@ -76,7 +78,7 @@
 <?php // == == == == == == DATE SPAN == == == == == == // ?>
 
         <div id="dates" class="bdTop bdBot">
-          <form id="admin_refresh" method="POST" action="list.php" class="margins">
+          <form id="admin_refresh" method="POST" action="list.php?type=<?php echo $postType; ?>" class="margins">
             <img src="<?php echo _SITE_URL; ?>/img/admin_stats.png" class="stats_img" width="48" height="48"/>
             <span class="color titleStats"><?php echo ucfirst($_REQUEST['type']); ?> Listing</span>
             <label for="start">Offset : </label>
@@ -84,7 +86,6 @@
             
             <label for="end">Limit : </label>
             <input type="text" id="limit" name="limit" value="<?php echo $limit; ?>"/>
-            
             <input type="submit" id="datespan" value="Refresh"/>
             
           </form>
@@ -94,7 +95,7 @@
 
         <div id="admin_platformsTrends" class="bdTop">
           <div class="margins">
-            <h2 class="txtS"><?php echo ucfirst($_REQUEST['type']); ?> Listing</h2>
+            <h2 class="txtS"><?php echo ucfirst($_REQUEST['type']); ?> Listing (<?php echo $startOffset; ?> to <?php echo $startOffset + $limit; ?>)</h2>
             <div class="boxed">
             <table width="100%">
             <thead>

@@ -157,6 +157,10 @@ td.name, th.name{
 .addAPick:hover{
   background: #333;
 }
+.adminIcon{
+  height: 28px;
+  width: 36px;
+}
 /* Watchdog */
 .success{
   background: green;

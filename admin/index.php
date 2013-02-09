@@ -156,15 +156,16 @@
         
           while (list($pId, $pObject) = each($platforms))
           {
-            $phvsh = (isset($platformsHitsViaShare[$pId]))?intval($platformsHitsViaShare[$pId]):0;
-            $phvse = (isset($platformsHitsViaSearch[$pId]))?intval($platformsHitsViaSearch[$pId]):0;
-            if (!isset($platformsHits[$pId])) $platformsHits[$pId] = 0;
+            $id = $pObject->getId();
+            $phvsh = (isset($platformsHitsViaShare[$id]))?intval($platformsHitsViaShare[$id]):0;
+            $phvse = (isset($platformsHitsViaSearch[$id]))?intval($platformsHitsViaSearch[$id]):0;
+            if (!isset($platformsHits[$id])) $platformsHits[$id] = 0;
             
-            echo "<tr><td width=\"35px\" class=\"image\"><img src=\""._SITE_URL."/img/platforms/platform_".$pId.".png\" /></td><td class=\"name\">".$pObject->getName()."</td>";
+            echo "<tr><td width=\"35px\" class=\"image\"><div class=\"adminIcon\" style=\"background: url("._SITE_URL."/img/platforms/platform_".$id.".png)\"></div></td><td class=\"name\">".$pObject->getName()."</td>";
             echo "<td><span class=\"color number\">".$phvsh."</span> (" . sprintf("%01.1f",$phvsh/$totalPlatformsHitsViaShare*100) ."%)</td>";
             echo "<td><span class=\"color number\">".$phvse."</span> (" . sprintf("%01.1f",$phvse/$totalPlatformsHitsViaSearch*100) ."%)</td>";
-            echo "<td><span class=\"color number\">".intval($platformsHits[$pId])."</span> (" . sprintf("%01.1f",$platformsHits[$pId]/$totalPlatformsHits*100) ."%)</td>" ;
-            echo "<td><span class=\"color\">".$platformsCatalogueSpan[$pId]."</span> ".sprintf("(%01.1f%%)",$platformsCatalogueSpan[$pId]/$platformsCatalogueSpan['total']*100)."</td></tr>";
+            echo "<td><span class=\"color number\">".intval($platformsHits[$id])."</span> (" . sprintf("%01.1f",$platformsHits[$id]/$totalPlatformsHits*100) ."%)</td>" ;
+            echo "<td><span class=\"color\">".$platformsCatalogueSpan[$id]."</span> ".sprintf("(%01.1f%%)",$platformsCatalogueSpan[$id]/$platformsCatalogueSpan['total']*100)."</td></tr>";
           }
           reset($platforms);
           
