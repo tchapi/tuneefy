@@ -1,5 +1,15 @@
 <!DOCTYPE html>
-<html itemscope itemtype="http://schema.org/Product"
+<?php
+  // Type of schema
+  if ($action == 'album'){
+    $schemaType = 'MusicAlbum';
+  } elseif ($action == 'track'){
+    $schemaType = 'MusicRecording';
+  } else {
+    $schemaType = 'WebPage';
+  }
+?>
+<html itemscope itemtype="http://schema.org/<?php echo $schemaType; ?>"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:og="http://ogp.me/ns#"
       xmlns:fb="http://www.facebook.com/2008/fbml"
@@ -24,6 +34,10 @@
   <meta property="og:type" content="website"/>
   <meta property="og:description" content="<?php $i18n->description; ?>"/>
 
+  <meta itemprop="name" content="<?php $i18n->general_title; ?>">
+  <meta itemprop="description" content="<?php $i18n->description; ?>">
+  <meta itemprop="image" content="<?php echo _SITE_URL; ?>/img/social.png">
+
 <?php } else if ($action == 'search' && isset($request)) { ?>
 
   <title><?php $i18n->search_title(html_entity_decode($request)); ?> | <?php $i18n->general_title; ?></title>
@@ -32,6 +46,10 @@
   <meta property="og:image" content="<?php echo _SITE_URL; ?>/img/social.png"/>
   <meta property="og:type" content="website"> 
   <meta property="og:description" content="<?php $i18n->description; ?>"/>
+
+  <meta itemprop="name" content="<?php $i18n->general_title; ?>">
+  <meta itemprop="description" content="<?php $i18n->description; ?>">
+  <meta itemprop="image" content="<?php echo _SITE_URL; ?>/img/social.png">
 
 <?php } else if ($action == 'track') { ?>
 
@@ -50,6 +68,10 @@
   <meta property="og:description" content="<?php $i18n->track_description(esc($name),esc($artist)); ?>"/>
   <meta property="og:type" content="tuneefy:track"> 
 
+  <meta itemprop="name" content="<?php echo esc($name); ?> | <?php echo esc($artist); ?>">
+  <meta itemprop="description" content="<?php $i18n->track_description(esc($name),esc($artist)); ?>">
+  <meta itemprop="image" content="<?php echo $image; ?>">
+
 <?php } else if ($action == 'album') { ?>
 
 <?php
@@ -67,6 +89,10 @@
   <meta property="og:description" content="<?php $i18n->album_description(esc($album), esc($artist)); ?>"/>
   <meta property="og:type" content="tuneefy:track"> 
       
+  <meta itemprop="name" content="<?php echo esc($album); ?> | <?php echo esc($artist); ?>">
+  <meta itemprop="description" content="<?php $i18n->album_description(esc($album), esc($artist)); ?>">
+  <meta itemprop="image" content="<?php echo $image; ?>">
+
 <?php } else if ($action == 'trends') {  ?>
 
   <title><?php $i18n->stats_title; ?> | <?php $i18n->general_title; ?></title>
@@ -75,6 +101,10 @@
   <meta property="og:image" content="<?php echo _SITE_URL; ?>/img/social.png"/>
   <meta property="og:type" content="website"/>
   
+  <meta itemprop="name" content="<?php $i18n->stats_title; ?> | <?php $i18n->general_title; ?>">
+  <meta itemprop="description" content="<?php $i18n->description; ?>">
+  <meta itemprop="image" content="<?php echo _SITE_URL; ?>/img/social.png">
+
 <?php } else if ($action == 'about') {  ?>
 
   <title><?php $i18n->about_title; ?> | <?php $i18n->general_title; ?></title>
@@ -83,6 +113,10 @@
   <meta property="og:image" content="<?php echo _SITE_URL; ?>/img/social.png"/>
   <meta property="og:type" content="website"/>
 
+  <meta itemprop="name" content="<?php $i18n->about_title; ?> | <?php $i18n->general_title; ?>">
+  <meta itemprop="description" content="<?php $i18n->description; ?>">
+  <meta itemprop="image" content="<?php echo _SITE_URL; ?>/img/social.png">
+
 <?php } else if ($action == 'api_doc') {  ?>
 
   <title><?php $i18n->api_title; ?> | <?php $i18n->general_title; ?></title>
@@ -90,6 +124,10 @@
   <meta property="og:url" content="<?php echo _API_URL; ?>"/>
   <meta property="og:image" content="<?php echo _SITE_URL; ?>/img/social.png"/>
   <meta property="og:type" content="website"/>
+
+  <meta itemprop="name" content="<?php $i18n->api_title; ?> | <?php $i18n->general_title; ?>">
+  <meta itemprop="description" content="<?php $i18n->description; ?>">
+  <meta itemprop="image" content="<?php echo _SITE_URL; ?>/img/social.png">
 
 <?php } else if ($action == 'admin') {  ?>
 
@@ -106,6 +144,10 @@
   <meta property="og:image" content="<?php echo _SITE_URL; ?>/img/social.png"/>
   <meta property="og:type" content="website"/>
   
+  <meta itemprop="name" content="<?php $i18n->general_title; ?>">
+  <meta itemprop="description" content="<?php $i18n->description; ?>">
+  <meta itemprop="image" content="<?php echo _SITE_URL; ?>/img/social.png">
+
 <?php } ?>
 
   <meta property="fb:app_id" content="<?php echo _FB_APP_ID; ?>"> 
@@ -114,9 +156,6 @@
   <meta property="fb:admins" content="<?php echo _FB_ADMIN; ?>"/>
         
 <?php // Social:: Google  // ?>
-  <meta itemprop="name" content="<?php $i18n->general_title; ?>">
-  <meta itemprop="description" content="<?php $i18n->description; ?>">
-  <meta itemprop="image" content="<?php echo _SITE_URL; ?>/img/social.png">
   <link rel="publisher" href="<?php echo _GPLUS_PUBLISHER_ID; ?>">
   
 <?php // ANALYTICS // ?>
