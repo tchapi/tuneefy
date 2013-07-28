@@ -147,7 +147,12 @@ abstract class Platform {
     if ($needsOAuth){
     
       // We add the signature to the request data
-      $call['data'] = OAuth::signRequest($this->api_key, $this->api_secret, null, $call['method'], $call['url'], $call['data']);
+      $consumer = new OAuthConsumer($this->api_key, $this->api_secret, null);
+      $req = OAuthRequest::from_consumer_and_token($consumer, null, $call['method'], $call['url'], $call['data']);
+      $hmac_method = new OAuthSignatureMethod_HMAC_SHA1();
+      $req->sign_request($hmac_method, $consumer, null);
+
+      $call['data'] = $req->get_parameters();
             
     }   
     
