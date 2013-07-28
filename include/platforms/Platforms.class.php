@@ -1852,7 +1852,7 @@ class QOBUZ extends Platform{
         $data[] = array('title' => $currentItem->title,
                         'artist' => $currentItem->performer->name,
                         'album' => $currentItem->album->title,
-                        'picture' => $currentItem->album->image->large,
+                        'picture' => $currentItem->album->image->small,
                         'link' => web(sprintf($this->track_permalink,$currentItem->id)),
                         'score' => round(1/($i/10+1), 2) );
                         
@@ -1862,7 +1862,7 @@ class QOBUZ extends Platform{
         $data[] = array('title' => NULL,
                         'artist' => $currentItem->artist->name,
                         'album' => $currentItem->title,
-                        'picture' => $currentItem->image,
+                        'picture' => $currentItem->image->small,
                         'link' => web(sprintf($this->album_permalink,$currentItem->id)),
                         'score' => round(1/($i/10+1), 2) );
       }
