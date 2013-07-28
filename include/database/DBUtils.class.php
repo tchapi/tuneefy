@@ -70,8 +70,10 @@ class DBUtils {
   
   public static function retrieveCustomer($consumerKey){
   
-    $query = "SELECT `consumer_secret` FROM `api_clients` WHERE `active` = TRUE LIMIT 1";
-  
+    $query = sprintf("SELECT `consumer_secret` FROM `api_clients` WHERE `active` = TRUE AND `consumer_key` = \"%s\" LIMIT 1",
+                        mysql_real_escape_string($consumerKey)
+                        );
+
     // Executes the query
     $exe = mysql_query($query); 
   
