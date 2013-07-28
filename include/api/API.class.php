@@ -6,6 +6,44 @@
 /*                                                     */
 /* *************************************************** */
 
+class APIOAuthDataStore extends OAuthDataStore {
+
+    function lookup_consumer($consumer_key) {/*{{{*/
+        $secret = DBUtils::retrieveCustomer($consumer_key);
+        if ($secret) return new OAuthConsumer($consumer_key, $secret, NULL);
+        return NULL;
+    }/*}}}*/
+
+    function lookup_token($consumer, $token_type, $token) {/*{{{*/
+        return NULL; // We don't need a token so we return a valid one all the time
+    }/*}}}*/
+
+    function lookup_nonce($consumer, $token, $nonce, $timestamp) {/*{{{*/
+        return false; // = not found. We can use the same nonce several times
+    }/*}}}*/
+
+    function new_request_token($consumer) {/*{{{*/
+        return NULL;
+    }/*}}}*/
+
+    function new_access_token($token, $consumer) {/*{{{*/
+        return NULL;
+    }/*}}}*/
+}
+
+class APIOAuthServer extends OAuthServer {
+
+  public function validate(&$request) {
+
+    $this->get_version($request);
+    $consumer = $this->get_consumer($request);
+    $this->check_signature($request, $consumer, NULL);
+    return array($consumer, $token);
+
+  }
+
+}
+
 class API {
   
   // So as to store platforms, obviously
@@ -54,44 +92,32 @@ class API {
     
   }
   
-  protected static function validateCall($calledMethod, $requestData){
+  protected static function validateCall(){
   
-    if (!isset($requestData->getData()->oauth_signature_method) ||
-        $requestData->getData()->oauth_signature_method != "HMAC-SHA1" ||
-        !isset($requestData->getData()->oauth_signature) ||
-        !isset($requestData->getData()->oauth_consumer_key)) {
-    
-      return false;    
-    }
-   
-    $url = _API_URL.'/'.$calledMethod;
-    $signature = urldecode($requestData->getData()->oauth_signature);
-    $consumer_key = urldecode($requestData->getData()->oauth_consumer_key);
-    $consumer_secret = DBUtils::retrieveCustomer($consumer_key);
-    
-    if (!$consumer_secret)
-      return false;
-      
-    // Makes a copy
-    $parameters = $requestData->getData();
-    $cleanParameters = array();
-    
-    // We need to strip down oauth_signature and create an array, not an object
-    while (list($key, $value) = each($parameters)){
-    
-      if ($key != 'oauth_signature')
-        $cleanParameters[$key] = urldecode($value);
-    }
-    
-    $valid = OAuth::checkRequest($signature, $consumer_key, $consumer_secret, null, $requestData->getMethod(), $url, $cleanParameters);
+    $server = new APIOAuthServer(new APIOAuthDataStore());
+    $hmac_method = new OAuthSignatureMethod_HMAC_SHA1();
+    $server->add_signature_method($hmac_method);
 
-    return $valid;
-    
+    try {
+
+      $req = OAuthRequest::from_request();
+      $req->unset_parameter("m");
+      $token = $server->validate($req);
+
+      return true;
+
+    } catch (OAuthException $e) {
+
+      // print($e->getMessage() . "\n\n");
+      return false;
+
+    }
+
   }
   
   public static function processAPICall($calledMethod, $data) {
     
-    $valid = API::validateCall($calledMethod, $data);
+    $valid = API::validateCall();
     
     if (!$valid) {
     
