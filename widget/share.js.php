@@ -53,10 +53,10 @@ function el(id){return document.getElementById(id);}
   
   try {
   
-    if (uri.indexOf(".deezer.") && el("current-track") != null) {
+    if (uri.indexOf(".deezer.") && el("player_track_title") != null) {
     
-      artist = el("current-artist").innerHTML;
-      song = el("current-track").innerHTML;
+      artist = el("player_track_artist").innerHTML;
+      song = el("player_track_title").innerHTML;
 
     } /*else if (uri.indexOf(".jiwa.") && el("player") != null) {
     

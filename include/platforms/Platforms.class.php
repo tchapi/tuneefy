@@ -30,9 +30,9 @@ class DEEZER extends Platform{
     $this->query_album_term = $this->query_term; 
     $this->query_album_options = $this->query_options;
     
-    $this->album_permalink = "http://www.deezer.com/fr/music/%s/%s-%d";
+    $this->album_permalink = "http://www.deezer.com/fr/album/%d";
     
-    $this->lookup_endpoint = "track/%d";
+    $this->lookup_endpoint = "%s/%d"; // is modified inline
     $this->lookup_term = null;
     $this->lookup_options = null;
 
@@ -82,7 +82,7 @@ class DEEZER extends Platform{
                         'artist' => $currentItem->artist->name,
                         'album' => $currentItem->title,
                         'picture' => $picture,
-                        'link' => web(sprintf($this->album_permalink,sanitize($currentItem->artist->name), sanitize($currentItem->title), $currentItem->id)),
+                        'link' => web(sprintf($this->album_permalink,$currentItem->id)),
                         'score' => round(1/($i/10+1), 2));
       
       }
@@ -96,18 +96,21 @@ class DEEZER extends Platform{
   public function lookupPermalink($permalink) {
   
     // http://www.deezer.com/listen-10236179
-    // http://www.deezer.com/music/track/10240179
-    $REGEX_DEEZER_TRACK = "/(listen-|music\/track\/)([0-9]*)$/";
-    // http://www.deezer.com/fr/music/rjd2/deadringer-144183
-    $REGEX_DEEZER_ALBUM = "/\/".$this->REGEX_FULLSTRING."\/".$this->REGEX_FULLSTRING."-([0-9]*)$/";
+    // NOT VALID ANYMORE http://www.deezer.com/music/track/10240179
+    // http://www.deezer.com/track/10444623
+    $REGEX_DEEZER_TRACK = "/(listen-|music\/track\/|\/track\/)([0-9]*)$/";
+    // NOT SUPPORTED ANYMORE http://www.deezer.com/fr/music/rjd2/deadringer-144183
+    // http://www.deezer.com/fr/album/955330
+    $REGEX_DEEZER_ALBUM = "/\/album\/([0-9]*)$/";
     // http://www.deezer.com/fr/music/radiohead
-    $REGEX_DEEZER_ARTIST = "/\/".$this->REGEX_FULLSTRING."\/".$this->REGEX_FULLSTRING."$/";
+    // http://www.deezer.com/fr/artist/16948
+    $REGEX_DEEZER_ARTIST = "/\/(music|artist)\/(".$this->REGEX_FULLSTRING.")$/";
     
     $track = null;
     $valid = false;
-    
     if (preg_match($REGEX_DEEZER_TRACK, $permalink, $match)) {
 
+      $this->lookup_endpoint = 'track/%d';
       $result = $this->callPlatform("lookup", $match[2]);
       if ($result == null) return null;
         
@@ -123,16 +126,36 @@ class DEEZER extends Platform{
       $query = $track['artist']."+".$track['name'];
       
     } else if (preg_match($REGEX_DEEZER_ALBUM, $permalink, $match)) {
+     
+      $this->lookup_endpoint = 'album/%d';
+      $result = $this->callPlatform("lookup", $match[1]);
+      if ($result == null) return null;
+
+      // We encode the track to pass it on as the return track
+      $track = array('name' => NULL,
+                     'artist' => $result->artist->name,
+                     'album' => $result->title,
+                     'picture' => $result->cover,
+                     'link' => web($permalink) );
 
       // We just modify the query
       $valid = true;
-      $query = str_replace("-","+",$match[1]."+".$match[2]);
+      $query = $track['artist']."+".$track['album'];
       
     } else if (preg_match($REGEX_DEEZER_ARTIST, $permalink, $match)) {
 
+      $this->lookup_endpoint = 'artist/%d';
+      $result = $this->callPlatform("lookup", $match[2]);
+
       // We just modify the query
       $valid = true;
-      $query = str_replace("-","+",$match[2]);
+
+      if ($result == null || $result->error->code == 800) { // "no data" => it's not an id
+        $query = $match[2];
+      } else {
+        $query = $result->name;
+      }
+
       
     }
   

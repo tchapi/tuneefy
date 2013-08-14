@@ -23,14 +23,13 @@
   $jsAllPlatforms = "";
   
   $platforms = API::getPlatforms();
-  
+
   while (list($pId, $pObject) = each($platforms))
   {
-    $allPlatforms .= $pObject->isActiveForSearch()?$pId.",":"";
-    $jsAllPlatforms .= $pObject->isActiveForSearch()?'_p['.$pId.'] = "'.$pObject->getName().'";':"";
+    $allPlatforms .= $pObject->isActiveForSearch()?$pObject->getId().",":"";
+    $jsAllPlatforms .= $pObject->isActiveForSearch()?'_p['.$pObject->getId().'] = "'.$pObject->getName().'";':"";
   }
   reset($platforms);
-  
 ?>
   <script type="text/javascript">
     _p = [];<?php echo $jsAllPlatforms; ?>

@@ -37,7 +37,7 @@ Tuneefy.prototype.bindObjects = function() {
     this.limit = limit;
     this.platforms = platforms.split(',');
     this.platformCount = this.platforms.length;
-    
+
     this.runQuery();
     
   }, this));
@@ -66,12 +66,12 @@ Tuneefy.prototype.runQuery = function(){
     
     // Calling the callback to launch search
     if (data != null) {
-    
+
       this.query = data.data.query.transformed;
       this.lookedUpPlatform = data.data.lookedUpPlatform;
       this.lookedUpItem = data.data.lookedUpItem;
       
-      console.log('Tuneefy >>> query.updated with ' + this.query.transformed);
+      console.log('Tuneefy >>> query.updated with ' + this.query);
       $(this.controller).trigger("tuneefy.query.updated", [this.query]);
       this.runGets();
       
@@ -90,7 +90,7 @@ Tuneefy.prototype.runGets = function(){
   
   /* Adding the track if there is any */
   if (this.lookedUpPlatform != null && this.lookedUpPlatform != -1 && $.inArray(this.lookedUpPlatform+'',_all_platforms) != -1) {
-    
+
     // We force the search on this platform, else it's biased
     if ($.inArray(this.lookedUpPlatform+'',this.platforms) == -1) {
       this.platforms.pushlookedUpPlatform;
