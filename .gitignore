@@ -6,4 +6,5 @@ include/api/test.php
 /.htaccess
 _SOURCES_
 _FEEDBACK_
+insertNewAPIClient
 TODO*
