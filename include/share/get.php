@@ -7,7 +7,7 @@
 // Somehow secure AJAX Request
 // For those that don't set the HTTP REFERER, it works (au cas ou...) 
 if (strtolower(@$_SERVER['HTTP_X_REQUESTED_WITH']) != "xmlhttprequest" || 
-    ( isset($_SERVER["HTTP_REFERER"]) && strpos($_SERVER["HTTP_REFERER"], "tuneefy.com") === false) ) {
+    ( isset($_SERVER["HTTP_REFERER"]) && strpos($_SERVER["HTTP_REFERER"], _SITE_URL) === false ) ) {
   header("Location: /503");
   exit;
 }
