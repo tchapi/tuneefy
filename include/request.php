@@ -83,6 +83,6 @@
   }
   
   // Developpement
-  if (isset($_GET['dev'])) {
+  if (isset($_GET['dev']) && _DESACTIVATE_DEV == false) {
     $dev = true;
   } else $dev = false;

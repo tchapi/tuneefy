@@ -3,12 +3,15 @@
   // Defines GA Tracker (http://analytics.google.com)
   const _GOOGLE_GA_TRACKER = "0"; 
   
-  // Desactivates momentarily the trends access
+  // Desactivates the trends access
   const _DESACTIVATE_TRENDS = true;
   
   // Desactivates playlists
   const _DESACTIVATE_PLAYLISTS = true;
   
+  // Desactivates dev mode
+  const _DESACTIVATE_DEV = true;
+
   // Base for Id <-> GUID
   const _BASE_MULTIPLIER = 123456789;
 
