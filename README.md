@@ -1,3 +1,7 @@
+### Please read : [Wiki - Before you criticize ...](https://github.com/tchapi/tuneefy/wiki/Before-you-criticize-...)
+- - - -
+- - - -
+
 # tuneefy #
 
 tuneefy is a music sharing service allowing you to easily share tracks and albums regardless of any music platforms.
