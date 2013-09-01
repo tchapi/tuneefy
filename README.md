@@ -1,4 +1,4 @@
-### Please read : [Wiki - Before you criticize ...](https://github.com/tchapi/tuneefy/wiki/Before-you-criticize-...)
+### If you wanna dive into the source code, please read [this wiki page](https://github.com/tchapi/tuneefy/wiki/Before-you-criticize-...) first ...
 - - - -
 - - - -
 
