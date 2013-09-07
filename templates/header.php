@@ -455,6 +455,9 @@
 </head>
 <body <?php if ($mobile) echo 'onload="window.scrollTo(0, 1)"'; ?> class="Bcolor"> 
 <div class="hideAll"></div>
+<div class="ribbon">
+  <a href="https://github.com/tchapi/tuneefy" rel="me"><?php $i18n->github; ?></a>
+</div>
 <?php if (($action == 'track' || $action == 'album') && $iframeMode) { ?>
 <div id="wrapper" class="boxed boxS">
 <?php } else { // end display:none for iframeMode ?>

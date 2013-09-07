@@ -7,6 +7,9 @@ $lang['tagline']= "Sharing <span class='color'>music</span>, done <span class='c
 $lang['tags']= "listen, music, online, share, unify, platform, friends, tuneefy, music service, music platform, track, sharing";
 $lang['search_title']= "Your search for %s"; 
 
+// Github
+$lang['github']= "Fork me on GitHub"; 
+
 // Menu
 $lang['home_title']= "Home"; 
 $lang['home_tip']= "Yay ! Search and Share Music !"; 
