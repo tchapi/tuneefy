@@ -176,6 +176,14 @@ The bookmarklet recognizes what you're listening to on the following platforms /
   * Myspace (music player and artist page - first track only)
   * Spotify (in a web browser only)
 
+## License ##
+
+I give access to the tuneefy code under the Creative Commons Attribution-NonCommercial 3.0 Unported License (http://creativecommons.org/licenses/by-nc/3.0/legalcode).
+
+In a nutshell, you are free to modify and distribute the code, as long as you don't make a commercial use of it, or sublicense it. You must include the following copyright notice and you cannot hold me liable if your server explodes while running this code (ahah).
+
+> Copyright (c) (CC BY-NC) 2012-2013 Cyril Chapellier
+
 ## Contact me ##
 
-Do not hesitate to drop me a line at tchap(@)tuneefy.com or to fork this repo and make pull requests.
+Do not hesitate to drop me a line at tchap(@)tuneefy.com, or to fork this repo and make pull requests.
