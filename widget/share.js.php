@@ -3,7 +3,7 @@
   require('../config.php');
   header("Content-Type: application/javascript, charset=UTF-8");
     
-  if (isset($_SERVER["HTTP_REFERER"]) && strpos($_SERVER["HTTP_REFERER"], "tuneefy.com") !== false && strpos($_SERVER["HTTP_REFERER"], "facebook.") !== false) {
+  if (isset($_SERVER["HTTP_REFERER"]) && strpos($_SERVER["HTTP_REFERER"], _SITE_URL) !== false && strpos($_SERVER["HTTP_REFERER"], "facebook.") !== false) {
     // We are on the site, let's alert that we cannot do this
     echo "alert('You cannot do this on this page, bro, come on.');";
     return;
