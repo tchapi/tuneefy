@@ -148,7 +148,6 @@ The following permalinks are supported when searching on tuneefy :
   * __Hypemachine__ track link : http://hypem.com/item/1g079/
   * __Youtube__ music link : http://www.youtube.com/watch?v=_FOyHhU0i7k
   * __Rdio__ link : http://www.rdio.com/#/artist/Crash_Test_Dummies
-  * __Qobuz__ track link : http://player.qobuz.com/#!/track/5280111
 
 ## tuneefy bookmarklet ##
 
@@ -170,7 +169,6 @@ The bookmarklet recognizes what you're listening to on the following platforms /
   * Radionomy
   * Stereomood
   * Musicmaze
-  * Qobuz Player
   * Rdio
   * Youtube (only for tracks available on iTunes via Youtube)
   * Myspace (music player and artist page - first track only)
