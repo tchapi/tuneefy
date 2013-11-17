@@ -173,13 +173,13 @@ abstract class Platform {
           'http' => array(
               'method'  => 'GET',
               'timeout' => 3,
-              'header'  => "Content-Type: text/html; charset=UTF-8\r\n".
+              'header'  => "Content-Type: charset=UTF-8\r\n".
                            "Connection: close"
           )
       );
 
       $context = stream_context_create($opts); 
-      $result = @file_get_contents($call['url'].'?'.$params,0,$context,null);
+      $result = @file_get_contents($call['url'].'?'.$params,0,$context);
 
     } else if ($call['method'] == 'POST' || $call['method'] == 'POST_JSON') {
 
