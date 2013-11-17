@@ -1,8 +1,8 @@
 <?php
 
   // We get the request
-  if(!isset($_SERVER['SERVER_NAME']) || strpos($_SERVER['SERVER_NAME'],_API_URL) === false ){
-    header ("Location: /404");
+  if(!isset($_SERVER['SERVER_NAME']) || strpos(_API_URL,$_SERVER['SERVER_NAME']) === false ){
+    header ("Location: http://tuneefy.com/404");
     exit;
   }
 
