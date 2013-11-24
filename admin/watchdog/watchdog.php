@@ -298,7 +298,7 @@ for ($i=1; $i < 5; $i++) {
 
 if ($medor->getStatus() != true) {
   
-  echo "FAILED ";
+  echo "FAILED.";
 
   // Send mail  
   $message = sprintf("Last failed watchdog run took %d seconds.\r\n\r\n", $medor->getLastRunTime());
@@ -306,8 +306,6 @@ if ($medor->getStatus() != true) {
   
   // Envoi
   $status = MailerHelper::sendWatchdogMail($message);
-  
-  echo "(" . $status . ")." ;
 
 } else {
   echo "OK.";
