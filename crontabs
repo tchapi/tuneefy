@@ -1,0 +1,1 @@
+00 06 * * * php [ROOT]/admin/watchdog/watchdog.php

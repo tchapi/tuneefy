@@ -2,9 +2,9 @@
   
   require('../config.php');
 
-  require(_PATH.'include/database/DBUtils.class.php');
-  require(_PATH.'include/database/DBStats.class.php');
-  require(_PATH.'include/database/DBConnection.class.php');
+  require(_PATH . 'include/database/DBUtils.class.php');
+  require(_PATH . 'include/database/DBStats.class.php');
+  require(_PATH . 'include/database/DBConnection.class.php');
 
   $action = 'admin';
 
@@ -44,9 +44,6 @@
   $lastSearches = DBStats::lastSearches($startDate, $endDate, $limite);
   $popularSearches = DBStats::popularSearches($startDate, $endDate, $limite);
   
-  // Emails from coming_soon
-  $mailsRegistered = DBStats::totalEmails();
-  
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -58,13 +55,15 @@
   
 <?php // jQuery // ?>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-  <script type="text/javascript" src="jquery.simplemodal.1.4.2.min.js"></script>
+  <script type="text/javascript" src="jquery.simplemodal.1.4.4.min.js"></script>
   <script type="text/javascript">
   
   $(document).ready(function(){
   
     $(".errorButton").click(function(){
+      $.modal("<div class=\"modal\"><img src=\"<?php echo _SITE_URL. '/img/ajax-loader.gif'?>\" /><br /> Running ....</div>", {overlayClose: true});
       $.get("minify.php?mode=errors",function(data){
+        $.modal.close();
         if (data)
           $.modal(data);
         else
@@ -73,16 +72,13 @@
     });
     
     $(".watchdogButton").click(function(){
-      $.get("watchdog.php",function(data){
+      $.modal("<div class=\"modal\"><img src=\"<?php echo _SITE_URL. '/img/ajax-loader.gif'?>\" /><br/> Running ...</div>", {overlayClose: true});
+      $.get("watchdog/watchdog.php",function(data){
+        $.modal.close();
         $.modal("<div class=\"modal\">" + data + "</div>", {overlayClose: true});
       });
     });
     
-    $(".mailButton").click(function(){
-      $.get("mails.php",function(data){
-        $.modal("<div class=\"modal\"><ul>" + data + "</ul></div>", {overlayClose: true});
-      });
-    });
   });
   
   </script>
@@ -95,7 +91,7 @@
     <div class="wrap clear bdBot" id="content">
     
       <div id="tagline" class="bdBot">
-        <a href="/"><h1 class="logo color"><img src="<?php echo _SITE_URL; ?>/img/logo.png" width="267" height="133" alt="tuneefy"/></h1></a>
+        <a href="<?php echo _ADMIN_URL; ?>"><h1 class="logo color"><img src="<?php echo _SITE_URL; ?>/img/logo.png" width="267" height="133" alt="tuneefy"/></h1></a>
         <p class="tagline txtS">Administration <span class="color">panel</span></p>
       </div>
       
@@ -109,7 +105,6 @@
             <div class="boxed">
             <p class="txtS">Check tuneefy sanity : <a class="btn watchdogButton">Run Watchdog</a></p>
             <p class="txtS">Get minified JS : <a class="btn errorButton">Errors</a><a class="btn" href="minify.php?adv=0" target="_blank">Output</a><a class="btn" href="minify.php?adv=0&file=1">File (.js)</a></p>
-            <p class="txtS">Currently <span class="color"><?php echo $mailsRegistered; ?></span> emails in the database : <a class="btn mailButton">mail admin</a></p>
             <p class="txtS">List the <span class="color"><?php echo $nbOfTracks; ?></span> tracks in the database : <a class="btn" href="list.php?type=tracks">list tracks</a></p>
             <p class="txtS">List the <span class="color"><?php echo $nbOfAlbums; ?></span> albums in the database : <a class="btn" href="list.php?type=albums">list albums</a></p>
             </div>

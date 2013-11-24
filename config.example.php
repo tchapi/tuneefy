@@ -29,7 +29,12 @@
   const _SITE_BASE_URL = "";
   const _SITE_URL = "http://www.tuneefy-on-git.com";
   const _API_URL = "http://api.tuneefy-on-git.com";
+  const _ADMIN_URL = "http://admin.tuneefy-on-git.com";
   
+  // Mails
+  const _CONTACT_MAIL = "contact@tuneefy-on-git.com";
+  const _TEAM_MAIL = "team@tuneefy-on-git.com";
+
   // Language
   $_LANG = "en";
 
@@ -55,6 +60,11 @@
   $options['ECHONEST']    = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 13);
   $options['QOBUZ']       = array("key" => null, "secret" => null, "default" => true, "search" => false, "album_search" => false, "lookup" => false, "order" => 3);
    
+  // Watchdog Tests
+  const _API_KEY = "12345678";
+  const _API_SECRET = "12345678";
+  const _WATCHDOG_MAIL = "test@example.com";
+
   /** Absolute path to the Tuneefy directory. */
   if ( !defined('_PATH') )
         define('_PATH', dirname(__FILE__) . '/');
