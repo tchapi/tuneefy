@@ -69,7 +69,7 @@
     <div class="wrap clear bdBot" id="content">
     
       <div id="tagline" class="bdBot">
-        <a href="/"><h1 class="logo color"><img src="<?php echo _SITE_URL; ?>/img/logo.png" width="267" height="133" alt="<?php $i18n->general_title; ?>"/></h1></a>
+        <a href="<?php echo _ADMIN_URL; ?>"><h1 class="logo color"><img src="<?php echo _SITE_URL; ?>/img/logo.png" width="267" height="133" alt="<?php $i18n->general_title; ?>"/></h1></a>
         <p class="tagline txtS">Administration <span class="color">panel</span></p>
       </div>
       

@@ -273,7 +273,12 @@ class SPOTIFY extends Platform{
     
     $data = null;
     
-    if ($length >0) $maxPopularity = $results[0]->popularity;
+    if ($length >0) {
+      $maxPopularity = $results[0]->popularity;
+      if ($maxPopularity == 0) {
+        $maxPopularity = 1;
+      }
+    }
 
     for($i=0;$i<$length; $i++){
     
@@ -1351,11 +1356,12 @@ class YOUTUBE extends Platform{
 
     $data = null;
     
-    if ($result->feed->entry)
+    if (isset($result->feed->entry) && $result->feed->entry) {
       $length = min(count($result->feed->entry), $limit);
-    else
+    } else {
       return null;
-        
+    }
+
     for($i=0;$i<$length; $i++){
     
       $currentItem = $result->feed->entry[$i];
