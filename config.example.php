@@ -26,12 +26,14 @@
   const _GPLUS_PUBLISHER_ID = "https://plus.google.com/TTTTTTTTTTT";
 
   // Site base url :
-  const _SITE_BASE_URL = "";
   const _SITE_URL = "http://www.tuneefy-on-git.com";
   const _API_URL = "http://api.tuneefy-on-git.com";
   const _ADMIN_URL = "http://admin.tuneefy-on-git.com";
   
   // Mails
+  const _SMTP_SERVER = "smtp.tuneefy-on-git.com";
+  const _SMTP_MAIL = "sending@tuneefy-on-git.com";
+  const _SMTP_PASSWORD = "foobar";
   const _CONTACT_MAIL = "contact@tuneefy-on-git.com";
   const _TEAM_MAIL = "team@tuneefy-on-git.com";
 

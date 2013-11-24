@@ -78,7 +78,7 @@ class PHPMailer {
    * Sets the From email address for the message.
    * @var string
    */
-  public $From              = 'team@tuneefy.com';
+  public $From              = _TEAM_MAIL;
 
   /**
    * Sets the From name of the message.
@@ -188,7 +188,7 @@ class PHPMailer {
    * Hosts will be tried in order.
    * @var string
    */
-  public $Host          = 'smtp.tuneefy.com';
+  public $Host          = _SMTP_SERVER;
 
   /**
    * Sets the default SMTP server port.
@@ -219,13 +219,13 @@ class PHPMailer {
    * Sets SMTP username.
    * @var string
    */
-  public $Username      = 'hoora@tuneefy.com';
+  public $Username      = _SMTP_MAIL;
 
   /**
    * Sets SMTP password.
    * @var string
    */
-  public $Password      = 'e4099afc56';
+  public $Password      = _SMTP_PASSWORD;
 
   /**
    * Sets the SMTP server timeout in seconds.
