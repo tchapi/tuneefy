@@ -493,20 +493,29 @@ class LASTFM extends Platform{
       
       $valid = true;
 
-      $result = $result->results->trackmatches->track;
+      if ($result->results->{"opensearch:totalResults"} != 0) {
 
-      if ($match[2] != '_') $album = $match[2];
-      else $album = null;
+        $result = $result->results->trackmatches->track;
 
-      // We encode the track to pass it on as the return track
-      $track = array('name' => $result->name,
-                     'artist' => $result->artist,
-                     'album' => $album,
-                     'picture' => NULL,
-                     'link' => web($permalink) );
+        if ($match[2] != '_') $album = $match[2];
+        else $album = null;
+
+        // We encode the track to pass it on as the return track
+        $track = array('name' => $result->name,
+                       'artist' => $result->artist,
+                       'album' => $album,
+                       'picture' => NULL,
+                       'link' => web($permalink) );
       
-      // We modify the query
-      $query = $track['artist']."+".$track['name'];
+        // We modify the query
+        $query = $track['artist']."+".$track['name'];
+
+      } else {
+ 
+        // We modify the query
+        $query = $match[1]."+".$match[2]."+".$match[3];
+
+      }
       
     } else if (preg_match($REGEX_LASTFM_ALBUM, $permalink, $match)) {
       
@@ -1119,7 +1128,7 @@ class MOG extends Platform{
     $valid = false;
     
     if (preg_match($REGEX_MOG_TRACK, $permalink, $match)) {
-  
+
       $result = $this->callPlatform("lookup", $match[1]);
       if ($result == null) return null;
       
@@ -1825,8 +1834,8 @@ class QOBUZ extends Platform{
     $this->query_album_term = $this->query_term; 
     $this->query_album_options = $this->query_options;
     
-    $this->lookup_endpoint = "track/get";
-    $this->lookup_term = "track_id";
+    $this->lookup_endpoint = "%s/get";
+    $this->lookup_term = "%s_id";
     $this->lookup_options = $this->query_options;
 
     $this->track_permalink = "http://player.qobuz.com/#!/track/%s";
@@ -1898,22 +1907,24 @@ class QOBUZ extends Platform{
   public function lookupPermalink($permalink) {
   
     // http://www.qobuz.com/album/kitsune-maison-compilation-11-the-indie-dance-issue-various-artists/3700656500011
-    // $REGEX_QOBUZ_ALBUM_1 = "/album\/".$this->REGEX_FULLSTRING."\/([0-9]*)$/";
+    $REGEX_QOBUZ_ALBUM_1 = "/album\/".$this->REGEX_FULLSTRING."\/([0-9]*)$/";
     
     // http://www.qobuz.com/telechargement-album-mp3/Various-Artists-Kitsune-Maison-Compilation-9-Petit-Bateau-Edition/Electronics-Electro/Interpretes-Divers/Kitsune/default/fiche_produit/id_produit-3760192210041.html?qref=sre_1_1
-    // $REGEX_QOBUZ_ALBUM_2 = "/\-([0-9]*)\.html\??.*$/";
+    $REGEX_QOBUZ_ALBUM_2 = "/\-([0-9]*)\.html\??.*$/";
     
     // http://player.qobuz.com/#!/album/0888880711410
-    // $REGEX_QOBUZ_ALBUM_3 = "/\#\!\/album\/([0-9]*)$/";
+    $REGEX_QOBUZ_ALBUM_3 = "/\!\/album\/([0-9]*)$/";
     
     // http://player.qobuz.com/#!/track/3551502
     $REGEX_QOBUZ_TRACK = "/\!\/track\/([0-9]*)$/";
    
     $track = null;
     $valid = false;
-    
+
     if (preg_match($REGEX_QOBUZ_TRACK, $permalink, $match)) {
 
+      $this->lookup_endpoint = 'track/get';
+      $this->lookup_term = "track_id";
       $result = $this->callPlatform("lookup", $match[1]);
       if ($result == null) return null;
       
@@ -1928,7 +1939,43 @@ class QOBUZ extends Platform{
       $valid = true;
       $query = $track['artist']."+".$track['name'];
 
-    }
+    } else if (preg_match($REGEX_QOBUZ_ALBUM_3, $permalink, $match) || preg_match($REGEX_QOBUZ_ALBUM_2, $permalink, $match)) {
+
+      $this->lookup_endpoint = 'album/get';
+      $this->lookup_term = "album_id";
+      $result = $this->callPlatform("lookup", $match[1]);
+      if ($result == null) return null;
+
+      // We encode the track to pass it on as the return track
+      $track = array('name' => null,
+                     'artist' => $result->artist->name,
+                     'album' => $result->title,
+                     'picture' => $result->image->small,
+                     'link' => web(sprintf($this->album_permalink, $result->id)) );
+        
+      // We modify the query 
+      $valid = true;
+      $query = $track['artist']."+".$track['album'];
+
+    } else if (preg_match($REGEX_QOBUZ_ALBUM_1, $permalink, $match)) {
+
+      $this->lookup_endpoint = 'album/get';
+      $this->lookup_term = "album_id";
+      $result = $this->callPlatform("lookup", $match[2]);
+      if ($result == null) return null;
+
+      // We encode the track to pass it on as the return track
+      $track = array('name' => null,
+                     'artist' => $result->artist->name,
+                     'album' => $result->title,
+                     'picture' => $result->image->small,
+                     'link' => web(sprintf($this->album_permalink, $result->id)) );
+        
+      // We modify the query 
+      $valid = true;
+      $query = $track['artist']."+".$track['album'];
+
+    } 
   
     if ($valid)
       return array('query' => $query, 'track' => $track);
