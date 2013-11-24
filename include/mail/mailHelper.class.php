@@ -46,7 +46,8 @@ class MailerHelper
 
     $mail->IsSMTP();                                      // set mailer to use SMTP
     
-    $mail->From = _WATCHDOG_MAIL;
+    $mail->From = _TEAM_MAIL;
+    $mail->AddAddress(_WATCHDOG_MAIL);
 
     $mail->IsHTML(true);                                  // set email format to HTML
 
