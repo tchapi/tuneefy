@@ -38,7 +38,7 @@ class APIOAuthServer extends OAuthServer {
     $this->get_version($request);
     $consumer = $this->get_consumer($request);
     $this->check_signature($request, $consumer, NULL);
-    return array($consumer, $token);
+    return array($consumer, null);
 
   }
 
@@ -208,6 +208,9 @@ class API {
    
   public static function lookup($query, $from = "site") {
    
+    // query decoding
+    $query = trim(urldecode($query));
+
     // So far, we have no item
     $lookedUpItem = null;
     
