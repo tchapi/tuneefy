@@ -978,6 +978,9 @@ h2.aboutTitle, h2.aboutTitles{
   padding-left: 18px;
 }
 
+.ribbon{
+  display: none;
+}
 
 @media screen and (max-width:640px) and (orientation: landscape) {
  #footer{
