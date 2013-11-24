@@ -1,6 +1,7 @@
 <?php
 
-require_once('../mail/mailHelper.class.php');
+require_once('../../config.php');
+require_once(_PATH . 'include/mail/mailHelper.class.php');
 
 // We verify the referer
 if (isset($_SERVER["HTTP_REFERER"]) && strpos($_SERVER["HTTP_REFERER"], _SITE_URL) !== false) {

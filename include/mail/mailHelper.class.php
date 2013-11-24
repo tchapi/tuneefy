@@ -16,13 +16,42 @@ class MailerHelper
 
     $mail->IsSMTP();                                      // set mailer to use SMTP
     
-    $mail->From = 'contact@tuneefy.com';
-    $mail->AddAddress('team@tuneefy.com');
+    $mail->From = _CONTACT_MAIL;
+    $mail->AddAddress(_TEAM_MAIL);
 
     $mail->IsHTML(true);                                  // set email format to HTML
 
-    $mail->Subject = "[CONTACT] $email (via tuneefy.com)";
+    $mail->Subject = "[CONTACT] $email (via " . _SITE_URL .")";
     $mail->Body    = $email.' sent a message from the site : <br /><br />'.nl2br($message);
+
+    try
+    {
+      $mail->Send();
+      return true;
+    }
+    catch(Exception $e)
+    {
+      // log error
+       $mail->ErrorInfo;
+       return false;
+    }
+  }
+
+  public static function sendWatchdogMail($message)
+  {
+
+    $mail = new PHPMailer();
+    
+    $mail->CharSet = 'UTF-8';
+
+    $mail->IsSMTP();                                      // set mailer to use SMTP
+    
+    $mail->From = _WATCHDOG_MAIL;
+
+    $mail->IsHTML(true);                                  // set email format to HTML
+
+    $mail->Subject = "tuneefy watchdog report";
+    $mail->Body    = nl2br($message);
 
     try
     {
