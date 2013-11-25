@@ -57,8 +57,8 @@
     
     $postValue = trim($_REQUEST[$postName]);
 
-    $lookupQuery .= " AND `".$lookupName."`=:post_value";
-    $insertQueryValues .= ", :post_value";
+    $lookupQuery .= " AND `".$lookupName."`=".$db->quote($postValue);
+    $insertQueryValues .= ", ".$db->quote($postValue);
     
   }
   reset($platforms);
@@ -70,7 +70,6 @@
   $query .= " LIMIT 1;";
 
   $statement = $db->prepare($query);
-  $statement->bindParam(':post_value', $postValue, PDO::PARAM_STR);
   $statement->bindParam(':name', $name, PDO::PARAM_STR);
   $statement->bindParam(':artist', $artist, PDO::PARAM_STR);
   $statement->bindParam(':album', $album, PDO::PARAM_STR);
@@ -99,7 +98,6 @@
   $query .= $insertQueryValues.", NOW())";
 
   $statement = $db->prepare($query);
-  $statement->bindParam(':post_value', $postValue, PDO::PARAM_STR);
   $statement->bindParam(':name', $name, PDO::PARAM_STR);
   $statement->bindParam(':artist', $artist, PDO::PARAM_STR);
   $statement->bindParam(':album', $album, PDO::PARAM_STR);

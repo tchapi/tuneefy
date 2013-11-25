@@ -53,6 +53,7 @@ class DBUtils {
     } else {
       // Fetch the info
       $row = $statement->fetch(PDO::FETCH_ASSOC);
+
       if (!$row) return false;
       
       while (list($pId, $pObject) = each($platforms))
