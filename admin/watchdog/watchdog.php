@@ -41,6 +41,36 @@ class WatchdogTest {
     $key_exists = TRUE;
     return $ref;
   }
+
+  private static function get_data($url) {
+    
+    $ch = curl_init();
+    $timeout = 5;
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    return $data;
+  
+  }
+
+  private static function get_headers($url) {
+    
+    $ch = curl_init();
+    $timeout = 5;
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    curl_setopt($ch, CURLOPT_NOBODY, true);
+    curl_setopt($ch, CURLOPT_HTTPGET, true);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    return $data;
+  
+  }
+  
   // ---
 
   public function __construct($url, $type, $description, $signed, $result = null){
@@ -69,9 +99,6 @@ class WatchdogTest {
 
   private function sign($url){
 
-    // URLS tests
-    stream_context_set_default(array('http' => array('method' => 'GET')));
-
     $hmac_method = new OAuthSignatureMethod_HMAC_SHA1();
     $test_consumer = new OAuthConsumer(_API_KEY, _API_SECRET, NULL);
 
@@ -89,20 +116,20 @@ class WatchdogTest {
   private function check200OKStatus(){
 
       // Gets the header
-      $raw = get_headers($this->url, 1);
-      $OK = preg_match('/HTTP\/1.(0|1)\ 20(0|4)\ (OK|No\ Content)/', $raw[0]);
+      $raw = self::get_headers($this->url);
+      $OK = preg_match('/HTTP\/1.(0|1)\ 20(0|4)\ (OK|No\ Content)/', $raw);
 
       if ($OK) {
         return array('check' => true);
       } else {
-        return array('check' => false, 'error' => $raw[0]);
+        return array('check' => false, 'error' => $raw);
       }
 
   }
 
   private function checkAPIResponse(){
 
-      $raw = file_get_contents($this->url);
+      $raw = self::get_data($this->url);
 
       // We decode from JSON
       $jsonResult = json_decode($raw, true);
