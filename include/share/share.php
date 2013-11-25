@@ -6,6 +6,8 @@
   require(_PATH.'include/database/DBUtils.class.php');
   require(_PATH.'include/database/DBConnection.class.php');
 
+  $db = DBConnection::db();
+
   // What type of share is it ?
   if (isset($_REQUEST['itemType'])) {
     if ($_REQUEST['itemType'] == _TABLE_TRACK) {
@@ -55,34 +57,33 @@
     
     $postValue = trim($_REQUEST[$postName]);
 
-    $lookupQuery .= sprintf(" AND `".$lookupName."`='%s'",
-                            mysql_real_escape_string($postValue)
-                            );
-    $insertQueryValues  .= sprintf(", '%s'",mysql_real_escape_string($postValue));
+    $lookupQuery .= " AND `".$lookupName."`=:post_value";
+    $insertQueryValues .= ", :post_value";
     
   }
   reset($platforms);
 
   // Looks for the track if already shared (name + artist + album only)
-  $query  = "SELECT `id`";
-  $query .= " FROM `items`";
-  $query .= sprintf(" WHERE `name`='%s' AND `artist`='%s' AND `album`='%s' AND `type`=".$itemType, 
-                    mysql_real_escape_string($name),
-                    mysql_real_escape_string($artist),
-                    mysql_real_escape_string($album)
-                    );
+  $query  = "SELECT `id` FROM `items`";
+  $query .= " WHERE `name`=:name AND `artist`=:artist AND `album`=:album AND `type`=".$itemType;
   $query .= $lookupQuery;
   $query .= " LIMIT 1;";
+
+  $statement = $db->prepare($query);
+  $statement->bindParam(':post_value', $postValue, PDO::PARAM_STR);
+  $statement->bindParam(':name', $name, PDO::PARAM_STR);
+  $statement->bindParam(':artist', $artist, PDO::PARAM_STR);
+  $statement->bindParam(':album', $album, PDO::PARAM_STR);
   
   // Executes the query
-  $exe = mysql_query($query);
+  $exe = $statement->execute();
 
-  if ($exe && mysql_num_rows($exe) == 1 ) {
+  if ($exe && $statement->rowCount() == 1 ) {
   
     $found = true;
-    $row = mysql_fetch_row($exe);
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
 
-    $shortUrl = _SITE_URL.$shortCode.DBUtils::toUId($row[0], _BASE_MULTIPLIER);
+    $shortUrl = _SITE_URL.$shortCode.DBUtils::toUId($row["id"], _BASE_MULTIPLIER);
 
     if (isset($_REQUEST['redirect']) && $_REQUEST['redirect'] == 1){
       header('Location: '.$shortUrl);
@@ -94,23 +95,23 @@
   }
   
   $query  = "INSERT INTO `items` (type, name, artist, album, image".$insertQueryColumns.", date) ";
-  
-  $query .= sprintf("VALUES(".$itemType.", '%s', '%s', '%s', '%s'",
-            mysql_real_escape_string($name),
-            mysql_real_escape_string($artist),
-            mysql_real_escape_string($album),
-            mysql_real_escape_string($image));
-  
+  $query .= "VALUES(".$itemType.", :name, :artist, :album, :image";
   $query .= $insertQueryValues.", NOW())";
 
-  // Executes the query
-  $exe = mysql_query($query); 
-  $id = mysql_insert_id();
+  $statement = $db->prepare($query);
+  $statement->bindParam(':post_value', $postValue, PDO::PARAM_STR);
+  $statement->bindParam(':name', $name, PDO::PARAM_STR);
+  $statement->bindParam(':artist', $artist, PDO::PARAM_STR);
+  $statement->bindParam(':album', $album, PDO::PARAM_STR);
+  $statement->bindParam(':image', $image, PDO::PARAM_STR);
   
-  // If we fail ...
+  // Executes the query
+  $exe = $statement->execute(); 
+  $id = $db->lastInsertId();
   
   if (!$exe || $exe == false || !$id || $id == 0) {
   
+    // If we fail ...
   	echo _SITE_URL."/woops";
   	  	
   } else {

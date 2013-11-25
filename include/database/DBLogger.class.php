@@ -16,22 +16,26 @@ class DBLogger {
   // A share page has been displayed
   // Adds a hit in the stats_tracks table
   //
-  public static function addHit($track_id){
+  public static function addHit($track_id)
+  {
+
+    $db = DBConnection::db();
 
     if (!isset($_SERVER["HTTP_REFERER"]))
       $_SERVER["HTTP_REFERER"] = "";
       
     $query = "INSERT INTO `stats_items` (item_id, referer, date)";
-    $query .= sprintf(" VALUES('%d', '%s', NOW());", 
-                      mysql_real_escape_string(intval($track_id)),
-                      mysql_real_escape_string($_SERVER["HTTP_REFERER"])
-                      );
-                      
+    $query .= " VALUES(:track_id, :referer, NOW());";
+
+    $statement = $db->prepare($query);
+    $statement->bindParam(':track_id', $track_id, PDO::PARAM_INT);
+    $statement->bindParam(':referer', $_SERVER["HTTP_REFERER"], PDO::PARAM_STR);
+
     // Executes the query
-    $exe = mysql_query($query);
+    $exe = $statement->execute();
     
     // Returns true if the query was well executed and returned a single line
-    if ($exe && mysql_affected_rows() == 1 ) {
+    if ($exe && $statement->rowCount() == 1 ) {
       return true;
     } else return false;
     
@@ -41,28 +45,35 @@ class DBLogger {
   // A link to Deezer, Spotify, ... has been clicked
   // Adds a hit in the stats_platforms table
   //
-  public static function addGlobalHit($platform, $track_id = 0){
+  public static function addGlobalHit($platform, $track_id = 0)
+  {
   
+    $db = DBConnection::db();
+
     if ($track_id == 0) {
       // We come from the search page
       $query = "INSERT INTO `stats_platforms` (platform, date)";
-      $query .= sprintf(" VALUES('%d', NOW());", 
-                      mysql_real_escape_string(intval($platform))
-                      );
+      $query .= " VALUES(:platform, NOW());";
+
+      $statement = $db->prepare($query);
+      $statement->bindParam(':platform', $platform, PDO::PARAM_INT);
+
     } else {
       // We come from a share page
       $query = "INSERT INTO `stats_platforms` (platform, item_id, date)";
-      $query .= sprintf(" VALUES('%d', '%d', NOW());", 
-                      mysql_real_escape_string(intval($platform)),
-                      mysql_real_escape_string(intval($track_id))
-                      );
+      $query .= " VALUES(:platform, :track_id, NOW());";
+
+      $statement = $db->prepare($query);
+      $statement->bindParam(':platform', $platform, PDO::PARAM_INT);
+      $statement->bindParam(':track_id', $track_id, PDO::PARAM_INT);
+
     }
-    
+
     // Executes the query
-    $exe = mysql_query($query);
+    $exe = $statement->execute();
     
     // Returns true if the query was well executed and returned a single line
-    if ($exe && mysql_affected_rows() == 1 ) {
+    if ($exe && $statement->rowCount() == 1 ) {
       return true;
     } else return false;
   
@@ -72,23 +83,27 @@ class DBLogger {
   // A search request has been made, we log it
   // Adds a line in the stats_search_query
   //
-  public static function logSearchQuery($searchQuery, $from = "site"){
+  public static function logSearchQuery($searchQuery, $from = "site")
+  {
+
+    $db = DBConnection::db();
 
     if (!isset($_SERVER["HTTP_REFERER"]))
       $_SERVER["HTTP_REFERER"] = "";
 
     $query = "INSERT INTO `stats_search_query` (query, referer, origin, date)";
-    $query .= sprintf(" VALUES('%s', '%s', '%s', NOW());", 
-                      mysql_real_escape_string(trim($searchQuery)),
-                      mysql_real_escape_string($_SERVER["HTTP_REFERER"]),
-                      mysql_real_escape_string($from)
-                      );
-                      
+    $query .= " VALUES(:search_query, :referer, :from, NOW());";
+            
+    $statement = $db->prepare($query);
+    $statement->bindParam(':search_query', trim($searchQuery), PDO::PARAM_STR);
+    $statement->bindParam(':referer', $_SERVER["HTTP_REFERER"], PDO::PARAM_STR);
+    $statement->bindParam(':from', $from, PDO::PARAM_STR);
+
     // Executes the query
-    $exe = mysql_query($query);
+    $exe = $statement->execute();
     
     // Returns true if the query was well executed and returned a single line
-    if ($exe && mysql_affected_rows() == 1 ) {
+    if ($exe && $statement->rowCount() == 1 ) {
       return true;
     } else return false;
     

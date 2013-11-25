@@ -1,6 +1,7 @@
 <?php
 
 require_once(dirname(__FILE__) . "/../../config.php");
+require_once(_PATH . "include/database/DBConnection.class.php");
 require_once(_PATH . "include/oauth/OAuth.class.php");
 require_once(_PATH . "include/mail/mailHelper.class.php");
 require_once(_PATH . "admin/watchdog/watchdog.conf");
@@ -14,7 +15,8 @@ $data = array(
   'database' => $database,
   'platformUrls' => $platformUrls,
   'pages' => $pages,
-  'apiSearch' => $apiSearch,
+  'apiSearchTrack' => $apiSearchTrack,
+  'apiSearchAlbum' => $apiSearchAlbum,
   'apiLookup' => $apiLookup,
   'lookup' => $lookup
   );
@@ -210,39 +212,28 @@ class Watchdog {
   
   // Checking DB
   public function checkDatabase() {
-  
-    $link = mysql_connect("localhost",$this->data['user'],$this->data['password']);
 
-    if (!$link) {
+    $db = DBConnection::db();
+
+    if (!$db) {
     
-      $this->log("DB Connection as '$user'", false, mysql_error());
+      $this->log("DB Connection as '$user'", false, "Error connecting to database : " . $db->errorInfo());
       
     } else {
     
       if ($this->verbose) $this->log("DB Connection as '".$this->data['user']."'", true, "");
 
-      $db_selected = mysql_select_db($this->data['database'], $link);
+      $statement = $db->prepare("SELECT * FROM items LIMIT 1");
+      $exe = $statement->execute();
 
-      if (!$db_selected) {
+      if (!$exe || $exe == false ) {
 
-        $this->log("DB Selection '$database'", false, mysql_error());
+        $this->log("DB Query", false, "Error ");
 
       } else {
 
-        if ($this->verbose) $this->log("DB Selection '".$this->data['database']."'", true, "");
+        if ($this->verbose) $this->log("DB Query", true, "Error making query : " . $db->errorInfo());
 
-        $exe = mysql_query("SELECT * FROM items LIMIT 1",$link);
-
-        if (!$exe || $exe == false ) {
-
-          $this->log("DB Query", false, mysql_error());
-
-        } else {
-
-          if ($this->verbose) $this->log("DB Query", true, "");
-
-        }
-        
       }
     
     }
@@ -280,11 +271,22 @@ class Watchdog {
     }
 
     // >> TEST ----------------------------------------
-    // The API respond to search request from every platform and the format is good
+    // The API respond to search request from every platform (track) and the format is good
     //  ex : http://api.tuneefy.local/search?q=radiohead+creep&platform=0&type=track&limit=2&alt=json
     while (list($pId, $pObject) = each($platforms)) {
       if ($pObject->isActiveForSearch()){
-        $this->addTest(sprintf($this->data['apiSearch']['url'],urlencode("radiohead"),$pObject->getId()), _CHECK_200_STATUS, sprintf($this->data['apiSearch']['name'],$pObject->getName()), true);
+        $this->addTest(sprintf($this->data['apiSearchTrack']['url'],urlencode("radiohead"),$pObject->getId()), _CHECK_200_STATUS, sprintf($this->data['apiSearchTrack']['name'],$pObject->getName()), true);
+      } else {
+        $this->addLog(">> Plaform ".$pObject->getName()." is not active");
+      }
+    }
+
+    // >> TEST ----------------------------------------
+    // The API respond to search request from every platform (album) and the format is good
+    //  ex : http://api.tuneefy.local/search?q=radiohead+creep&platform=0&type=track&limit=2&alt=json
+    while (list($pId, $pObject) = each($platforms)) {
+      if ($pObject->isActiveForSearch()){
+        $this->addTest(sprintf($this->data['apiSearchAlbum']['url'],urlencode("daft+punk"),$pObject->getId()), _CHECK_200_STATUS, sprintf($this->data['apiSearchAlbum']['name'],$pObject->getName()), true);
       } else {
         $this->addLog(">> Plaform ".$pObject->getName()." is not active");
       }

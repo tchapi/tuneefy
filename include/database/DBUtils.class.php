@@ -11,21 +11,23 @@ class DBUtils {
   /*  UTILS
    *  Utility functions to translate the id into a "hash" or "guid" (BASE 36 = [0-9a-z])
    */
-
-  public static function toUId($baseId, $multiplier = 1) {
+  public static function toUId($baseId, $multiplier = 1)
+  {
       return base_convert($baseId * $multiplier, 10, 36);
   }
 
-  public static function fromUId($uid, $multiplier = 1) {
+  public static function fromUId($uid, $multiplier = 1)
+  {
       return (int) base_convert($uid, 36, 10) / $multiplier;
   }
   
   /* RETRIEVING AN ITEM FROM THE DATABASE
    *
    */
+  public static function retrieveItem($id)
+  {
   
-  public static function retrieveItem($id){
-  
+    $db = DBConnection::db();
     $platforms = API::getPlatforms();
   
     $query  = "SELECT `type`, `name`, `artist`, `album`, `image`";
@@ -36,20 +38,21 @@ class DBUtils {
       $query .= ", `"._TABLE_LINK_PREFIX.$pObject->getSafeName()."`"; // column name = link_DEEZER, etc ...
     }
     reset($platforms);
-    
-    $query .= " FROM `items`";
-    // We'll check if the type is correct later on
-    $query .= sprintf(" WHERE id=%d LIMIT 1;", mysql_real_escape_string(intval($id)));
+
+    $query .= " FROM `items` WHERE id=:id LIMIT 1;";
   
+    $statement = $db->prepare($query);
+    $statement->bindParam(':id', $id, PDO::PARAM_INT);
+
     // Executes the query
-    $exe = mysql_query($query); 
+    $exe = $statement->execute();
   
-    if (!$exe || $exe == false || mysql_num_rows($exe) != 1 ) {
+    if (!$exe || $exe == false || $statement->rowCount() != 1 ) {
       // Looks like it's expired ?
       return false;
     } else {
       // Fetch the info
-      $row = mysql_fetch_array($exe, MYSQL_ASSOC);
+      $row = $statement->fetch(PDO::FETCH_ASSOC);
       if (!$row) return false;
       
       while (list($pId, $pObject) = each($platforms))
@@ -67,22 +70,20 @@ class DBUtils {
   /* RETRIEVING A CUSTOMER OF THE API
    *
    */
+  public static function retrieveCustomer($consumerKey)
+  {
   
-  public static function retrieveCustomer($consumerKey){
+    $db = DBConnection::db();
+    $statement = $db->prepare('SELECT `consumer_secret` FROM `api_clients` WHERE `active` = TRUE AND `consumer_key` = :consumer_key LIMIT 1');
+    $statement->bindParam(':consumer_key', $consumerKey, PDO::PARAM_STR);
+    $exe = $statement->execute();
   
-    $query = sprintf("SELECT `consumer_secret` FROM `api_clients` WHERE `active` = TRUE AND `consumer_key` = \"%s\" LIMIT 1",
-                        mysql_real_escape_string($consumerKey)
-                        );
-
-    // Executes the query
-    $exe = mysql_query($query); 
-  
-    if (!$exe || $exe == false || mysql_num_rows($exe) != 1 ) {
+    if (!$exe || $exe == false || $statement->rowCount() != 1 ) {
       // Looks like it's a no
       return false;
     } else {
       // Fetch the info
-      $row = mysql_fetch_array($exe, MYSQL_ASSOC);
+      $row = $statement->fetch(PDO::FETCH_ASSOC);
       if (!$row) return false;
       
       return $row['consumer_secret'];
