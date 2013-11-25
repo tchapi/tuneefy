@@ -258,6 +258,7 @@ class Watchdog {
   public function run(){
 
     $time_pre = microtime(true);
+    $this->status = true; // reinits
 
     // Basics
     $platforms = API::getPlatforms();
