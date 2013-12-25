@@ -78,6 +78,7 @@ a.btn_10{ background: url("../img/platforms/platform_10.png") no-repeat;}
 a.btn_11{ background: url("../img/platforms/platform_11.png") no-repeat;}
 a.btn_12{ background: url("../img/platforms/platform_12.png") no-repeat;}
 a.btn_13{ background: url("../img/platforms/platform_13.png") no-repeat;}
+a.btn_14{ background: url("../img/platforms/platform_14.png") no-repeat;}
 
 a.btns_full{
   display: inline-block;
@@ -101,6 +102,7 @@ a.btn_full_10{ background: url("../img/platforms/platform_full_10.png") no-repea
 a.btn_full_11{ background: url("../img/platforms/platform_full_11.png") no-repeat; width: 87px; }
 a.btn_full_12{ background: url("../img/platforms/platform_full_12.png") no-repeat; width: 107px; }
 a.btn_full_13{ background: url("../img/platforms/platform_full_13.png") no-repeat; width: 83px; }
+a.btn_full_14{ background: url("../img/platforms/platform_full_14.png") no-repeat; width: 130px; }
 
 /* Main colors */
 .color{ color: #76bad0; }
