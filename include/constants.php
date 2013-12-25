@@ -135,6 +135,17 @@ API::addPlatform(new QOBUZ($options['QOBUZ']['key'],
                            $options['QOBUZ']['lookup'],
                            _QOBUZ),
                            $options['QOBUZ']['order']);
+
+const _XBOX = 14;
+API::addPlatform(new XBOX($options['XBOX']['key'],
+                              $options['XBOX']['secret'],
+                              $options['XBOX']['default'],
+                              $options['XBOX']['search'],
+                              $options['XBOX']['album_search'],
+                              $options['XBOX']['lookup'],
+                              _XBOX),
+                              $options['XBOX']['order']);
+
 // Utilities
 const _ITUNES = 11;
 API::addPlatform(new ITUNES($options['ITUNES']['key'],
