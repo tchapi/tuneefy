@@ -1941,9 +1941,15 @@ class QOBUZ extends Platform{
       $result = $this->callPlatform("lookup", $match[1]);
       if ($result == null) return null;
       
+      if (isset($result->performer)) {
+        $artist = $result->performer->name;
+      } else {
+        $artist = $result->album->artist->name;
+      }
+
       // We encode the track to pass it on as the return track
       $track = array('name' => $result->title,
-                     'artist' => $result->performer->name,
+                     'artist' => $artist,
                      'album' => $result->album->title,
                      'picture' => $result->album->image->small,
                      'link' => web(sprintf($this->track_permalink, $result->id)) );
