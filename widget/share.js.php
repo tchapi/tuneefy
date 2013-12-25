@@ -102,6 +102,13 @@ function el(id){return document.getElementById(id);}
     
       uri = encodeURIComponent("http://player.qobuz.com" + document.getElementById("now-playing").childNodes[4].childNodes[1].childNodes[3].getAttribute("href"));
 
+    } else if (uri.indexOf("music.xbox.") && el("player") != null){
+
+      // Jquery is here ! \o/
+      song = $("#player").find(".playerNowPlaying .playerNowPlayingMetadata .primaryMetadata a").html();
+      artist = $("#player").find(".playerNowPlaying .playerNowPlayingMetadata .secondaryMetadata a:first-child").html();
+      //album = $("#player").find(".playerNowPlaying .playerNowPlayingMetadata .secondaryMetadata a:last-child").html();
+
     }
     
   } catch(e) { artist = null; song = null;}
