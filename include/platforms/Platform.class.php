@@ -237,9 +237,13 @@ abstract class Platform {
 
     }
 
+    // Just in case, remove the BOM (THANKS XBOX I HATE YOU)
+    $bom = pack('H*','EFBBBF');
+    $result = preg_replace("/^$bom/", '', $result);
+
     if ($result == null) 
       throw new PlatformTimeoutException();
-      
+
     return json_decode($result);
 
   }
