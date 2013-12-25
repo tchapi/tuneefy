@@ -1888,7 +1888,7 @@ class QOBUZ extends Platform{
        
         $currentItem = $object[$i];
         $data[] = array('title' => $currentItem->title,
-                        'artist' => $currentItem->performer->name,
+                        'artist' => $currentItem->artist->name,
                         'album' => $currentItem->album->title,
                         'picture' => $currentItem->album->image->small,
                         'link' => web(sprintf($this->track_permalink,$currentItem->id)),
@@ -1936,7 +1936,7 @@ class QOBUZ extends Platform{
       
       // We encode the track to pass it on as the return track
       $track = array('name' => $result->title,
-                     'artist' => $result->performer->name,
+                     'artist' => $result->artist->name,
                      'album' => $result->album->title,
                      'picture' => $result->album->image->small,
                      'link' => web(sprintf($this->track_permalink, $result->id)) );
