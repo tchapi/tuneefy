@@ -256,7 +256,7 @@ $lang['facts_supported_list'] = "<ul class=\"platformsPatterns\">
         <ul style=\"display: none;\">
           <li class=\"song\">All Rdio links<br/><span class=\"link\">http://www.rdio.com/#/artist/Crash_Test_Dummies</span></li>
           <li class=\"artist\">Qobuz<br/><span class=\"link\">http://player.qobuz.com/#!/track/5280111</span></li>
-          <li class=\"album\">Want to suggest a link ?<br/><span class=\"link\">contact us !</span></li>
+          <li class=\"album\">Xbox Music<br/><span class=\"link\">http://music.xbox.com/Album/C954F807-0100-11DB-89CA-0019B92A3933</span></li>
         </ul>
         </li>
         </ul>";
