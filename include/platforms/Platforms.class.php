@@ -1881,14 +1881,20 @@ class QOBUZ extends Platform{
     }
 
     $length = min(count($object), $limit);
-    
+
     for($i=0;$i<$length; $i++){
       
       if ($itemType == 'track') {
-       
         $currentItem = $object[$i];
+
+        if (isset($currentItem->performer)) {
+          $artist = $currentItem->performer->name;
+        } else {
+          $artist = $currentItem->album->artist->name;
+        }
+
         $data[] = array('title' => $currentItem->title,
-                        'artist' => $currentItem->artist->name,
+                        'artist' => $artist,
                         'album' => $currentItem->album->title,
                         'picture' => $currentItem->album->image->small,
                         'link' => web(sprintf($this->track_permalink,$currentItem->id)),
@@ -1904,6 +1910,7 @@ class QOBUZ extends Platform{
                         'link' => web(sprintf($this->album_permalink,$currentItem->id)),
                         'score' => round(1/($i/10+1), 2) );
       }
+
     }
     
     return $data;
@@ -1936,7 +1943,7 @@ class QOBUZ extends Platform{
       
       // We encode the track to pass it on as the return track
       $track = array('name' => $result->title,
-                     'artist' => $result->artist->name,
+                     'artist' => $result->performer->name,
                      'album' => $result->album->title,
                      'picture' => $result->album->image->small,
                      'link' => web(sprintf($this->track_permalink, $result->id)) );
