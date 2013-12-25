@@ -149,7 +149,7 @@ The following permalinks are supported when searching on tuneefy :
   * __Youtube__ music link : http://www.youtube.com/watch?v=_FOyHhU0i7k
   * __Rdio__ link : http://www.rdio.com/#/artist/Crash_Test_Dummies
   * __Qobuz__ track link : http://player.qobuz.com/#!/track/5280111
-  * __Xbox__ track link : http://music.xbox.com/Details/Album/z/7B4AB500-0100-11DB-89CA-0019B92A3933/Track/z/7D4AB500-0100-11DB-89CA-0019B92A3933
+  * __Xbox__ track link : http://music.xbox.com/Track/7D4AB500-0100-11DB-89CA-0019B92A3933
   * __Xbox__ album link : http://music.xbox.com/Album/C954F807-0100-11DB-89CA-0019B92A3933
 
 ## tuneefy bookmarklet ##
