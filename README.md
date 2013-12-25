@@ -149,6 +149,8 @@ The following permalinks are supported when searching on tuneefy :
   * __Youtube__ music link : http://www.youtube.com/watch?v=_FOyHhU0i7k
   * __Rdio__ link : http://www.rdio.com/#/artist/Crash_Test_Dummies
   * __Qobuz__ track link : http://player.qobuz.com/#!/track/5280111
+  * __Xbox__ track link : http://music.xbox.com/Details/Album/z/7B4AB500-0100-11DB-89CA-0019B92A3933/Track/z/7D4AB500-0100-11DB-89CA-0019B92A3933
+  * __Xbox__ album link : http://music.xbox.com/Album/C954F807-0100-11DB-89CA-0019B92A3933
 
 ## tuneefy bookmarklet ##
 
@@ -171,6 +173,7 @@ The bookmarklet recognizes what you're listening to on the following platforms /
   * Stereomood
   * Musicmaze
   * Qobuz Player
+  * Xbox Music
   * Rdio
   * Youtube (only for tracks available on iTunes via Youtube)
   * Myspace (music player and artist page - first track only)
@@ -183,6 +186,10 @@ I give access to the tuneefy code under the Creative Commons Attribution-NonComm
 In a nutshell, you are free to modify and distribute the code, as long as you don't make a commercial use of it, or sublicense it. You must include the following copyright notice and you cannot hold me liable if your server explodes while running this code (ahah).
 
 > Copyright (c) (CC BY-NC) 2012-2013 Cyril Chapellier
+
+## Sites that use tuneefy ##
+
+  * http://www.extremr.com/
 
 ## Contact me ##
 
