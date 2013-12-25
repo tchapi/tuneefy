@@ -61,7 +61,8 @@
   $options['ITUNES']      = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 12);
   $options['ECHONEST']    = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 13);
   $options['QOBUZ']       = array("key" => null, "secret" => null, "default" => true, "search" => false, "album_search" => false, "lookup" => false, "order" => 3);
-   
+  $options['XBOX']        = array("key" => null, "secret" => null, "default" => true, "search" => true, "album_search" => true, "lookup" => true, "order" => 14);
+  
   // Watchdog Tests
   const _API_KEY = "12345678";
   const _API_SECRET = "12345678";
