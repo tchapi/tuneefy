@@ -1875,7 +1875,7 @@ class QOBUZ extends Platform{
       
     } else if ($itemType == 'album') {
     
-      if (count($result->albums->total) != 0) $object = $result->albums->items;
+      if (intval($result->albums->total) != 0) $object = $result->albums->items;
       else return null;
       
     }
@@ -2051,5 +2051,205 @@ class QOBUZ extends Platform{
 
   }
 
+
+}
+
+
+/* ****************************************************************************************************** */
+/*                                                                                                        */
+/*                                                                                                        */
+/*                                               XBOX                                                     */
+/*                                                                                                        */
+/*                                                                                                        */
+/* ****************************************************************************************************** */
+class XBOX extends Platform{
+
+  public function __construct($key, $secret, $default, $activeSearch, $activeAlbumSearch, $activeLookup, $id) {
+
+    $this->name = "Xbox Music";
+    $this->safe_name = "_XBOX";
+    $this->type = _LISTEN;
+    $this->color = "007500";
+    $this->id = $id;
+
+    $this->api_key = $key;
+    $this->needsOAuth = false;
+    $this->api_secret = $secret;
+    
+    $this->api_endpoint = "https://music.xboxlive.com/1/content/";
+    $this->api_method = "GET";
+    
+    $this->query_endpoint = "music/search";
+    $this->query_term = "q";
+    $this->query_options = array("contentType" => "json", "accessToken" => "Bearer %s");
+    
+    $this->query_album_endpoint = $this->query_endpoint; 
+    $this->query_album_term = $this->query_term; 
+    $this->query_album_options = $this->query_options;
+    
+    $this->lookup_endpoint = "music.%s/lookup";
+    $this->lookup_term = "";
+    $this->lookup_options = $this->query_options;
+
+    $this->track_permalink = "http://music.xbox.com/Track/%s";
+    $this->album_permalink = "http://music.xbox.com/Album/%s";
+    
+    // Search and lookup Behavior
+    $this->isDefault = $default;
+    $this->isActiveForSearch = $activeSearch;
+    $this->isActiveForAlbumSearch = $activeAlbumSearch;
+    $this->isActiveForLookup = $activeLookup;
+    
+  }
+  
+  public function hasPermalink($permalink) {
+
+    return (strpos($permalink, "music.xbox.") !== false);
+  
+  }
+
+  protected function auth() { // From the XBOX docs : http://msdn.microsoft.com/en-us/library/dn546688.aspx
+
+    $serviceauth = "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13";
+    $scope = "http://music.xboxlive.com";
+    $grantType = "client_credentials";
+
+    $requestData = array("client_id" => $this->api_key, "client_secret" => $this->api_secret, "scope" => $scope, "grant_type" => $grantType);
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method'  => 'POST',
+            'content' => http_build_query($requestData),
+        ),
+    );
+    $context  = stream_context_create($options);
+    $response = json_decode(@file_get_contents($serviceauth, false, $context),true);
+    $token = $response['access_token'];
+    
+    return $token;
+  }
+
+  public function getNormalizedResults($itemType, $query, $limit) {
+  
+    // Update token
+    $token = $this->auth();
+    $this->query_options["accessToken"] = sprintf($this->query_options["accessToken"], $token);
+    $this->query_album_options["accessToken"] = sprintf($this->query_album_options["accessToken"], $token);
+
+    $result = $this->callPlatform($itemType, $query);
+
+    if ($result == null) return null;
+
+    $data = null;
+    
+    if ($itemType == 'track') {
+    
+      if (count($result->Tracks->Items) != 0) $object = $result->Tracks->Items;
+      else return null;
+      
+    } else if ($itemType == 'album') {
+    
+      if (count($result->Albums->Items) != 0) $object = $result->Albums->Items;
+      else return null;
+      
+    }
+
+    $length = min(count($object), $limit);
+
+    for($i=0;$i<$length; $i++){
+      
+      if ($itemType == 'track') {
+       
+        $currentItem = $object[$i];
+        $data[] = array('title' => $currentItem->Name,
+                        'artist' => $currentItem->Artists[0]->Artist->Name,
+                        'album' => $currentItem->Album->Name,
+                        'picture' => $currentItem->ImageUrl,
+                        'link' => web($currentItem->Link . "&action=play"),
+                        'score' => round(1/($i/10+1), 2) );
+                        
+      } else if ($itemType == 'album') {
+       
+        $currentItem = $object[$i];
+        $data[] = array('title' => NULL,
+                        'artist' => $currentItem->Artists[0]->Artist->Name,
+                        'album' => $currentItem->Name,
+                        'picture' => $currentItem->ImageUrl,
+                        'link' => web($currentItem->Link . "&action=play"),
+                        'score' => round(1/($i/10+1), 2) );
+      }
+    }
+
+    return $data;
+    
+  }
+  
+  public function lookupPermalink($permalink) {
+
+    // http://music.xbox.com/Album/C954F807-0100-11DB-89CA-0019B92A3933
+    $REGEX_XBOX_ALBUM = "/Album\/".$this->REGEX_FULLSTRING.".*$/";
+    
+    // http://music.xbox.com/Track/87CF3706-0100-11DB-89CA-0019B92A3933
+    $REGEX_XBOX_TRACK = "/Track\/".$this->REGEX_FULLSTRING.".*$/";
+   
+    $track = null;
+    $valid = false;
+
+    // Update token
+    $token = $this->auth();
+    $this->lookup_options["accessToken"] = sprintf($this->lookup_options["accessToken"], $token);
+
+    if (preg_match($REGEX_XBOX_TRACK, $permalink, $match)) {
+
+      $this->lookup_endpoint = sprintf($this->lookup_endpoint, $match[1]);
+      $result = $this->callPlatform("lookup", $match[1]);
+
+      if ($result !== null && isset($result->Tracks) && isset($result->Tracks->Items) && count($result->Tracks->Items) > 0) {
+        $object = $result->Tracks->Items[0];
+      } else {
+        return null;
+      }
+
+      // We encode the track to pass it on as the return track
+      $track = array('name' => $object->Name,
+                     'artist' => $object->Artists[0]->Artist->Name,
+                     'album' => $object->Album->Name,
+                     'picture' => $object->ImageUrl,
+                     'link' => web($object->Link) );
+        
+      // We modify the query 
+      $valid = true;
+      $query = $track['artist']."+".$track['name'];
+
+    } else if (preg_match($REGEX_XBOX_ALBUM, $permalink, $match)) {
+
+      $this->lookup_endpoint = sprintf($this->lookup_endpoint, $match[1]);
+      $result = $this->callPlatform("lookup", $match[1]);
+
+      if ($result !== null && isset($result->Albums) && isset($result->Albums->Items) && count($result->Albums->Items) > 0) {
+        $object = $result->Albums->Items[0];
+      } else {
+        return null;
+      }
+
+      // We encode the track to pass it on as the return track
+      $track = array('name' => null,
+                     'artist' => $object->Artists[0]->Artist->Name,
+                     'album' => $object->Name,
+                     'picture' => $object->ImageUrl,
+                     'link' => web($object->Link) );
+        
+      // We modify the query 
+      $valid = true;
+      $query = $track['artist']."+".$track['album'];
+
+    } 
+  
+    if ($valid)
+      return array('query' => $query, 'track' => $track);
+    else
+      return null;
+      
+  }
 
 }
