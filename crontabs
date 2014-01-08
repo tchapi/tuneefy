@@ -1,1 +1,1 @@
-00 06 * * * php [ROOT]/admin/watchdog/watchdog.php
+00 06 * * * php [ROOT]/admin/watchdog/watchdog.php >> [ROOT]/admin/watchdog/watchdog.log
