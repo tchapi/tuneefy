@@ -6,8 +6,8 @@ require_once(_PATH . "include/oauth/OAuth.class.php");
 require_once(_PATH . "include/mail/mailHelper.class.php");
 require_once(_PATH . "admin/watchdog/watchdog.conf");
 
-const _CHECK_200_STATUS = 1;
-const _CHECK_API_RESPONSE = 2;
+define('_CHECK_200_STATUS', 1);
+define('_CHECK_API_RESPONSE', 2);
 
 $data = array(
   'user' => $user,

@@ -15,7 +15,9 @@ class PlatformTimeoutException extends Exception { }
 /*                                                     */
 /* *************************************************** */
 
-const _LISTEN = 0, _BUY = 1, _META = 2;
+define('_LISTEN', 0);
+define('_BUY', 1);
+define('_META', 2);
 
 abstract class Platform {
 

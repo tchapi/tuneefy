@@ -351,6 +351,7 @@ class DBStats {
   {
   
     $db = DBConnection::db();
+    $limite = intval($limite);
 
     if ($time_start != null && $time_end != null) {
     
@@ -375,7 +376,7 @@ class DBStats {
 
     }
     
-    $statement->bindParam(':limite', intval($limite), PDO::PARAM_INT);
+    $statement->bindParam(':limite', $limite, PDO::PARAM_INT);
 
     // Executes the query
     $exe = $statement->execute();

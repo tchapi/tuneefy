@@ -3,16 +3,16 @@
 date_default_timezone_set('Europe/Paris');
 
 // Results limit
-const _LIMIT = 100;
+define('_LIMIT', 100);
 
 // Iframe mode
-const _IFRAME = "<iframe src='%s&embed' allowtransparency='yes' border='no' frameBorder='0' scrolling='0' width='350' height='150' ></iframe>";
+define('_IFRAME', "<iframe src='%s&embed' allowtransparency='yes' border='no' frameBorder='0' scrolling='0' width='350' height='150' ></iframe>");
 
 // Platforms
-const _TABLE_LINK_PREFIX = "link";
+define('_TABLE_LINK_PREFIX', "link");
 
-const _TABLE_TRACK = 0;
-const _TABLE_ALBUM = 1;
+define('_TABLE_TRACK', 0);
+define('_TABLE_ALBUM', 1);
 
 // Oauth helper
 require_once(_PATH.'include/oauth/OAuth.class.php');
@@ -27,7 +27,7 @@ require_once(_PATH.'include/api/API.class.php');
 
 // For reference : Platform::__construct($key, $secret, $default, $activeSearch, $activeAlbumSearch, $activeLookup, $order)
 //                 API::addPlatform($platform, $id);
-const _DEEZER = 0;
+define('_DEEZER', 0);
 API::addPlatform(new DEEZER($options['DEEZER']['key'],
                             $options['DEEZER']['secret'],
                             $options['DEEZER']['default'],
@@ -37,7 +37,7 @@ API::addPlatform(new DEEZER($options['DEEZER']['key'],
                             _DEEZER),
                             $options['DEEZER']['order']);
 
-const _SPOTIFY = 1;
+define('_SPOTIFY', 1);
 API::addPlatform(new SPOTIFY($options['SPOTIFY']['key'], 
                              $options['SPOTIFY']['secret'],
                              $options['SPOTIFY']['default'], 
@@ -47,7 +47,7 @@ API::addPlatform(new SPOTIFY($options['SPOTIFY']['key'],
                              _SPOTIFY),
                              $options['SPOTIFY']['order']);
 
-const _LASTFM = 2;
+define('_LASTFM', 2);
 API::addPlatform(new LASTFM($options['LASTFM']['key'],
                             $options['LASTFM']['secret'],
                             $options['LASTFM']['default'],
@@ -57,7 +57,7 @@ API::addPlatform(new LASTFM($options['LASTFM']['key'],
                             _LASTFM),
                             $options['LASTFM']['order']);
 
-const _GROOVESHARK = 3;
+define('_GROOVESHARK', 3);
 API::addPlatform(new GROOVESHARK($options['GROOVESHARK']['key'],
                                  $options['GROOVESHARK']['secret'],
                                  $options['GROOVESHARK']['default'],
@@ -68,11 +68,11 @@ API::addPlatform(new GROOVESHARK($options['GROOVESHARK']['key'],
                                  $options['GROOVESHARK']['order']);
 
 /* DEPRECATED */
-const _JIWA = 4;
+define('_JIWA', 4);
 API::addPlatform(new JIWA(null, null, false, false, false, false, _JIWA), 9999);
 /* ********** */
 
-const _SOUNDCLOUD = 5;
+define('_SOUNDCLOUD', 5);
 API::addPlatform(new SOUNDCLOUD($options['SOUNDCLOUD']['key'],
                                 $options['SOUNDCLOUD']['secret'],
                                 $options['SOUNDCLOUD']['default'],
@@ -82,7 +82,7 @@ API::addPlatform(new SOUNDCLOUD($options['SOUNDCLOUD']['key'],
                                 _SOUNDCLOUD),
                                 $options['SOUNDCLOUD']['order']);
 
-const _HYPEMACHINE = 6;
+define('_HYPEMACHINE', 6);
 API::addPlatform(new HYPEMACHINE($options['HYPEMACHINE']['key'],
                                  $options['HYPEMACHINE']['secret'],
                                  $options['HYPEMACHINE']['default'],
@@ -92,7 +92,7 @@ API::addPlatform(new HYPEMACHINE($options['HYPEMACHINE']['key'],
                                  _HYPEMACHINE),
                                  $options['HYPEMACHINE']['order']);
 
-const _YOUTUBE = 7;
+define('_YOUTUBE', 7);
 API::addPlatform(new YOUTUBE($options['YOUTUBE']['key'],
                              $options['YOUTUBE']['secret'],
                              $options['YOUTUBE']['default'],
@@ -102,7 +102,7 @@ API::addPlatform(new YOUTUBE($options['YOUTUBE']['key'],
                              _YOUTUBE),
                              $options['YOUTUBE']['order']);
 
-const _MIXCLOUD = 8;
+define('_MIXCLOUD', 8);
 API::addPlatform(new MIXCLOUD($options['MIXCLOUD']['key'],
                               $options['MIXCLOUD']['secret'],
                               $options['MIXCLOUD']['default'],
@@ -112,10 +112,10 @@ API::addPlatform(new MIXCLOUD($options['MIXCLOUD']['key'],
                               _MIXCLOUD),
                               $options['MIXCLOUD']['order']);
 
-const _MOG = 9;
+define('_MOG', 9);
 API::addPlatform(new MOG($options['MOG']['key'], $options['MOG']['secret'], false, false, false, $options['MOG']['lookup'], _MOG), $options['MOG']['order']); // no search for MOG
 
-const _RDIO = 10;
+define('_RDIO', 10);
 API::addPlatform(new RDIO($options['RDIO']['key'],
                           $options['RDIO']['secret'],
                           $options['RDIO']['default'],
@@ -126,7 +126,7 @@ API::addPlatform(new RDIO($options['RDIO']['key'],
                           $options['RDIO']['order']);
 
   
-const _QOBUZ = 13;
+define('_QOBUZ', 13);
 API::addPlatform(new QOBUZ($options['QOBUZ']['key'],
                            $options['QOBUZ']['secret'],
                            $options['QOBUZ']['default'],
@@ -136,7 +136,7 @@ API::addPlatform(new QOBUZ($options['QOBUZ']['key'],
                            _QOBUZ),
                            $options['QOBUZ']['order']);
 
-const _XBOX = 14;
+define('_XBOX', 14);
 API::addPlatform(new XBOX($options['XBOX']['key'],
                               $options['XBOX']['secret'],
                               $options['XBOX']['default'],
@@ -147,7 +147,7 @@ API::addPlatform(new XBOX($options['XBOX']['key'],
                               $options['XBOX']['order']);
 
 // Utilities
-const _ITUNES = 11;
+define('_ITUNES', 11);
 API::addPlatform(new ITUNES($options['ITUNES']['key'],
                             $options['ITUNES']['secret'],
                             $options['ITUNES']['default'],
@@ -157,7 +157,7 @@ API::addPlatform(new ITUNES($options['ITUNES']['key'],
                             _ITUNES),
                             $options['ITUNES']['order']); // no lookup for iTunes
 
-const _ECHONEST = 12;
+define('_ECHONEST', 12);
 API::addPlatform(new ECHONEST($options['ECHONEST']['key'],
                               $options['ECHONEST']['secret'],
                               $options['ECHONEST']['default'],

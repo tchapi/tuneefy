@@ -1,41 +1,41 @@
 <?php
   
   // Defines GA Tracker (http://analytics.google.com)
-  const _GOOGLE_GA_TRACKER = "0"; 
+  define('_GOOGLE_GA_TRACKER', "0"); 
   
   // Desactivates the trends access
-  const _DESACTIVATE_TRENDS = true;
+  define('_DESACTIVATE_TRENDS', true);
   
   // Desactivates playlists
-  const _DESACTIVATE_PLAYLISTS = true;
+  define('_DESACTIVATE_PLAYLISTS', true);
   
   // Desactivates dev mode
-  const _DESACTIVATE_DEV = true;
+  define('_DESACTIVATE_DEV', true);
 
   // Base for Id <-> GUID
-  const _BASE_MULTIPLIER = 123456789;
+  define('_BASE_MULTIPLIER', 123456789);
 
   // Allow USERVOICE Feedback
-  const _USERVOICE_ENABLED = true;
+  define('_USERVOICE_ENABLED', true);
   
   // Social
-  const _FB_ADMIN = "XXXXXXX"; 
-  const _FB_APP_ID = "YYYYYYYYYY";
-  const _FB_APP_SECRET = "ZZZZZZZZZZZ";
-  const _FB_PAGE_ID = "UUUUUUUUUU";
-  const _GPLUS_PUBLISHER_ID = "https://plus.google.com/TTTTTTTTTTT";
+  define('_FB_ADMIN', "XXXXXXX"); 
+  define('_FB_APP_ID', "YYYYYYYYYY");
+  define('_FB_APP_SECRET', "ZZZZZZZZZZZ");
+  define('_FB_PAGE_ID', "UUUUUUUUUU");
+  define('_GPLUS_PUBLISHER_ID', "https://plus.google.com/TTTTTTTTTTT");
 
   // Site base url :
-  const _SITE_URL = "http://www.tuneefy-on-git.com";
-  const _API_URL = "http://api.tuneefy-on-git.com";
-  const _ADMIN_URL = "http://admin.tuneefy-on-git.com";
+  define('_SITE_URL', "http://www.tuneefy-on-git.com");
+  define('_API_URL', "http://api.tuneefy-on-git.com");
+  define('_ADMIN_URL', "http://admin.tuneefy-on-git.com");
   
   // Mails
-  const _SMTP_SERVER = "smtp.tuneefy-on-git.com";
-  const _SMTP_MAIL = "sending@tuneefy-on-git.com";
-  const _SMTP_PASSWORD = "foobar";
-  const _CONTACT_MAIL = "contact@tuneefy-on-git.com";
-  const _TEAM_MAIL = "team@tuneefy-on-git.com";
+  define('_SMTP_SERVER', "smtp.tuneefy-on-git.com");
+  define('_SMTP_MAIL', "sending@tuneefy-on-git.com");
+  define('_SMTP_PASSWORD', "foobar");
+  define('_CONTACT_MAIL', "contact@tuneefy-on-git.com");
+  define('_TEAM_MAIL', "team@tuneefy-on-git.com");
 
   // Language
   $_LANG = "en";
@@ -64,9 +64,9 @@
   $options['XBOX']        = array("key" => null, "secret" => null, "default" => true, "search" => true, "album_search" => true, "lookup" => true, "order" => 14);
   
   // Watchdog Tests
-  const _API_KEY = "12345678";
-  const _API_SECRET = "12345678";
-  const _WATCHDOG_MAIL = "test@example.com";
+  define('_API_KEY', "12345678");
+  define('_API_SECRET', "12345678");
+  define('_WATCHDOG_MAIL', "test@example.com");
 
   /** Absolute path to the Tuneefy directory. */
   if ( !defined('_PATH') )
