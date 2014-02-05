@@ -402,6 +402,7 @@ class DBStats {
   {
   
     $db = DBConnection::db();
+    $limite = intval($limite);
 
     if ($time_start != null && $time_end != null) {
     
@@ -427,7 +428,7 @@ class DBStats {
     }
     
     
-    $statement->bindParam(':limite', intval($limite), PDO::PARAM_INT);
+    $statement->bindParam(':limite', $limite, PDO::PARAM_INT);
 
     // Executes the query
     $exe = $statement->execute();
@@ -466,6 +467,7 @@ class DBStats {
   {
   
     $db = DBConnection::db();
+    $limite = intval($limite);
 
     if ($time_start != null && $time_end != null) {
     
@@ -490,7 +492,7 @@ class DBStats {
 
     }
     
-    $statement->bindParam(':limite', intval($limite), PDO::PARAM_INT);
+    $statement->bindParam(':limite', $limite, PDO::PARAM_INT);
 
     // Executes the query
     $exe = $statement->execute();
@@ -622,6 +624,7 @@ class DBStats {
   {
   
     $db = DBConnection::db();
+    $limite = intval($limite);
 
     if ($time_start != null && $time_end != null) {
     
@@ -668,6 +671,7 @@ class DBStats {
   {
   
     $db = DBConnection::db();
+    $limite = intval($limite);
 
     if ($time_start != null && $time_end != null) {
     
@@ -820,6 +824,7 @@ class DBStats {
   {
   
     $db = DBConnection::db();
+    $limite = intval($limite);
 
     // Latest first
     $query = "SELECT id, album, artist, image FROM `items` WHERE type="._TABLE_ALBUM." ORDER BY date DESC LIMIT :offset,:limite";
