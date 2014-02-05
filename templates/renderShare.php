@@ -93,9 +93,6 @@
     </div>
   
     <div id="socialHolder" class="boxSinv">
-<?php if (!$mobile && !$iframeMode) { ?>    
-      <div id="new" ><img src="<?php echo _SITE_URL; ?>/img/<?php echo $i18n->newImage; ?>" width="116" height="60" title="<?php echo $i18n->newAlt; ?>"/></div>
-<?php } ?>
       <a id="embed" onclick="toggleEmbed(); return false;" title="<?php echo $i18n->get($action.'_embed'); ?>"></a>
       <a id="facebookShare" onclick="postToFeed(); return false;" title="<?php echo $i18n->get($action.'_facebook'); ?>"></a>
       <a id="twitterShare" onclick="newTweet(); return false;" title="<?php echo $i18n->get($action.'_twitter'); ?>"></a>
