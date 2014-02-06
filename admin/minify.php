@@ -117,7 +117,7 @@
   $result = file_get_contents($closureUrl, false, $context);
   
   if ($mode == 'compiled_code')
-    $result = "/*! Tuneefy v4.0".$build_version." release 2012 | http://tuneefy.com/ (c) 2011-2012, tchap */".$result;
+    $result = "/*! Tuneefy v4.0".$build_version." release 2014 | http://tuneefy.com/ (c) 2011-2014, tchap */".$result;
     
   $result = trim($result);
   
