@@ -1,49 +1,54 @@
+/*global $,console,*/
+/*jslint browser: true*/
 /* 
  * Constructor Function
  */
-function Links() {
+var Links = function() {
 
-  this.links = [];
+    this.links = [];
 
 };
 
 /* 
  * Add a Single link Function
  */
-Links.prototype.addLink = function(type, link){
+Links.prototype.addLink = function(type, link) {
 
-  this.links[type] = link;
-  
+    this.links[type] = link;
+
 };
 
 
 /* 
  * Merge two items Function
  */
-Links.prototype.merge = function(links){
+Links.prototype.merge = function(links) {
 
-  this.links = $.extend(links.links, this.links);
-  
+    this.links = $.extend(links.links, this.links);
+
 };
 
 /* 
  * Get the span of the links Function
  */
-Links.prototype.getSpan = function(){
+Links.prototype.getSpan = function() {
 
-  var size = 0;
-  for (type in this.links) {
-      if (this.links.hasOwnProperty(type)) size++;
-  }
-  return size;
+    var size = 0,
+        type;
+    for (type in this.links) {
+        if (this.links.hasOwnProperty(type)) {
+            size += 1;
+        }
+    }
+    return size;
 
 };
 
 /* 
  * Get one link of a type Function
  */
-Links.prototype.findOne = function(type){
-  
-  return this.links[type];
+Links.prototype.findOne = function(type) {
+
+    return this.links[type];
 
 };

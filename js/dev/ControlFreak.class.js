@@ -1,1 +1,1 @@
-function ControlFreak() { };
+function ControlFreak() {};

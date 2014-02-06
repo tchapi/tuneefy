@@ -27,6 +27,7 @@
 
   // Site base url :
   define('_SITE_URL', "http://www.tuneefy-on-git.com");
+  define('_COOKIE_DOMAIN', ".tuneefy-on-git.com");
   define('_API_URL', "http://api.tuneefy-on-git.com");
   define('_ADMIN_URL', "http://admin.tuneefy-on-git.com");
   
