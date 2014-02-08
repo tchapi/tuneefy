@@ -92,7 +92,7 @@ SearchUI.prototype.initUIInitialState = function() {
     // Gets the cookie to initially set the platforms
     var cookieValue = document.cookie.split($COOKIE + '=')[1] || "";
 
-    if (cookieValue === null) {
+    if (cookieValue === "") {
         cookieValue = $default_platforms;
     } else {
         cookieValue = decodeURIComponent(cookieValue.split(';')[0]);
