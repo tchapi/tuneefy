@@ -232,8 +232,10 @@ class Watchdog {
 
       } else {
 
-        if ($this->verbose) $this->log("DB Query", true, "Error making query : " . $db->errorInfo());
-
+        if ($this->verbose) {
+          $error = $db->errorInfo();
+          $this->log("DB Query", true, "Error making query : " . $error[2]);
+        }
       }
     
     }
