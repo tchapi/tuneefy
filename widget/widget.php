@@ -14,12 +14,12 @@
   <link rel="stylesheet" type="text/css" media="all" href="<?php echo _SITE_URL; ?>/css/reset.css" />
   <link rel="stylesheet" type="text/css" media="all" href="<?php echo _SITE_URL; ?>/widget/widget.css" />
 
-<?php $jsVersion = 2; ?>
+<?php $jsVersion = 6; ?>
 <?php // DEFAULTS // ?>
 <?php
 
-  $defaultPlatforms ="";
-  $allPlatforms ="";
+  $defaultPlatforms = "";
+  $allPlatforms = "";
   $jsAllPlatforms = "";
   
   $platforms = API::getPlatforms();
@@ -27,14 +27,14 @@
   while (list($pId, $pObject) = each($platforms))
   {
     $allPlatforms .= $pObject->isActiveForSearch()?$pObject->getId().",":"";
-    $jsAllPlatforms .= $pObject->isActiveForSearch()?'_p['.$pObject->getId().'] = "'.$pObject->getName().'";':"";
+    $jsAllPlatforms .= $pObject->isActiveForSearch()?'$p['.$pObject->getId().'] = "'.$pObject->getName().'";':"";
   }
   reset($platforms);
 ?>
   <script type="text/javascript">
-    _p = [];<?php echo $jsAllPlatforms; ?>
-    _all_platforms = <?php echo '"'.substr($allPlatforms,0, -1).'"'; ?>;
-    _table_link_prefix = <?php echo '"'._TABLE_LINK_PREFIX.'"'; ?>;
+    $p = [];<?php echo $jsAllPlatforms; ?>
+    $all_platforms = <?php echo '"'.substr($allPlatforms,0, -1).'"'; ?>;
+    $table_link_prefix = <?php echo '"'._TABLE_LINK_PREFIX.'"'; ?>;
   </script>
   <script type="text/javascript" src="<?php echo _SITE_URL; ?>/js/lang/lang.js.php?v=<?=$jsVersion?>&l=<?=$i18n->whichLang()?>"></script>
 <?php // Classes - OO Javascript // ?>
@@ -63,8 +63,8 @@
     var alertView = new AlertUI(controller, 0);
     var resultsView = new ResultRenderUI(model, controller, 1, 1, true);
     
-    _results_found = _result_found_widget;
-    $(controller).trigger("tuneefy.search.start",["<?php echo html_entity_decode($request); ?>", 0, true, _all_platforms, 50]);
+    $results_found = $result_found_widget;
+    $(controller).trigger("tuneefy.search.start",["<?php echo html_entity_decode($request); ?>", 0, true, $all_platforms, 50]);
 
   });
 
