@@ -57,12 +57,13 @@
   $options['HYPEMACHINE'] = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => true, "order" => 9);
   $options['YOUTUBE']     = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 6);
   $options['MIXCLOUD']    = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 10);
-  $options['MOG']         = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 11);
+  // DEPRECATED $options['MOG']         = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 11);
   $options['RDIO']        = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 7);
   $options['ITUNES']      = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 12);
   $options['ECHONEST']    = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 13);
   $options['QOBUZ']       = array("key" => null, "secret" => null, "default" => true, "search" => false, "album_search" => false, "lookup" => false, "order" => 3);
   $options['XBOX']        = array("key" => null, "secret" => null, "default" => true, "search" => true, "album_search" => true, "lookup" => true, "order" => 14);
+  $options['BEATS']        = array("key" => null, "secret" => null, "default" => true, "search" => true, "album_search" => true, "lookup" => true, "order" => 11);
   
   // Watchdog Tests
   define('_API_KEY', "12345678");

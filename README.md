@@ -151,6 +151,9 @@ The following permalinks are supported when searching on tuneefy :
   * __Qobuz__ track link : http://player.qobuz.com/#!/track/5280111
   * __Xbox__ track link : http://music.xbox.com/Track/7D4AB500-0100-11DB-89CA-0019B92A3933
   * __Xbox__ album link : http://music.xbox.com/Album/C954F807-0100-11DB-89CA-0019B92A3933
+  * __Beats Music__ track link : http://on.beatsmusic.com/albums/al8992411/tracks/tr8992441
+  * __Beats Music__ album link : http://on.beatsmusic.com/albums/al6960443
+  * __Beats Music__ artist link : http://on.beatsmusic.com/artists/ar27304
 
 ## tuneefy bookmarklet ##
 

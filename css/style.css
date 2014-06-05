@@ -389,7 +389,7 @@ h2.infoTitle, h2.pickTitle{
 
 #advanced{
   position: absolute;
-  width: 359px;
+  width: 395px;
   right: 9px;
   top: 86px;
   padding: 10px;
@@ -401,7 +401,7 @@ h2.infoTitle, h2.pickTitle{
 
 #availablePlatforms{
   float: left;
-  width: 216px;
+  width: 252px;
   padding: 10px;
   background: #3B3B3B;
   border-radius: 3px;
@@ -414,7 +414,7 @@ h2.infoTitle, h2.pickTitle{
 #availablePlatforms span.filter,
 #mergeResults span.merge{
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   color: #9F9F9F;
   font-weight: bold;
   font-size: .6em;

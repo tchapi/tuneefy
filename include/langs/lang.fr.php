@@ -138,7 +138,7 @@ $lang['about_us']= "À Propos";
 $lang['contact']= "Contact";
 $lang['follow_twitter']= "Nous suivre sur Twitter";
 $lang['copyright']= "tuneefy &copy; 2011 - 2012"; 
-$lang['endorsement']= "Ce service utilise les API de Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz) mais n'est pas approuvé ni certifié de quelque manière que ce soit par Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz). Les noms, marques et logos cités ou utilisés sur ce site sont la propriété de leurs déposants respectifs.";
+$lang['endorsement']= "Ce service utilise les API de Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz, Beats Music) mais n'est pas approuvé ni certifié de quelque manière que ce soit par Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz, Beats Music). Les noms, marques et logos cités ou utilisés sur ce site sont la propriété de leurs déposants respectifs.";
 
 // Share
 $lang['track_intro']= "Allez on monte le son, en avant la musique !"; 

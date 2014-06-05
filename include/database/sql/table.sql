@@ -43,7 +43,9 @@ INSERT INTO `platforms` (`id`, `name`) VALUES
 (10, 'Rdio'),
 (11, 'iTunes'),
 (12, 'Echonest'),
-(13, 'Qobuz');
+(13, 'Qobuz'),
+(13, 'Xbox'),
+(13, 'Beats Music');
 --
 -- Table structure for table `tracks`
 --
@@ -69,6 +71,8 @@ CREATE TABLE IF NOT EXISTS `items` (
   `link_ITUNES` varchar(256) DEFAULT NULL,
   `link_ECHONEST` varchar(256) DEFAULT NULL,
   `link_QOBUZ` varchar(256) DEFAULT NULL,
+  `link_XBOX` varchar(256) DEFAULT NULL,
+  `link_BEATS` varchar(256) DEFAULT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

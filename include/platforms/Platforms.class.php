@@ -2266,3 +2266,167 @@ class XBOX extends Platform{
   }
 
 }
+
+
+/* ****************************************************************************************************** */
+/*                                                                                                        */
+/*                                                                                                        */
+/*                                          BEATS MUSIC                                                   */
+/*                                                                                                        */
+/*                                                                                                        */
+/* ****************************************************************************************************** */
+class BEATSMUSIC extends Platform{
+
+  public function __construct($key, $secret, $default, $activeSearch, $activeAlbumSearch, $activeLookup, $id) {
+
+    $this->name = "Beats Music";
+    $this->safe_name = "_BEATS";
+    $this->type = _LISTEN;
+    $this->color = "E31937";
+    $this->id = $id;
+    
+    $this->api_key = $key;
+    $this->api_endpoint = "https://partner.api.beatsmusic.com/v1/";
+    $this->api_method = "GET";
+    
+    $this->query_endpoint = "api/search";
+    $this->query_term = 'q';
+    $this->query_options = array( 'type' => "track", "limit" => _LIMIT, 'client_id' => $this->api_key );
+    
+    $this->query_album_endpoint = $this->query_endpoint;
+    $this->query_album_term = $this->query_term; 
+    $this->query_album_options = array( 'type' => "album", "limit" => _LIMIT, 'client_id' => $this->api_key );
+    
+    $this->lookup_endpoint = "api/%s/%s";
+    $this->lookup_term = null;
+    $this->lookup_options = array( 'client_id' => $this->api_key );
+
+    $this->track_permalink = "http://on.beatsmusic.com/albums/%s/tracks/%s";
+    $this->album_permalink = "http://on.beatsmusic.com/albums/%s";
+    
+    // Search and lookup Behavior
+    $this->isDefault = $default;
+    $this->isActiveForSearch = $activeSearch;
+    $this->isActiveForAlbumSearch = $activeAlbumSearch;
+    $this->isActiveForLookup = $activeLookup;
+    
+  }
+  
+  public function hasPermalink($permalink) {
+
+    return (strpos($permalink, "beatsmusic.com") !== false);
+  
+  }
+
+  public function getNormalizedResults($itemType, $query, $limit) {
+
+    $result = $this->callPlatform($itemType, $query);
+    if ($result == null || !isset($result->data)) return null;
+
+    $length = min(count($result->data), $limit);
+    
+    $data = null;
+    // Normalizing each track found
+    for($i=0;$i<$length; $i++){
+    
+      $currentItem = $result->data[$i];
+
+      if ($itemType == 'track') { // Track
+      
+        $data[] = array('title' => $currentItem->display,
+                        'artist' => $currentItem->detail,
+                        'album' => $currentItem->related->display,
+                        'picture' => null,
+                        'link' => web(sprintf($this->track_permalink,$currentItem->related->id,$currentItem->id)),
+                        'score' => round(1/($i/10+1), 2));
+                        
+      } else if ($itemType == 'album') { // Album
+
+        $data[] = array('title' => NULL,
+                        'artist' => $currentItem->detail,
+                        'album' => $currentItem->display,
+                        'picture' => null,
+                        'link' => web(sprintf($this->album_permalink,$currentItem->id)),
+                        'score' => round(1/($i/10+1), 2));
+      
+      }
+
+    }
+    
+    return $data;
+    
+  }
+  
+  public function lookupPermalink($permalink) {
+  
+    // http://on.beatsmusic.com/albums/al8992411/tracks/tr8992441
+    // http://on.beatsmusic.com/artists/ar27304
+    // http://on.beatsmusic.com/albums/al6960443
+    $REGEX_BEATS_TRACK = "/albums\/al([0-9]*)\/tracks\/tr([0-9]*)$/";
+    $REGEX_BEATS_ALBUM = "/albums\/al([0-9]*)$/";
+    $REGEX_BEATS_ARTIST = "/artists\/ar([0-9]*)$/";
+    
+    $track = null;
+    $valid = false;
+
+    if (preg_match($REGEX_BEATS_TRACK, $permalink, $match)) {
+
+      $this->lookup_endpoint = 'api/tracks/tr%s';
+      $result = $this->callPlatform("lookup", $match[2]);
+      if ($result == null || !isset($result->data)) {
+        return null;
+      }
+    
+      // We encode the track to pass it on as the return track
+      $track = array('name' => $result->data->title,
+                     'artist' => $result->data->artist_display_name,
+                     'album' => $result->data->refs->album->display,
+                     'picture' => null,
+                     'link' => web(sprintf($this->track_permalink, $match[1], $match[2])) );
+        
+      // We modify the query 
+      $valid = true;
+      $query = $track['album']."+".$track['name'];
+
+    } else if (preg_match($REGEX_BEATS_ALBUM, $permalink, $match)) {
+
+      $this->lookup_endpoint = 'api/albums/al%s';
+      $result = $this->callPlatform("lookup", $match[1]);
+      if ($result == null || !isset($result->data)) {
+        return null;
+      }
+    
+      // We encode the track to pass it on as the return track
+      $track = array('name' => null,
+                     'artist' => $result->data->refs->artists[0]->display,
+                     'album' => $result->data->title,
+                     'picture' => null,
+                     'link' => web(sprintf($this->album_permalink, $result->data->id)) );
+        
+      // We modify the query 
+      $valid = true;
+      $query = $track['artist']."+".$track['album'];
+
+    } else if (preg_match($REGEX_BEATS_ARTIST, $permalink, $match)) {
+
+      $this->lookup_endpoint = 'api/artists/ar%s';
+      $result = $this->callPlatform("lookup", $match[1]);
+      if ($result == null || !isset($result->data)) {
+        return null;
+      }
+    
+      // No tracks to encode 
+      // We modify the query 
+      $valid = true;
+      $query = $result->data->name;
+
+    } 
+  
+    if ($valid)
+      return array('query' => $query, 'track' => $track);
+    else
+      return null;
+      
+  }
+
+}

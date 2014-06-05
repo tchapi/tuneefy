@@ -112,8 +112,21 @@ API::addPlatform(new MIXCLOUD($options['MIXCLOUD']['key'],
                               _MIXCLOUD),
                               $options['MIXCLOUD']['order']);
 
+/* DEPRECATED */
 define('_MOG', 9);
-API::addPlatform(new MOG($options['MOG']['key'], $options['MOG']['secret'], false, false, false, $options['MOG']['lookup'], _MOG), $options['MOG']['order']); // no search for MOG
+API::addPlatform(new MOG(null, null, false, false, false, false, _JIWA), 9999);
+/* ********** */
+
+define('_BEATS', 15);
+API::addPlatform(new BEATSMUSIC($options['BEATS']['key'],
+                          $options['BEATS']['secret'],
+                          $options['BEATS']['default'],
+                          $options['BEATS']['search'],
+                          $options['BEATS']['album_search'],
+                          $options['BEATS']['lookup'],
+                          _BEATS),
+                          $options['BEATS']['order']);
+
 
 define('_RDIO', 10);
 API::addPlatform(new RDIO($options['RDIO']['key'],

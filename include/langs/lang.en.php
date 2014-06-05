@@ -150,7 +150,7 @@ $lang['about_us']= "About Us";
 $lang['contact']= "Contact";
 $lang['follow_twitter']= "Follow us on Twitter";
 $lang['copyright']= "tuneefy &copy; 2011 - 2012"; 
-$lang['endorsement']= "This product uses Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz) APIs but is not endorsed, certified or otherwise approved in any way by Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz). Each brand and name is or may be the registered trade mark of its respective owner.";
+$lang['endorsement']= "This product uses Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz, Beats Music) APIs but is not endorsed, certified or otherwise approved in any way by Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz, Beats Music). Each brand and name is or may be the registered trade mark of its respective owner.";
 
 // Share
 $lang['track_intro']= "Let's turn up the volume and listen to some music."; 
