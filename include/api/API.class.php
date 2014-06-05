@@ -22,11 +22,11 @@ class APIOAuthDataStore extends OAuthDataStore {
         return false; // = not found. We can use the same nonce several times
     }/*}}}*/
 
-    function new_request_token($consumer) {/*{{{*/
+    function new_request_token($consumer, $callback = NULL) {/*{{{*/
         return NULL;
     }/*}}}*/
 
-    function new_access_token($token, $consumer) {/*{{{*/
+    function new_access_token($token, $consumer, $verifier = NULL) {/*{{{*/
         return NULL;
     }/*}}}*/
 }
