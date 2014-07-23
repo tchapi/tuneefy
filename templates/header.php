@@ -474,7 +474,7 @@
 <?php //////// TWITTER //////// ?>
       <div id="share_twitter">
         <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo _SITE_URL; ?>" data-text="<?php $i18n->description; ?>" data-lang="<?php echo $i18n->whichLang() ?>" data-hashtags="tuneefy">Tweet</a>
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=('https:' == document.location.protocol ? 'https://' : 'http://') + "platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
       </div>
 <?php //////// END TWITTER //////// ?>
           
@@ -497,7 +497,7 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  js.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + "connect.facebook.net/en_GB/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>   
       <div class="fb-like" data-href="<?php echo _SITE_URL; ?>" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-colorscheme="light" data-font="arial"></div>
