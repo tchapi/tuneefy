@@ -193,6 +193,8 @@ In a nutshell, you are free to modify and distribute the code, as long as you do
 ## Sites that use tuneefy ##
 
   * http://www.extremr.com/
+  * http://lebidule.org/
+  * LaRockArmy (https://www.youtube.com/channel/UCgxUpKe_69MqeCgLHGm5V2Q)
 
 ## Contact me ##
 
