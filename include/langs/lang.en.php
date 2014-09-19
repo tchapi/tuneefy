@@ -227,7 +227,7 @@ $lang['facts_supported_list'] = "<ul class=\"platformsPatterns\">
         <li class=\"platform\">Spotify
         <ul style=\"display: none;\">
           <li class=\"song\">Song link<br/><span class=\"link\">spotify:track:6GOxgLKnfd567oG2VpfJio</span></li>
-          <li class=\"artist\">Artist link<br/><span class=\"link\">http://open.spotify.com/artist/6UUrUCIZtQeOf8tC0WuzRy</span></li>
+          <li class=\"artist\">Artist link<br/><span class=\"link\">http://play.spotify.com/artist/6UUrUCIZtQeOf8tC0WuzRy</span></li>
           <li class=\"album\">Album link<br/><span class=\"link\">spotify:album:2bRcCP8NYDgO7gtRbkcqdk</span></li>
         </ul>
         </li>

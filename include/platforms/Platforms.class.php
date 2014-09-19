@@ -257,7 +257,7 @@ class SPOTIFY extends Platform{
   
   public function hasPermalink($permalink) {
 
-    return (strpos($permalink, "spotify:") !== false || strpos($permalink, "open.spotify.") !== false);
+    return (strpos($permalink, "spotify:") !== false || strpos($permalink, "open.spotify.") !== false || strpos($permalink, "play.spotify.") !== false);
   
   }
   
