@@ -22,6 +22,15 @@ function addCSS(url){
 
 function el(id){return document.getElementById(id);}
 
+function elcl(className, parent) {
+  parent || (parent = document);
+  var descendants= parent.getElementsByTagName('*'), i=-1, e, result=[];
+  while (e=descendants[++i]) {
+    ((' '+(e['class']||e.className)+' ').indexOf(' '+className+' ') > -1) && result.push(e);
+  }
+  return result;
+}
+
 (function(){
 
 <?php  // We add the CSS ?>
@@ -58,7 +67,12 @@ function el(id){return document.getElementById(id);}
       artist = el("player_track_artist").innerHTML;
       song = el("player_track_title").innerHTML;
 
-    } /*else if (uri.indexOf(".jiwa.") && el("player") != null) {
+    } else if (uri.indexOf(".deezer.") && elcl("player-track-title") != null) {
+    
+      artist = elcl('player-track-artist')[0].childNodes[1].innerHTML;
+      song = elcl('player-track-title')[0].firstChild.innerHTML;
+
+    }/*else if (uri.indexOf(".jiwa.") && el("player") != null) {
     
       artist = el("player").childNodes[5].childNodes[1].innerHTML.replace(" /","");
       song = el("player").childNodes[5].childNodes[3].innerHTML;
@@ -100,7 +114,7 @@ function el(id){return document.getElementById(id);}
 
     } else if (uri.indexOf("player.qobuz.") && el("now-playing") != null) {
     
-      uri = encodeURIComponent("http://player.qobuz.com" + document.getElementById("now-playing").childNodes[4].childNodes[1].childNodes[3].getAttribute("href"));
+      uri = encodeURIComponent("http://player.qobuz.com" + el("now-playing").childNodes[4].childNodes[1].childNodes[3].getAttribute("href"));
 
     } else if (uri.indexOf("music.xbox.") && el("player") != null){
 
