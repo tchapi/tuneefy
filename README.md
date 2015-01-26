@@ -195,7 +195,8 @@ In a nutshell, you are free to modify and distribute the code, as long as you do
   * http://www.extremr.com/
   * http://lebidule.org/
   * LaRockArmy (https://www.youtube.com/channel/UCgxUpKe_69MqeCgLHGm5V2Q)
-
+  * http://elx-art.com/wp-content/uploads/2014/05/Spotify-Innovation.pdf
+  
 ## Contact me ##
 
 Do not hesitate to drop me a line at tchap(@)tuneefy.com, or to fork this repo and make pull requests.
