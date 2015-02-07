@@ -62,68 +62,68 @@ function elcl(className, parent) {
   
   try {
   
-    if (uri.indexOf(".deezer.") && el("player_track_title") != null) {
+    if (uri.indexOf(".deezer.") != -1 && el("player_track_title") != null) {
     
       artist = el("player_track_artist").innerHTML;
       song = el("player_track_title").innerHTML;
 
-    } else if (uri.indexOf(".deezer.") && elcl("player-track-title") != null) {
+    } else if (uri.indexOf(".deezer.") != -1 && elcl("player-track-title") != null) {
     
       artist = elcl('player-track-artist')[0].childNodes[1].innerHTML;
       song = elcl('player-track-title')[0].firstChild.innerHTML;
 
-    }/*else if (uri.indexOf(".jiwa.") && el("player") != null) {
+    }/*else if (uri.indexOf(".jiwa.") != -1 && el("player") != null) {
     
       artist = el("player").childNodes[5].childNodes[1].innerHTML.replace(" /","");
       song = el("player").childNodes[5].childNodes[3].innerHTML;
 
-    }*/ else if (uri.indexOf(".grooveshark.") && el("now-playing-metadata") != null) {
+    }*/ else if (uri.indexOf(".grooveshark.") != -1 && el("now-playing-metadata") != null) {
     
       artist = el("now-playing-metadata").childNodes[4].innerHTML;
       song = el("now-playing-metadata").firstChild.innerHTML;
 
-    } else if (uri.indexOf(".radionomy.") && el("track-name") != null) {
+    } else if (uri.indexOf(".radionomy.") != -1 && el("track-name") != null) {
     
       artist = el("artist-name").innerHTML;
       song = el("track-name").innerHTML;
 
-    } else if (uri.indexOf(".stereomood.") && el("info_track_title") != null) {
+    } else if (uri.indexOf(".stereomood.") != -1 && el("info_track_title") != null) {
     
       artist = el("info_track_artist").innerHTML;
       song = el("info_track_title").innerHTML;
 
-    } else if (uri.indexOf(".musicmaze.") && el("song-title") != null) {
+    } else if (uri.indexOf(".musicmaze.") != -1 && el("song-title") != null) {
     
       artist = el("artist-name").firstChild.innerHTML;
       song = el("song-title").firstChild.innerHTML;
 
-    } /* else if (uri.indexOf(".youtube.") && el("watch-description-extra-info") != null) {
+    } /* else if (uri.indexOf(".youtube.") != -1 && el("watch-description-extra-info") != null) {
     
       artist = el("watch-description-extra-info").childNodes[5].childNodes[3].childNodes[0].nodeValue.split('"')[1];
       song = el("watch-description-extra-info").childNodes[3].childNodes[1].childNodes[3].childNodes[1].innerHTML;
 
-    }*/ else if (uri.indexOf(".myspace.com/music/player") && el("mainContent") != null) {
+    }*/ else if (uri.indexOf(".myspace.com/music/player") != -1 && el("mainContent") != null) {
     
       artist = el("mainContent").childNodes[3].childNodes[11].childNodes[1].childNodes[5].firstChild.innerHTML;
       song = el("mainContent").childNodes[3].childNodes[11].childNodes[1].childNodes[3].firstChild.innerHTML;
 
-    } else if (uri.indexOf(".myspace.") && document.getElementsByTagName("h1")[1] != null) {
+    } else if (uri.indexOf(".myspace.") != -1 && document.getElementsByTagName("h1")[1] != null) {
     
       artist = document.getElementsByTagName("h1")[1].firstChild.innerHTML;
       song = document.getElementsByTagName("h6")[0].firstChild.firstChild.innerHTML;
 
-    } else if (uri.indexOf("player.qobuz.") && el("now-playing") != null) {
+    } else if (uri.indexOf("player.qobuz.") != -1 && el("now-playing") != null) {
     
       uri = encodeURIComponent("http://player.qobuz.com" + el("now-playing").childNodes[4].childNodes[1].childNodes[3].getAttribute("href"));
 
-    } else if (uri.indexOf("music.xbox.") && el("player") != null){
+    } else if (uri.indexOf("music.xbox.") != -1 && el("player") != null){
 
       // Jquery is here ! \o/
       song = $("#player").find(".playerNowPlaying .playerNowPlayingMetadata .primaryMetadata a").html();
       artist = $("#player").find(".playerNowPlaying .playerNowPlayingMetadata .secondaryMetadata a:first-child").html();
       //album = $("#player").find(".playerNowPlaying .playerNowPlayingMetadata .secondaryMetadata a:last-child").html();
 
-    } else if (uri.indexOf("radiooooo.") && elcl("songinfo--box")[0] != null){
+    } else if (uri.indexOf("radiooooo.") != -1 && elcl("songinfo--box")[0] != null){
 
       artist = elcl("song__artist")[0].innerHTML;
       song = elcl("song__title")[0].innerHTML;
