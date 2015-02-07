@@ -123,6 +123,11 @@ function elcl(className, parent) {
       artist = $("#player").find(".playerNowPlaying .playerNowPlayingMetadata .secondaryMetadata a:first-child").html();
       //album = $("#player").find(".playerNowPlaying .playerNowPlayingMetadata .secondaryMetadata a:last-child").html();
 
+    } else if (uri.indexOf("radiooooo.") && elcl("songinfo--box")[0] != null){
+
+      artist = elcl("song__artist")[0].innerHTML;
+      song = elcl("song__title")[0].innerHTML;
+
     }
     
   } catch(e) { artist = null; song = null;}
