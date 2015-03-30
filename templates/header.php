@@ -66,7 +66,7 @@
   <meta property="tuneefy:artist" content="<?php echo esc($artist); ?>"/>
   <meta property="tuneefy:album" content="<?php echo esc($album); ?>" />
   <meta property="og:description" content="<?php $i18n->track_description(esc($name),esc($artist)); ?>"/>
-  <meta property="og:type" content="tuneefy:track"> 
+  <meta property="og:type" content="website"> 
 
   <meta itemprop="name" content="<?php echo esc($name); ?> | <?php echo esc($artist); ?>">
   <meta itemprop="description" content="<?php $i18n->track_description(esc($name),esc($artist)); ?>">
@@ -87,7 +87,7 @@
   <meta property="tuneefy:artist" content="<?php echo esc($artist); ?>"/>
   <meta property="tuneefy:album" content="<?php echo esc($album); ?>" />
   <meta property="og:description" content="<?php $i18n->album_description(esc($album), esc($artist)); ?>"/>
-  <meta property="og:type" content="tuneefy:track"> 
+  <meta property="og:type" content="website"> 
       
   <meta itemprop="name" content="<?php echo esc($album); ?> | <?php echo esc($artist); ?>">
   <meta itemprop="description" content="<?php $i18n->album_description(esc($album), esc($artist)); ?>">
@@ -151,7 +151,7 @@
 <?php } ?>
 
   <meta property="fb:app_id" content="<?php echo _FB_APP_ID; ?>"> 
-  <meta property="fb:page_id" content="<?php echo _FB_PAGE_ID; ?>">
+  <!--<meta property="fb:page_id" content="<?php echo _FB_PAGE_ID; ?>">-->
   <meta property="og:site_name" content="<?php $i18n->general_title; ?>"/>
   <meta property="fb:admins" content="<?php echo _FB_ADMIN; ?>"/>
         
