@@ -13,6 +13,16 @@
       return floatval($reg[1]);
   }
   
+  // Is Slack ?
+  function isSlack() {
+    $match=preg_match('/Slackbot/',$_SERVER['HTTP_USER_AGENT'],$reg);
+    if($match==0)
+      return false;
+    else
+      return true;
+  }
+  $slack = isSlack();
+
   // Check whether we're in an iframe or not
   function iframeMode() {
     return isset($_GET['embed']);

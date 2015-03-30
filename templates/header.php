@@ -66,7 +66,7 @@
   <meta property="tuneefy:artist" content="<?php echo esc($artist); ?>"/>
   <meta property="tuneefy:album" content="<?php echo esc($album); ?>" />
   <meta property="og:description" content="<?php $i18n->track_description(esc($name),esc($artist)); ?>"/>
-  <meta property="og:type" content="website"> 
+  <meta property="og:type" content="<?php echo $slack?"website":"tuneefy:track"; ?>"> 
 
   <meta itemprop="name" content="<?php echo esc($name); ?> | <?php echo esc($artist); ?>">
   <meta itemprop="description" content="<?php $i18n->track_description(esc($name),esc($artist)); ?>">
@@ -87,7 +87,7 @@
   <meta property="tuneefy:artist" content="<?php echo esc($artist); ?>"/>
   <meta property="tuneefy:album" content="<?php echo esc($album); ?>" />
   <meta property="og:description" content="<?php $i18n->album_description(esc($album), esc($artist)); ?>"/>
-  <meta property="og:type" content="website"> 
+  <meta property="og:type" content="<?php echo $slack?"website":"tuneefy:track"; ?>"> 
       
   <meta itemprop="name" content="<?php echo esc($album); ?> | <?php echo esc($artist); ?>">
   <meta itemprop="description" content="<?php $i18n->album_description(esc($album), esc($artist)); ?>">
