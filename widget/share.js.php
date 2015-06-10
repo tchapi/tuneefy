@@ -114,7 +114,7 @@ function elcl(className, parent) {
 
     } else if (uri.indexOf("player.qobuz.") != -1 && el("now-playing") != null) {
     
-      uri = encodeURIComponent(el("now-playing").childNodes[2].childNodes[3].childNodes[0].href));
+      uri = encodeURIComponent(el("now-playing").childNodes[2].childNodes[3].childNodes[0].href);
 
     } else if (uri.indexOf("music.xbox.") != -1 && el("player") != null){
 
