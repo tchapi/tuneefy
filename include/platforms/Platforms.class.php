@@ -1646,10 +1646,10 @@ class RDIO extends Platform{
     $this->id = $id;
 
     $this->api_key = $key;
-    $this->needsOAuth = true;
+    $this->needsOAuth2 = true;
     $this->api_secret = $secret;
     
-    $this->api_endpoint = "http://api.rdio.com/1/";
+    $this->api_endpoint = "https://services.rdio.com/api/1/";
     $this->api_method = "POST";
     
     $this->query_endpoint = "";
@@ -1666,6 +1666,10 @@ class RDIO extends Platform{
 
     $this->track_permalink = null;
     
+    $this->oauth2_endpoint = "https://services.rdio.com/oauth2/token";
+    $this->oauth2_access_token_term = "access_token";
+    $this->oauth2_params = array("grant_type" => 'client_credentials', "client_id" => $this->api_key, "client_secret" => $this->api_secret);
+
     // Search and lookup Behavior
     $this->isDefault = $default;
     $this->isActiveForSearch = $activeSearch;
