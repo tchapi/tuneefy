@@ -7,7 +7,7 @@
 /* *************************************************** */
 
 class PlatformTimeoutException extends Exception { }
-
+class PlatformOAuth2Exception extends Exception { }
 
 /* *************************************************** */
 /*                                                     */
@@ -34,6 +34,7 @@ abstract class Platform {
   // For authentication
   protected $api_key;
   protected $needsOAuth = false;
+  protected $needsOAuth2 = false;
   protected $api_secret = null;
   
   // API endpoint
@@ -125,7 +126,7 @@ abstract class Platform {
 
     $call = $this->constructCall($type, $query);
     
-    return $this->makeCall($call,$this->needsOAuth);
+    return $this->makeCall($call,$this->needsOAuth,$this->needsOAuth2);
   
   }
   
@@ -143,7 +144,7 @@ abstract class Platform {
     return $outData;
   }
 
-  protected function makeCall($call, $needsOAuth){
+  protected function makeCall($call, $needsOAuth, $needsOAuth2){
     
     // In case we need OAuth (simple signed request)
     if ($needsOAuth){
@@ -156,8 +157,26 @@ abstract class Platform {
 
       $call['data'] = $req->get_parameters();
             
-    }   
-    
+    }
+
+    if ($needsOAuth2){
+
+      // We need to call the token endpoint
+      $ch = curl_init($this->oauth2_endpoint);
+      curl_setopt($ch, CURLOPT_POST, true);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->oauth2_params));
+      $result = curl_exec($ch);
+      $res = json_decode($result, true);
+
+      if ($res === null || !array_key_exists('access_token', $res)) 
+        throw new PlatformOAuth2Exception();
+
+      // We had the access token
+      $call['data'][$this->oauth2_access_token_term] = $res['access_token'];
+            
+    }
+
     // Build the query for params
     $params = null;
     if ($call['data'] != null) {
