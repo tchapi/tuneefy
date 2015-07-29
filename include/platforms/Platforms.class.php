@@ -1315,23 +1315,22 @@ class YOUTUBE extends Platform{
     $this->id = $id;
 
     $this->api_key = $key;
-    $this->api_endpoint = "https://gdata.youtube.com/feeds/api/";
+    $this->api_endpoint = "https://www.googleapis.com/youtube/v3/";
     $this->api_method = "GET";
     
-    $this->query_endpoint = "videos";
+    $this->query_endpoint = "search";
     $this->query_term = 'q';
     // We cannot go beyond 50 results (YOUTUBE LIMITATION)
-    $this->query_options = array('key' => $this->api_key, 'orderby' => "relevance", 'max-results' => min(50,_LIMIT), 
-                                 'category' => "Music", 'alt' => "json");
+    $this->query_options = array('key' => $this->api_key, 'part' => 'snippet', 'order' => "relevance", 'maxResults' => min(50,_LIMIT), 
+                                 'videoCategoryId' => "10", 'alt' => "json", "type" => 'video', "topicId" => "/m/04rlf");
                                  
     $this->query_album_endpoint = null;
     $this->query_album_term = null; 
     $this->query_album_options = null;
     
     $this->lookup_endpoint = "videos";
-    $this->lookup_term = 'q';
-    $this->lookup_options = array('key' => $this->api_key, 'orderby' => "relevance", 'max-results' => min(50,_LIMIT), 
-                                 'category' => "Music", 'alt' => "json");
+    $this->lookup_term = 'id';
+    $this->lookup_options = array('key' => $this->api_key, 'part' => 'snippet', 'alt' => "json");
 
     $this->track_permalink = "http://youtube.com/watch?v=%s";
     
@@ -1356,21 +1355,20 @@ class YOUTUBE extends Platform{
 
     $data = null;
     
-    if (isset($result->feed->entry) && $result->feed->entry) {
-      $length = min(count($result->feed->entry), $limit);
+    if (count($result->items) > 0) {
+      $length = min(count($result->items), $limit);
     } else {
       return null;
     }
 
     for($i=0;$i<$length; $i++){
     
-      $currentItem = $result->feed->entry[$i];
+      $currentItem = $result->items[$i];
       
-      if (preg_match("/([^-]*)-([^-^\(\[]*).*/",$currentItem->title->{'$t'},$meta) && 
-          preg_match("/.*\/([a-zA-Z0-9\_]+)$/",$currentItem->id->{'$t'},$perma) ) {
+      if (preg_match("/([^-]*)-([^-^\(\[]*).*/",$currentItem->snippet->title,$meta)) {
         $title = trim($meta[2]);
         $artist = trim($meta[1]);
-        $permalink = $perma[1];
+        $id = $currentItem->id->videoId;
       } else {
         // We can't parse the title => we will not have enough info on the track
         continue;
@@ -1379,8 +1377,8 @@ class YOUTUBE extends Platform{
       $data[] = array('title' => $title,
                       'artist' => $artist,
                       'album' => NULL,
-                      'picture' => $currentItem->{'media$group'}->{'media$thumbnail'}[1]->url,
-                      'link' => web(sprintf($this->track_permalink,$permalink)),
+                      'picture' => $currentItem->snippet->thumbnails->medium->url,
+                      'link' => web(sprintf($this->track_permalink,$id)),
                       'score' => round(1/($i/10+1), 2) );
 
     }
@@ -1401,9 +1399,9 @@ class YOUTUBE extends Platform{
       $result = $this->callPlatform("lookup", $match[1]);
       if ($result == null) return null;
       
-      $currentItem = $result->feed->entry[0];
+      $currentItem = $result->items[0];
 
-      if (preg_match("/([^-]*)-([^-^\(\[]*).*/",$currentItem->title->{'$t'},$meta)) {
+      if (preg_match("/([^-]*)-([^-^\(\[]*).*/",$currentItem->snippet->title,$meta)) {
         $title = trim($meta[2]);
         $artist = trim($meta[1]);
         $valid = true;
@@ -1416,8 +1414,8 @@ class YOUTUBE extends Platform{
       $track = array( 'name' => $title,
                       'artist' => $artist,
                       'album' => NULL,
-                      'picture' => $currentItem->{'media$group'}->{'media$thumbnail'}[1]->url,
-                      'link' => web(sprintf($this->track_permalink,$match[1])) );
+                      'picture' => $currentItem->snippet->thumbnails->medium->url,
+                      'link' => web(sprintf($this->track_permalink,$currentItem->id)) );
       
       // We modify the query
       $query = $track['artist']."+".$track['name']; 
