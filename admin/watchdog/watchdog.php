@@ -324,7 +324,7 @@ class Watchdog {
 }
 
 // Run
-$medor = new Watchdog($data, true);
+$medor = new Watchdog($data, false);
 echo "Running ... ";
 
 for ($i=1; $i < 5; $i++) { 
