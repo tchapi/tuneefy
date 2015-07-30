@@ -56,16 +56,14 @@ API::addPlatform(new LASTFM($options['LASTFM']['key'],
                             $options['LASTFM']['lookup'],
                             _LASTFM),
                             $options['LASTFM']['order']);
-
 /* DEPRECATED */
 define('_GROOVESHARK', 3);
-API::addPlatform(new GROOVESHARK(null, null, false, false, false, false, _GROOVESHARK), 9999);
+API::addPlatform(new GROOVESHARK(null, null, false, false, false, false, _GROOVESHARK), 97);
 /* ********** */
-
 
 /* DEPRECATED */
 define('_JIWA', 4);
-API::addPlatform(new JIWA(null, null, false, false, false, false, _JIWA), 9999);
+API::addPlatform(new JIWA(null, null, false, false, false, false, _JIWA), 98);
 /* ********** */
 
 define('_SOUNDCLOUD', 5);
@@ -110,7 +108,7 @@ API::addPlatform(new MIXCLOUD($options['MIXCLOUD']['key'],
 
 /* DEPRECATED */
 define('_MOG', 9);
-API::addPlatform(new MOG(null, null, false, false, false, false, _MOG), 9999);
+API::addPlatform(new MOG(null, null, false, false, false, false, _MOG), 99);
 /* ********** */
 
 define('_BEATS', 15);
