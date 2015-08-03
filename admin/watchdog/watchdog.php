@@ -248,6 +248,10 @@ class Watchdog {
     $this->output .= "<span class=\"". ($status?"success":"error") ."\">" . ($status?"OK":"FAIL ($error)") . "</span></li>";
   }
 
+  public function addOutput($text){
+    $this->output .= $text;
+  }
+
   public function run(){
 
     $time_pre = microtime(true);
@@ -278,7 +282,7 @@ class Watchdog {
     while (list($pId, $pObject) = each($platforms)) {
       if ($pObject->isActiveForSearch()){
         $this->addTest(sprintf($this->data['apiSearchTrack']['url'],urlencode("radiohead"),$pObject->getId()), _CHECK_200_STATUS, sprintf($this->data['apiSearchTrack']['name'],$pObject->getName()), true);
-      } else {
+      } elseif ($this->verbose) {
         $this->addLog(">> Plaform ".$pObject->getName()." is not active");
       }
     }
@@ -289,7 +293,7 @@ class Watchdog {
     while (list($pId, $pObject) = each($platforms)) {
       if ($pObject->isActiveForSearch()){
         $this->addTest(sprintf($this->data['apiSearchAlbum']['url'],urlencode("daft+punk"),$pObject->getId()), _CHECK_200_STATUS, sprintf($this->data['apiSearchAlbum']['name'],$pObject->getName()), true);
-      } else {
+      } elseif ($this->verbose) {
         $this->addLog(">> Plaform ".$pObject->getName()." is not active");
       }
     }
@@ -328,6 +332,7 @@ $medor = new Watchdog($data, false);
 echo "Running ... ";
 
 for ($i=1; $i < 5; $i++) { 
+  $medor->addOutput("<br /><br /><strong>Starting run #" . $i . "</strong><br /><br />");
   $medor->run();
   if ($medor->getStatus() == true) break;
 }
