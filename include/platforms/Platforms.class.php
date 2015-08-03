@@ -2106,8 +2106,8 @@ class XBOX extends Platform{
     $this->lookup_term = "";
     $this->lookup_options = $this->query_options;
 
-    $this->track_permalink = "http://music.xbox.com/Track/%s";
-    $this->album_permalink = "http://music.xbox.com/Album/%s";
+    $this->track_permalink = "http://music.microsoft.com/Track/%s";
+    $this->album_permalink = "http://music.microsoft.com/Album/%s";
     
     // Search and lookup Behavior
     $this->isDefault = $default;
@@ -2119,7 +2119,7 @@ class XBOX extends Platform{
   
   public function hasPermalink($permalink) {
 
-    return (strpos($permalink, "music.xbox.") !== false);
+    return (strpos($permalink, "music.xbox.") !== false || strpos($permalink, "music.microsoft.") !== false);
   
   }
 
