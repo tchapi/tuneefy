@@ -160,7 +160,7 @@
             echo "<td><span class=\"color number\">".$phvsh."</span> (" . sprintf("%01.1f",$phvsh/$totalPlatformsHitsViaShare*100) ."%)</td>";
             echo "<td><span class=\"color number\">".$phvse."</span> (" . sprintf("%01.1f",$phvse/$totalPlatformsHitsViaSearch*100) ."%)</td>";
             echo "<td><span class=\"color number\">".intval($platformsHits[$id])."</span> (" . sprintf("%01.1f",$platformsHits[$id]/$totalPlatformsHits*100) ."%)</td>" ;
-            echo "<td><span class=\"color\">".$platformsCatalogueSpan[$id]."</span> ".sprintf("(%01.1f%%)",$platformsCatalogueSpan[$id]/$platformsCatalogueSpan['total']*100)."</td></tr>";
+            echo "<td><span class=\"color\">".$platformsCatalogueSpan[$id]."</span> ".sprintf("(%01.1f%%)",(($platformsCatalogueSpan['total']!=0)?$platformsCatalogueSpan[$id]/$platformsCatalogueSpan['total']*100:0))."</td></tr>";
           }
           reset($platforms);
           
