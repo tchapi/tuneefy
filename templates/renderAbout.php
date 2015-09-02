@@ -41,7 +41,7 @@ $minified = str_replace("%s%",_SITE_URL, $minified);
   </div>
 
   <div id="os-wrapper" class="bdTop bdBot txtS">
-  <h2 id="open-source" class="color aboutTitle"><?php $i18n->os_title_long; ?></h2>
+  <h2 id="free" class="color aboutTitle"><?php $i18n->os_title_long; ?></h2>
     <div class="aboutRow boxed boxS">
       <h2 class="os_subtitle"><?php $i18n->os_paragraph_1_important; ?></h2>
       <div class="os_box"><?php $i18n->os_paragraph_1; ?></div>
