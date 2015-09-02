@@ -1143,6 +1143,31 @@ h2.aboutTitle, h2.aboutTitles{
   float: none;
 }
 
+#os-wrapper .os_subtitle {
+  padding: 20px;
+  font-size: 1.1em;
+  line-height: 1.2em;
+}
+#os-wrapper .os_subtitle em {
+  font-style: italic;
+}
+#os-wrapper .os_box {
+  padding: 20px;
+  color: #626262;
+  font-size: 0.9em;
+  line-height: 1.2em;
+  padding-top: 0;
+}
+#os-wrapper .link {
+  text-align: center;
+  margin-bottom: 20px;
+}
+#os-wrapper img {
+  box-shadow: 0px 0px 21px #aaa;
+}
+#os-wrapper a, #os-wrapper a:hover {
+  color: white;
+}
 
 /* PLAYLISTS */
 h2.playlistsTitle{

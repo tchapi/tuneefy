@@ -149,7 +149,7 @@ $lang['more_info']   = "Tell Me More !";
 $lang['about_us']= "About Us"; 
 $lang['contact']= "Contact";
 $lang['follow_twitter']= "Follow us on Twitter";
-$lang['copyright']= "tuneefy &copy; 2011 - 2012"; 
+$lang['copyright']= "tuneefy &copy; 2011 - 2015"; 
 $lang['endorsement']= "This product uses Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz, Beats Music) APIs but is not endorsed, certified or otherwise approved in any way by Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz, Beats Music). Each brand and name is or may be the registered trade mark of its respective owner.";
 
 // Share
@@ -312,3 +312,13 @@ $lang['coming_soon_blog']   = "Yes we have a blog";
 $lang['coming_soon_info']   = "tuneefy will be online soon. Give us your e-mail address so we can notify you when it goes live !";
 
 $lang['coming_soon_disclaimer']= "Be assured. We are very careful about privacy - We will not disclose your email to any other parties, even if they offer us dounughts n' stuff, u know.";
+
+// Open Source project
+$lang['os_title_long'] = "« http://tuneefy.com/t/oxtcm »"; 
+$lang['os_paragraph_1_important'] = "Tuneefy is an open-source project. It is (<em>and always be</em>) free, ad-free, and it does not require any login or any personal information. It just works (<em>most of the time ...</em>).";
+$lang['os_paragraph_1'] = "But tuneefy has a (small) cost nonetheless, that we are happy to pay each month. This is basically the server and a domain name, which amounts to around 6€ per month. While it's not much, it still is something.<br><br>
+
+If you find the service useful and if you would like to support us, we are happy to welcome your tiny donations to keep the server and the domain going : either <a href='http://paypal.me/tchap'>paypal.me/tchap</a> or <a href='mailto:team@tuneefy.com'>team@tuneefy.com</a> if you want to reach out.";
+
+$lang['os_paragraph_2'] = "We are also rewriting tuneefy from scratch to make it even more simple, fast and straight-forward, it takes some time, but you can have a look <a href='https://github.com/tchapi/tuneefy-hacklang'>here</a> and join forces if you have some spare time.";
+$lang['os_paragraph_2_thanks'] = "Thank you ! 💙";
