@@ -425,12 +425,13 @@ class LASTFM extends Platform{
     if ($itemType == 'track') {
       if (isset ($result->results) && $result->results->trackmatches != '\n' && isset($result->results->trackmatches->track)) {
         $results = $result->results->trackmatches->track;
-        
-        if (is_array($results)) // so number of items > 1
+
+        if (is_array($results) && count($results) > 0) {// so number of items > 1
           $maxPopularity = $results[0]->listeners;
-        else // number of items = 1
+        } else if (count($results) > 0) { // number of items = 1
           $maxPopularity = $results->listeners;
-      
+        } else { $results = NULL; }
+
       } else { $results = NULL; }
     } else if ($itemType == 'album') {
       if (isset ($result->results) && $result->results->albummatches != '\n' && isset($result->results->albummatches->album)) {
