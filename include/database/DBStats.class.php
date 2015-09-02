@@ -603,12 +603,12 @@ class DBStats {
       // Fetch the info
       $row = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-      $result['total'] = intval($row["total"]);
+      $result['total'] = intval($row[0]["total"]);
 
       while (list($pId, $pObject) = each($platforms))
       {
         $linkProperty = _TABLE_LINK_PREFIX.$pObject->getSafeName();
-        $result[$pObject->getId()] = intval($row[$linkProperty]);
+        $result[$pObject->getId()] = intval($row[0][$linkProperty]);
       }
       
       return $result;
@@ -655,6 +655,7 @@ class DBStats {
       return false;
     } else {
       // Fetch the info
+      $result = [];
       while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
         $result[] = $row["query"];
       }
