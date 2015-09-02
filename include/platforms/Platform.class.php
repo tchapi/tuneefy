@@ -67,7 +67,7 @@ abstract class Platform {
   protected $isActiveForLookup = false;
   
   // Helper
-  protected $REGEX_FULLSTRING = "([a-zA-Z0-9%\+-\s\_\.]*)";
+  protected $REGEX_FULLSTRING = "([a-zA-Z0-9%\+\s\_\.\-]*)";
   /* *************************************** */
   
   // IMPLEMENTED IN CHILD CLASSES
