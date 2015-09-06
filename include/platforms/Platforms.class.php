@@ -448,28 +448,30 @@ class LASTFM extends Platform{
       else
         $currentItem = $results[$i];
         
-      if (isset($currentItem->image))
-        $picture = $currentItem->image[2]->{'#text'}; // medium size
-      else $picture = NULL;
-      
-      if ($itemType == 'track') {
-      
-        $data[] = array('title' => $currentItem->name,
-                        'artist' => $currentItem->artist,
-                        'album' => NULL,
-                        'picture' => $picture,
-                        'link' => web($currentItem->url),
-                        'score' => round($currentItem->listeners/$maxPopularity,2) );
-                        
-      } else if ($itemType == 'album') {
-      
-        $data[] = array('title' => NULL,
-                        'artist' => $currentItem->artist,
-                        'album' => $currentItem->name,
-                        'picture' => $picture,
-                        'link' => web($currentItem->url),
-                        'score' => round(1/($i/10+1), 2));
-                        
+      if (!is_null($currentItem)) {
+        if (isset($currentItem->image))
+          $picture = $currentItem->image[2]->{'#text'}; // medium size
+        else $picture = NULL;
+        
+        if ($itemType == 'track') {
+        
+          $data[] = array('title' => $currentItem->name,
+                          'artist' => $currentItem->artist,
+                          'album' => NULL,
+                          'picture' => $picture,
+                          'link' => web($currentItem->url),
+                          'score' => round($currentItem->listeners/$maxPopularity,2) );
+                          
+        } else if ($itemType == 'album') {
+        
+          $data[] = array('title' => NULL,
+                          'artist' => $currentItem->artist,
+                          'album' => $currentItem->name,
+                          'picture' => $picture,
+                          'link' => web($currentItem->url),
+                          'score' => round(1/($i/10+1), 2));
+                          
+        }
       }
   
     }
