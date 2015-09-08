@@ -443,12 +443,10 @@ class LASTFM extends Platform{
     
     for($i=0;$i<$length; $i++){
     
-      if ($length == 1)
-        $currentItem = $results;
-      else
-        $currentItem = $results[$i];
+      $currentItem = $results[$i];
         
       if (!is_null($currentItem)) {
+
         if (isset($currentItem->image))
           $picture = $currentItem->image[2]->{'#text'}; // medium size
         else $picture = NULL;
