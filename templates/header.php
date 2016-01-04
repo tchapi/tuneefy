@@ -221,7 +221,7 @@
   <script type="text/javascript">
     $p = [];<?php echo $jsAllPlatforms; ?>
     $all_platforms = <?php echo '"'.substr($allPlatforms,0, -1).'"'; ?>;
-    $default_platforms = <?php if (!$mobile) { echo '"'.substr($defaultPlatforms,0, -1).'"';} else { echo '_all_platforms'; } ?>;
+    $default_platforms = <?php if (!$mobile) { echo '"'.substr($defaultPlatforms,0, -1).'"';} else { echo '$all_platforms'; } ?>;
     $table_link_prefix = <?php echo '"'._TABLE_LINK_PREFIX.'"'; ?>;
   </script>
   <script type="text/javascript" src="<?php echo _SITE_URL; ?>/js/lang/lang.js.php?v=<?=$jsVersion?>&l=<?=$i18n->whichLang()?>"></script>
