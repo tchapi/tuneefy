@@ -1509,7 +1509,7 @@ class ITUNES extends Platform{
     $length = min(count($result->results), $limit);
     
     for($i=0;$i<$length; $i++){
-    
+
       $currentItem = $result->results[$i];
       
       if (isset($currentItem->collectionName))
@@ -1519,6 +1519,12 @@ class ITUNES extends Platform{
       
       if ($itemType == 'track') {
        
+        if (strpos($currentItem->trackViewUrl, "?") === FALSE){
+          $currentItem->trackViewUrl .= "?app=music";
+        } else {
+          $currentItem->trackViewUrl .= "&app=music";
+        }
+
         $data[] = array('title' => $currentItem->trackName,
                         'artist' => $currentItem->artistName,
                         'album' => $album,
@@ -1528,7 +1534,13 @@ class ITUNES extends Platform{
                         
       } else if ($itemType == 'album') {
       
-         $data[] = array('title' => NULL,
+        if (strpos($currentItem->collectionViewUrl, "?") === FALSE){
+          $currentItem->collectionViewUrl .= "?app=music";
+        } else {
+          $currentItem->collectionViewUrl .= "&app=music";
+        }
+        
+        $data[] = array('title' => NULL,
                         'artist' => $currentItem->artistName,
                         'album' => $album,
                         'picture' => $currentItem->artworkUrl100,
