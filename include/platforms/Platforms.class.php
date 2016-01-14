@@ -521,7 +521,7 @@ class LASTFM extends Platform{
                          'link' => web($permalink) );
         
           // We modify the query
-          $query = $track['artist']."+".$track['name'];
+          $query = $track['artist'].($album!=null?"+".$album:"")."+".$track['name'];
 
         }
 
