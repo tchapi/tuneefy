@@ -503,18 +503,27 @@ class LASTFM extends Platform{
 
         $result = $result->results->trackmatches->track;
 
-        if ($match[2] != '_') $album = $match[2];
-        else $album = null;
+        if ($result == null || count($result) == 0) {
 
-        // We encode the track to pass it on as the return track
-        $track = array('name' => $result->name,
-                       'artist' => $result->artist,
-                       'album' => $album,
-                       'picture' => NULL,
-                       'link' => web($permalink) );
-      
-        // We modify the query
-        $query = $track['artist']."+".$track['name'];
+          // We modify the query
+          $query = $match[1]."+".$match[2]."+".$match[3];
+
+        } else {
+
+          if ($match[2] != '_') $album = $match[2];
+          else $album = null;
+
+          // We encode the track to pass it on as the return track
+          $track = array('name' => $result[0]->name,
+                         'artist' => $result[0]->artist,
+                         'album' => $album,
+                         'picture' => NULL,
+                         'link' => web($permalink) );
+        
+          // We modify the query
+          $query = $track['artist']."+".$track['name'];
+
+        }
 
       } else {
  
