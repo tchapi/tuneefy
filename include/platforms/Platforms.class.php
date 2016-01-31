@@ -280,6 +280,22 @@ class SPOTIFY extends Platform{
       }
     }
 
+    if ($itemType == 'album') {
+      $artists = array();
+      for ($j=0; $j < $length; $j++) { 
+          $artists[$results[$j]->id] = $results[$j]->id;
+      }
+
+      // We need to get the artist for each album, FUCK YOU Spotify, you API is SHIT
+      $this->lookup_endpoint = "albums";
+      $this->lookup_term = "ids";
+      $result_artists = $this->callPlatform("lookup", implode($artists, ","));
+
+      for ($k=0; $k < count($result_artists->albums); $k++) {
+          $artists[$result_artists->albums[$k]->id] = $result_artists->albums[$k]->artists[0]->name;
+      }
+    }
+
     for($i=0;$i<$length; $i++){
     
       $currentItem = $results[$i];
@@ -292,11 +308,11 @@ class SPOTIFY extends Platform{
                         'picture' => $currentItem->album->images[1]->url,
                         'link' => web($currentItem->external_urls->spotify),
                         'score' => round($currentItem->popularity/$maxPopularity,2) );
-                        
+     
       } else if ($itemType == 'album') { // Album
       
         $data[] = array('title' => NULL,
-                        'artist' => NULL, // Motherfucking Spotify !!
+                        'artist' => $artists[$currentItem->id], // Motherfucking Spotify !!
                         'album' => $currentItem->name,
                         'picture' => $currentItem->images[1]->url,
                         'link' => web($currentItem->external_urls->spotify),
