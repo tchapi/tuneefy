@@ -232,19 +232,19 @@ class SPOTIFY extends Platform{
     $this->id = $id;
 
     $this->api_key = $key;
-    $this->api_endpoint = "http://ws.spotify.com/";
+    $this->api_endpoint = "http://api.spotify.com/v1/";
     $this->api_method = "GET";
     
-    $this->query_endpoint = "search/1/track.json";
+    $this->query_endpoint = "search";
     $this->query_term = 'q';
-    $this->query_options = null;
+    $this->query_options = array("type" => "track");
     
-    $this->query_album_endpoint = "search/1/album.json";
+    $this->query_album_endpoint = "search";
     $this->query_album_term = $this->query_term; 
-    $this->query_album_options = $this->query_options;
+    $this->query_album_options = array( "type" => "album");
     
-    $this->lookup_endpoint = "lookup/1/.json";
-    $this->lookup_term = "uri";
+    $this->lookup_endpoint = "%ss/%s";
+    $this->lookup_term = null;
     $this->lookup_options = null;
 
     // Search and lookup Behavior
@@ -266,14 +266,14 @@ class SPOTIFY extends Platform{
     $result = $this->callPlatform($itemType, $query);
     if ($result == null) return null;
 
-    if ($itemType == 'track') $results = $result->tracks;
-    if ($itemType == 'album') $results = $result->albums;
+    if ($itemType == 'track') $results = $result->tracks->items;
+    if ($itemType == 'album') $results = $result->albums->items;
     
     $length = min(count($results), $limit);
     
     $data = null;
     
-    if ($length >0) {
+    if ($length > 0 && $itemType == 'track') {
       $maxPopularity = $results[0]->popularity;
       if ($maxPopularity == 0) {
         $maxPopularity = 1;
@@ -289,18 +289,18 @@ class SPOTIFY extends Platform{
         $data[] = array('title' => $currentItem->name,
                         'artist' => $currentItem->artists[0]->name,
                         'album' => $currentItem->album->name,
-                        'picture' => NULL,
-                        'link' => web($currentItem->href),
+                        'picture' => $currentItem->album->images[1]->url,
+                        'link' => web($currentItem->external_urls->spotify),
                         'score' => round($currentItem->popularity/$maxPopularity,2) );
                         
       } else if ($itemType == 'album') { // Album
       
         $data[] = array('title' => NULL,
-                        'artist' => $currentItem->artists[0]->name,
+                        'artist' => NULL, // Motherfucking Spotify !!
                         'album' => $currentItem->name,
-                        'picture' => NULL,
-                        'link' => web($currentItem->href),
-                        'score' => round($currentItem->popularity/$maxPopularity,2) );
+                        'picture' => $currentItem->images[1]->url,
+                        'link' => web($currentItem->external_urls->spotify),
+                        'score' => round(1/($i/10+1), 2));
       }
       
     }
@@ -324,8 +324,11 @@ class SPOTIFY extends Platform{
     // We have a nicely formatted share url
     
       $requestType = trim($match[1]);
-      
-      $result = $this->callPlatform("lookup", $permalink);
+
+      // We need to change the endpoint according to the type
+      $this->lookup_endpoint = $requestType . 's/%s';
+
+      $result = $this->callPlatform("lookup", $match[3]);
       if ($result == null) return null;
       
       $valid = true;
@@ -333,10 +336,10 @@ class SPOTIFY extends Platform{
       if ($requestType == 'track') {
       
         // We encode the track to pass it on as the return track
-        $track = array('name' => $result->track->name,
-                       'artist' => $result->track->artists[0]->name,
-                       'album' => $result->track->album->name,
-                       'picture' => NULL,
+        $track = array('name' => $result->name,
+                       'artist' => $result->artists[0]->name,
+                       'album' => $result->album->name,
+                       'picture' => $result->album->images[1]->url,
                        'link' => web($permalink) );
       
         // We modify the query
@@ -344,11 +347,11 @@ class SPOTIFY extends Platform{
       
       } else if ($requestType == 'album') {
       
-        $query = $result->album->artist."+".$result->album->name;
+        $query = $result->artists[0]->name."+".$result->name;
       
       } else if ($requestType == 'artist') {
       
-        $query = $result->artist->name;
+        $query = $result->name;
         
       }
         
