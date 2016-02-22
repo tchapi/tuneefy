@@ -121,17 +121,10 @@ API::addPlatform(new BEATSMUSIC($options['BEATS']['key'],
                           _BEATS),
                           $options['BEATS']['order']);
 
-
+/* DEPRECATED */
 define('_RDIO', 10);
-API::addPlatform(new RDIO($options['RDIO']['key'],
-                          $options['RDIO']['secret'],
-                          $options['RDIO']['default'],
-                          $options['RDIO']['search'],
-                          $options['RDIO']['album_search'],
-                          $options['RDIO']['lookup'],
-                          _RDIO),
-                          $options['RDIO']['order']);
-
+API::addPlatform(new RDIO(null, null, false, false, false, false, _RDIO), 96);
+/* ********** */
   
 define('_QOBUZ', 13);
 API::addPlatform(new QOBUZ($options['QOBUZ']['key'],

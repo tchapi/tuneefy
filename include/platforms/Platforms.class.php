@@ -2181,7 +2181,7 @@ class XBOX extends Platform{
     $context  = stream_context_create($options);
     $response = json_decode(@file_get_contents($serviceauth, false, $context),true);
     $token = $response['access_token'];
-    
+
     return $token;
   }
 

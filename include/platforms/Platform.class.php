@@ -193,14 +193,36 @@ abstract class Platform {
       $opts = array(
           'http' => array(
               'method'  => 'GET',
-              'timeout' => 3,
+              'timeout' => 5,
               'header'  => "Content-Type: charset=UTF-8\r\n".
                            "Connection: close"
+          ),
+          "ssl" => array(
+            "verify_peer" => false,
+            "verify_peer_name" => false,
           )
       );
 
       $context = stream_context_create($opts); 
       $result = @file_get_contents($call['url'].'?'.$params,0,$context);
+
+      // $ch = curl_init(); 
+
+      // // set url 
+      // curl_setopt($ch, CURLOPT_URL, $call['url'].'?'.$params); 
+
+      // $headers = array();
+      // $headers[] = 'Content-Type: charset=UTF-8';
+      // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+      // //return the transfer as a string 
+      // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+
+      // // $output contains the output string 
+      // $result = curl_exec($ch); 
+
+      // // close curl resource to free up system resources 
+      // curl_close($ch);      
 
     } else if ($call['method'] == 'POST' || $call['method'] == 'POST_JSON') {
 
