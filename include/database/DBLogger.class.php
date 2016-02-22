@@ -94,8 +94,10 @@ class DBLogger {
     $query = "INSERT INTO `stats_search_query` (query, referer, origin, date)";
     $query .= " VALUES(:search_query, :referer, :from, NOW());";
             
+    $searchQuery = trim($searchQuery);
+
     $statement = $db->prepare($query);
-    $statement->bindParam(':search_query', trim($searchQuery), PDO::PARAM_STR);
+    $statement->bindParam(':search_query', $searchQuery, PDO::PARAM_STR);
     $statement->bindParam(':referer', $_SERVER["HTTP_REFERER"], PDO::PARAM_STR);
     $statement->bindParam(':from', $from, PDO::PARAM_STR);
 
