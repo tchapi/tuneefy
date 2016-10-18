@@ -1,26 +1,26 @@
 <?php
 
 // Header
-$lang['general_title']= "tuneefy"; 
-$lang['description']= "tuneefy is a new unified way to share music with your friends, over various online music services ! ";
-$lang['tagline']= "Sharing <span class='color'>music</span>, done <span class='color'>right</span>.";
-$lang['tags']= "listen, music, online, share, unify, platform, friends, tuneefy, music service, music platform, track, sharing";
-$lang['search_title']= "Your search for %s"; 
+$lang['general_title'] = "tuneefy";
+$lang['description'] = "tuneefy is a new unified way to share music with your friends, over various online music services ! ";
+$lang['tagline'] = "Sharing <span class='color'>music</span>, done <span class='color'>right</span>.";
+$lang['tags'] = "listen, music, online, share, unify, platform, friends, tuneefy, music service, music platform, track, sharing";
+$lang['search_title'] = "Your search for %s";
 
 // Github
-$lang['github']= "Fork me on GitHub"; 
+$lang['github'] = "Fork me on GitHub";
 
 // Menu
-$lang['home_title']= "Home"; 
-$lang['home_tip']= "Yay ! Search and Share Music !"; 
-$lang['stats_title']= "Trends"; 
-$lang['stats_tip']= "Stats & stuff"; 
-$lang['about_title']= "About"; 
-$lang['about_tip']= "What is it, yo ?"; 
+$lang['home_title'] = "Home";
+$lang['home_tip'] = "Yay ! Search and Share Music !";
+$lang['stats_title'] = "Trends";
+$lang['stats_tip'] = "Stats & stuff";
+$lang['about_title'] = "About";
+$lang['about_tip'] = "What is it, yo ?";
 
 // API
-$lang['api_title']="API";
-$lang['api_intro']="Introducing the tuneefy API (beta)";
+$lang['api_title'] ="API";
+$lang['api_intro'] ="Introducing the tuneefy API (beta)";
 $lang['api_overview_title'] = "Overview";
 $lang['api_overview'] = "<p>The tuneefy API is a RESTful API that allows you to lookup, search, and aggregate tracks via tuneefy.</p><p>Two response formats are available : </p><ul><li><span class=\"color\">JSON</span></li><li><span class=\"color\">XML</span></li></ul><p>The server will first check if an '<span class=\"color\">HTTP_ACCEPT</span>' header is present, containing one of the two supported MIME-types. The response type can be overriden with the 'alt' parameter available for each method (see below). By default, the API will return XML.</p><p>All the responses are <span class=\"color\">UTF-8</span> encoded, and so must be all the calls.</p>";
 $lang['api_endpoint_title'] = "API Endpoint";
@@ -86,12 +86,12 @@ $lang['api_disclaimer_title'] = "Disclaimer";
 $lang['api_disclaimer'] = "<strong>This is work in progress (as of Jan' 13).</strong> The specifications should not change that much in the meantime but the underlying code may well do, thus changing the response times, parameters, calls, etc .. of the API. This API relies on various APIs, and is thus highly dependent on their availability, health, return codes, timeout, will to respond, apathy, etc ..<br/><br/>The aggregate method is particularly slow for now, but hopefully this will be improved in a near future.";
 
 // Search
-$lang['query_label']= "Search for a track, album or paste a link here"; 
+$lang['query_label'] = "Search for a track, album or paste a link here";
 $lang['available_platforms'] = "Broaden your search to more services";
-$lang['results_found'] = "We found #nb# #type# for your search &laquo; #iq# &raquo;"; 
+$lang['results_found'] = "We found #nb# #type# for your search &laquo; #iq# &raquo;";
 $lang['result_found_widget'] = "Is that the track you're looking for ?";
-$lang['merge_label']   = "Merge tracks even if the album is not the same"; 
-$lang['search_button'] = "Search"; 
+$lang['merge_label']   = "Merge tracks even if the album is not the same";
+$lang['search_button'] = "Search";
 $lang['search_alert']  = "#p# did not return any result.";
 $lang['invalid_query'] = "Your query seems invalid. Please try with a different phrase.";
 $lang['api_alert'] = "#p# API did not respond. It may be down, please try again in a few seconds.";
@@ -131,76 +131,76 @@ $lang['header_available'] = "Available on";
 $lang['back_to_top'] = "Back To Top";
 
 // Widget
-$lang['see_more']= "More results"; 
+$lang['see_more'] = "More results";
 
 // Pick of the day
-$lang['pick_discover']= "Discover it !";
-$lang['pick_of_the_day']= "Our pick for today";
-$lang['last_track_shared']= "Last share";
-$lang['most_viewed_this_week']= "Most viewed this week";
+$lang['pick_discover'] = "Discover it !";
+$lang['pick_of_the_day'] = "Our pick for today";
+$lang['last_track_shared'] = "Last share";
+$lang['most_viewed_this_week'] = "Most viewed this week";
 
 // Info
-$lang['info_welcome']= "All for Music, Music for all !"; 
-$lang['info_content']= "Let's say you use <span class=\"color\">Spotify</span> and your friends use other music platforms such as <span class=\"color\">Deezer</span>, <span class=\"color\">Soundcloud</span> or <span class=\"color\">Grooveshark</span> for instance. When it comes to sharing music, what a mess!<br/><span class=\"color\">tuneefy</span> bridges the gap — search for a track or paste the corresponding link from your platform, hit 'Share' for the tune you're looking for and <span class=\"color\">voila</span> !";
-$lang['more_info']   = "Tell Me More !"; 
+$lang['info_welcome'] = "All for Music, Music for all !";
+$lang['info_content'] = "Let's say you use <span class=\"color\">Spotify</span> and your friends use other music platforms such as <span class=\"color\">Deezer</span>, <span class=\"color\">Soundcloud</span> or <span class=\"color\">Grooveshark</span> for instance. When it comes to sharing music, what a mess!<br/><span class=\"color\">tuneefy</span> bridges the gap — search for a track or paste the corresponding link from your platform, hit 'Share' for the tune you're looking for and <span class=\"color\">voila</span> !";
+$lang['more_info']   = "Tell Me More !";
 
 
 // Footer
-$lang['about_us']= "About Us"; 
-$lang['contact']= "Contact";
-$lang['follow_twitter']= "Follow us on Twitter";
-$lang['copyright']= "tuneefy &copy; 2011 - 2015"; 
-$lang['endorsement']= "This product uses Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz, Beats Music) APIs but is not endorsed, certified or otherwise approved in any way by Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz, Beats Music). Each brand and name is or may be the registered trade mark of its respective owner.";
+$lang['about_us'] = "About Us";
+$lang['contact'] = "Contact";
+$lang['follow_twitter'] = "Follow us on Twitter";
+$lang['copyright'] = "tuneefy &copy; 2011 - 2015";
+$lang['endorsement'] = "This product uses Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz, Beats Music) APIs but is not endorsed, certified or otherwise approved in any way by Spotify (resp. Deezer, Grooveshark, Last.fm, Soundcloud, HypeMachine, Youtube, Mixcloud, Rdio, iTunes, Qobuz, Beats Music). Each brand and name is or may be the registered trade mark of its respective owner.";
 
 // Share
-$lang['track_intro']= "Let's turn up the volume and listen to some music."; 
-$lang['track_listen_to']   = "You can listen to this track on these sites : "; 
-$lang['track_share']   = "Share this track : "; 
-$lang['track_facebook']   = "Share this track on Facebook"; 
-$lang['track_embed']   = "Embed a widget of this track"; 
-$lang['track_twitter']   = "Share this track on Twitter";  
-$lang['track_mail']   = "Send the link to this track via mail"; 
-$lang['track_mail_subject']   = "Someone wants to share the track '%s' (by '%s') with you"; 
-$lang['track_mail_body']   = "Click here to discover this track : %s"; 
+$lang['track_intro'] = "Let's turn up the volume and listen to some music.";
+$lang['track_listen_to']   = "You can listen to this track on these sites : ";
+$lang['track_share']   = "Share this track : ";
+$lang['track_facebook']   = "Share this track on Facebook";
+$lang['track_embed']   = "Embed a widget of this track";
+$lang['track_twitter']   = "Share this track on Twitter";
+$lang['track_mail']   = "Send the link to this track via mail";
+$lang['track_mail_subject']   = "Someone wants to share the track '%s' (by '%s') with you";
+$lang['track_mail_body']   = "Click here to discover this track : %s";
 $lang['track_facebook_action']   = "Share music too !";
 $lang['track_twitter_status']   = "Listen to '%s' by '%s'  %s %%23tuneefy";
 $lang['track_seeOnTuneefy']   = "Go to the tuneefy page for this track";
-$lang['track_title']= "Listen to %s by %s";
-$lang['track_description']= "Get the links to listen to %s by %s on tuneefy, a new unified way to share music over various online music services !";
+$lang['track_title'] = "Listen to %s by %s";
+$lang['track_description'] = "Get the links to listen to %s by %s on tuneefy, a new unified way to share music over various online music services !";
 
 // Album
-$lang['album_intro']= "Let's turn up the volume and listen to this album."; 
-$lang['album_listen_to']   = "You can listen to this album on these sites : "; 
-$lang['album_share']   = "Share this album : "; 
-$lang['album_facebook']   = "Share this album on Facebook"; 
-$lang['album_embed']   = "Embed a widget of this album"; 
-$lang['album_twitter']   = "Share this album on Twitter";  
-$lang['album_mail']   = "Send the link to this album via mail"; 
-$lang['album_mail_subject']   = "Someone wants to share the album '%s' (by '%s') with you"; 
-$lang['album_mail_body']   = "Click here to discover this album : %s"; 
+$lang['album_intro'] = "Let's turn up the volume and listen to this album.";
+$lang['album_listen_to']   = "You can listen to this album on these sites : ";
+$lang['album_share']   = "Share this album : ";
+$lang['album_facebook']   = "Share this album on Facebook";
+$lang['album_embed']   = "Embed a widget of this album";
+$lang['album_twitter']   = "Share this album on Twitter";
+$lang['album_mail']   = "Send the link to this album via mail";
+$lang['album_mail_subject']   = "Someone wants to share the album '%s' (by '%s') with you";
+$lang['album_mail_body']   = "Click here to discover this album : %s";
 $lang['album_facebook_action']   = "Share music too !";
 $lang['album_twitter_status']   = "Listen to the album '%s' by '%s'  %s %%23tuneefy";
 $lang['album_seeOnTuneefy']   = "Go to the tuneefy page for this album";
-$lang['album_title']= "Listen to the album %s by %s";
-$lang['album_description']= "Get the links to listen to the album %s by %s on tuneefy, a new unified way to share music over various online music services !";
+$lang['album_title'] = "Listen to the album %s by %s";
+$lang['album_description'] = "Get the links to listen to the album %s by %s on tuneefy, a new unified way to share music over various online music services !";
 
 // Stats
-$lang['stats_title_long']= "What people are sharing lately";
-$lang['global_stats'] = "Music services you are using"; 
-$lang['most_viewed_tracks'] = "%d Most Viewed Tracks"; 
-$lang['most_viewed_albums'] = "%d Most Viewed Albums"; 
-$lang['most_viewed_artists']= "%d Most Viewed Artists"; 
-$lang['total_tracks_viewed'] = "Total Tracks Viewed :"; 
-$lang['total_links_clicked']= "Total Platforms Links Clicked :"; 
-$lang['views']= "<span class=\"color\">%d</span> views"; 
+$lang['stats_title_long'] = "What people are sharing lately";
+$lang['global_stats'] = "Music services you are using";
+$lang['most_viewed_tracks'] = "%d Most Viewed Tracks";
+$lang['most_viewed_albums'] = "%d Most Viewed Albums";
+$lang['most_viewed_artists'] = "%d Most Viewed Artists";
+$lang['total_tracks_viewed'] = "Total Tracks Viewed :";
+$lang['total_links_clicked'] = "Total Platforms Links Clicked :";
+$lang['views'] = "<span class=\"color\">%d</span> views";
 
 // About
-$lang['about_title_long']= "About tuneefy, the Universe, and Everything"; 
-$lang['the_team']= "About the Team"; 
-$lang['contact_us']= "Contact Us"; 
-$lang['contact_us_email']= "Your email"; 
-$lang['contact_us_message']= "Your message"; 
-$lang['contact_us_send']= "Send"; 
+$lang['about_title_long'] = "About tuneefy, the Universe, and Everything";
+$lang['the_team'] = "About the Team";
+$lang['contact_us'] = "Contact Us";
+$lang['contact_us_email'] = "Your email";
+$lang['contact_us_message'] = "Your message";
+$lang['contact_us_send'] = "Send";
 $lang['facts_info'] = "<h3>Sharing Music Online.<br />Made easy</h3>
       <p>Tuneefy unifies various online music streaming services to provide you with a fast and easy way to search for your favorite tunes and share them around you.
       </p>";
@@ -306,15 +306,15 @@ $lang['coming_soon_title']  = "tuneefy is coming ...";
 $lang['coming_soon_label']  = "Enter your e-mail address ...";
 $lang['coming_soon_thanks'] = "Thank you. We will send you an e-mail when Tuneefy is ready.";
 $lang['coming_soon_oops']   = "Oooops. There has been an error saving your mail. Have you checked it is correct ?";
-$lang['coming_soon_twitter']= "Follow us on Twitter";
-$lang['coming_soon_tagline']= $lang['tagline'] . " Coming soon - Follow <a href=\"http://www.twitter.com/tuneefy\"><span class=\"color\">@tuneefy</span></a> !<span class=\"tip\">tuneefy will soon help you share music links regardless of the online streaming platform or service you and your friends use.</span>"; 
+$lang['coming_soon_twitter'] = "Follow us on Twitter";
+$lang['coming_soon_tagline'] = $lang['tagline'] . " Coming soon - Follow <a href=\"http://www.twitter.com/tuneefy\"><span class=\"color\">@tuneefy</span></a> !<span class=\"tip\">tuneefy will soon help you share music links regardless of the online streaming platform or service you and your friends use.</span>";
 $lang['coming_soon_blog']   = "Yes we have a blog";
 $lang['coming_soon_info']   = "tuneefy will be online soon. Give us your e-mail address so we can notify you when it goes live !";
 
-$lang['coming_soon_disclaimer']= "Be assured. We are very careful about privacy - We will not disclose your email to any other parties, even if they offer us dounughts n' stuff, u know.";
+$lang['coming_soon_disclaimer'] = "Be assured. We are very careful about privacy - We will not disclose your email to any other parties, even if they offer us dounughts n' stuff, u know.";
 
 // Open Source project
-$lang['os_title_long'] = "« http://tuneefy.com/t/oxtcm »"; 
+$lang['os_title_long'] = "« http://tuneefy.com/t/oxtcm »";
 $lang['os_paragraph_1_important'] = "Tuneefy is an open-source project. It is (<em>and always be</em>) free, ad-free, and it does not require any login or any personal information. It just works (<em>most of the time ...</em>).";
 $lang['os_paragraph_1'] = "But tuneefy has a (small) cost nonetheless, that we are happy to pay each month. This is basically the server and a domain name, which amounts to around 6€ per month. While it's not much, it still is something.<br><br>
 
