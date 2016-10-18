@@ -4,28 +4,32 @@
 // Based on Lars Marius Garshol's Python XMLWriter class
 // See http://www.xml.com/pub/a/2003/04/09/py-xml.html
 
-class XMLHelper {
-
-    var $xml;
-    var $indent;
-    var $stack = array();
+class XMLHelper
+{
+    private $xml;
+    private $indent;
+    private $stack = array();
     
-    function __construct($indent = '  ') {
+    public function __construct($indent = '  ')
+    {
         $this->indent = $indent;
         $this->xml = '<?xml version="1.0" encoding="utf-8"?>'."\n";
     }
     
-    function escapeXML($str){
-      return utf8_decode(str_replace('&', '&amp;', $str));
+    public function escapeXML($str)
+    {
+        return utf8_decode(str_replace('&', '&amp;', $str));
     }
     
-    function _indent() {
+    public function _indent()
+    {
         for ($i = 0, $j = count($this->stack); $i < $j; $i++) {
             $this->xml .= $this->indent;
         }
     }
     
-    function push($element, $attributes = array()) {
+    public function push($element, $attributes = array())
+    {
         $this->_indent();
         $this->xml .= '<'.$element;
         foreach ($attributes as $key => $value) {
@@ -35,7 +39,8 @@ class XMLHelper {
         $this->stack[] = $element;
     }
     
-    function element($element, $content, $attributes = array()) {
+    public function element($element, $content, $attributes = array())
+    {
         $this->_indent();
         $this->xml .= '<'.$element;
         foreach ($attributes as $key => $value) {
@@ -44,7 +49,8 @@ class XMLHelper {
         $this->xml .= '>'.$this->escapeXML($content).'</'.$element.'>'."\n";
     }
     
-    function emptyelement($element, $attributes = array()) {
+    public function emptyelement($element, $attributes = array())
+    {
         $this->_indent();
         $this->xml .= '<'.$element;
         foreach ($attributes as $key => $value) {
@@ -53,14 +59,15 @@ class XMLHelper {
         $this->xml .= " />\n";
     }
     
-    function pop() {
+    public function pop()
+    {
         $element = array_pop($this->stack);
         $this->_indent();
         $this->xml .= "</$element>\n";
     }
     
-    function getXml() {
+    public function getXml()
+    {
         return $this->xml;
     }
-
 }
