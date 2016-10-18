@@ -1296,7 +1296,7 @@ class YOUTUBE extends Platform
         $this->query_endpoint = "search";
         $this->query_term = 'q';
         // We cannot go beyond 50 results (YOUTUBE LIMITATION)
-        $this->query_options = array('key' => $this->api_key, 'part' => 'snippet', 'order' => "relevance", 'maxResults' => min(50, _LIMIT), 
+        $this->query_options = array('key' => $this->api_key, 'part' => 'snippet', 'order' => "relevance", 'maxResults' => min(50, _LIMIT),
                                      'videoCategoryId' => "10", 'alt' => "json", "type" => 'video', "topicId" => "/m/04rlf");
                                      
         $this->query_album_endpoint = null;
@@ -1339,7 +1339,7 @@ class YOUTUBE extends Platform
         for ($i=0; $i<$length; $i++) {
             $currentItem = $result->items[$i];
             
-            if (preg_match("/([^-]*)-([^-^\(\[]*).*/", $currentItem->snippet->title,$meta)) {
+            if (preg_match("/([^-]*)-([^-^\(\[]*).*/", $currentItem->snippet->title, $meta)) {
                 $title = trim($meta[2]);
                 $artist = trim($meta[1]);
                 $id = $currentItem->id->videoId;
@@ -1545,7 +1545,7 @@ class ECHONEST extends Platform
         $this->query_options = array('api_key' => $this->api_key, 'format' => "json", 'start' => 0,  'sort' => "song_hotttnesss-desc", 'bucket' => "audio_summary", 'results' => _LIMIT);
         
         $this->query_album_endpoint = null;
-        $this->query_album_term = null; 
+        $this->query_album_term = null;
         $this->query_album_options = null;
         
         $this->lookup_endpoint = null;

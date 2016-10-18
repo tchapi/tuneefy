@@ -23,25 +23,25 @@ $dump_request = @$_REQUEST['dump_request'];
 $sig_method = $hmac_method;
 
 
-$test_consumer = new OAuthConsumer($key, $secret, NULL);
+$test_consumer = new OAuthConsumer($key, $secret, null);
 
 
 
 if ($action == "sign_and_execute_request") {
-  $parsed = parse_url($endpoint);
-  $params = array();
-  parse_str($parsed['query'], $params);
+    $parsed = parse_url($endpoint);
+    $params = array();
+    parse_str($parsed['query'], $params);
 
-  $req_req = OAuthRequest::from_consumer_and_token($test_consumer, NULL, "GET", $endpoint, $params);
-  $req_req->sign_request($sig_method, $test_consumer, NULL);
+    $req_req = OAuthRequest::from_consumer_and_token($test_consumer, null, "GET", $endpoint, $params);
+    $req_req->sign_request($sig_method, $test_consumer, null);
 
-  if ($dump_request) {
-    Header('Content-type: text/plain');
-    print "request url: " . $req_req->to_url(). "\n";
-    print_r($req_req);
-    exit;
-  }
-  Header("Location: $req_req");
+    if ($dump_request) {
+        header('Content-type: text/plain');
+        print "request url: " . $req_req->to_url(). "\n";
+        print_r($req_req);
+        exit;
+    }
+    header("Location: $req_req");
 }
 
 ?>
