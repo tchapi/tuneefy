@@ -1,37 +1,37 @@
 <?php
   
-  require('../config.php');
-  require(_PATH.'include/langs/i18nHelper.php');
+require('../config.php');
+require(_PATH.'include/langs/i18nHelper.php');
 
-  require(_PATH.'include/database/DBUtils.class.php');
-  require(_PATH.'include/database/DBStats.class.php');
-  require(_PATH.'include/database/DBConnection.class.php');
+require(_PATH.'include/database/DBUtils.class.php');
+require(_PATH.'include/database/DBStats.class.php');
+require(_PATH.'include/database/DBConnection.class.php');
 
-  $action = 'admin';
+$action = 'admin';
 
-  // In case we clicked 'pagination'
-  if (isset($_REQUEST['start'])) {
-  
+// In case we clicked 'pagination'
+if (isset($_REQUEST['start'])) {
     $startOffset = intval($_REQUEST['start']);
-  
-  } else $startOffset = 0;
-  
-  if (isset($_REQUEST['limit'])) {
-  
+} else {
+    $startOffset = 0;
+}
+
+if (isset($_REQUEST['limit'])) {
     $limit = intval($_REQUEST['limit']);
-  
-  } else $limit = 20;
-  
-  // We get the tracks
-  if (isset($_REQUEST['type']) && $_REQUEST['type'] == "tracks") {
+} else {
+    $limit = 20;
+}
+
+// We get the tracks
+if (isset($_REQUEST['type']) && $_REQUEST['type'] == "tracks") {
     $type = _TABLE_TRACK;
     $items = DBStats::getTracks($startOffset, $limit);
     $postType = 'tracks';
-  } else {
+} else {
     $type = _TABLE_ALBUM;
     $items = DBStats::getAlbums($startOffset, $limit);
     $postType = 'albums';
-  }
+}
   
 ?><!DOCTYPE html>
 <html>
@@ -108,25 +108,25 @@
             </thead>
             <tbody>
         <?php
-          while (list($id, $item) = each($items))
-          {
-            
+        while (list($id, $item) = each($items)) {
             echo "<tr><td width=\"35px\" class=\"image\"><img src=\"".$item['image']."\" width=\"30px\" /></td><td class=\"name\">";
             
-            if ($type == _TABLE_TRACK)
-              echo "<a href=\""._SITE_URL.'/t/'.DBUtils::toUid($id, _BASE_MULTIPLIER)."\" target=\"_blank\">".html_entity_decode($item['name'])."</a></td>";
-            else
-              echo "<a href=\""._SITE_URL.'/a/'.DBUtils::toUid($id, _BASE_MULTIPLIER)."\" target=\"_blank\">".html_entity_decode($item['album'])."</a></td>";
+            if ($type == _TABLE_TRACK) {
+                echo "<a href=\""._SITE_URL.'/t/'.DBUtils::toUid($id, _BASE_MULTIPLIER)."\" target=\"_blank\">".html_entity_decode($item['name'])."</a></td>";
+            } else {
+                echo "<a href=\""._SITE_URL.'/a/'.DBUtils::toUid($id, _BASE_MULTIPLIER)."\" target=\"_blank\">".html_entity_decode($item['album'])."</a></td>";
+            }
               
             echo "<td class=\"name\">".html_entity_decode($item['artist'])."</td>";
             
-            if ($type == _TABLE_TRACK)
-              echo "<td class=\"name\">".ellipsis(html_entity_decode($item['album']),40)."</td>";
-            else
-              echo "<td class=\"name\"></td>";
+            if ($type == _TABLE_TRACK) {
+                echo "<td class=\"name\">".ellipsis(html_entity_decode($item['album']), 40)."</td>";
+            } else {
+                echo "<td class=\"name\"></td>";
+            }
               
             echo "<td class=\"name addAPick\" rel=\"".$id."\">pick it</td></tr>";
-          }
+        }
         ?>
             </tbody>
           </table>

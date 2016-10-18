@@ -1,48 +1,46 @@
 <?php
-  
-  require('../config.php');
 
-  require(_PATH . 'include/database/DBUtils.class.php');
-  require(_PATH . 'include/database/DBStats.class.php');
-  require(_PATH . 'include/database/DBConnection.class.php');
+require('../config.php');
 
-  $action = 'admin';
+require(_PATH . 'include/database/DBUtils.class.php');
+require(_PATH . 'include/database/DBStats.class.php');
+require(_PATH . 'include/database/DBConnection.class.php');
 
-  // We get the first date and the last date
-  $startDate = DBStats::firstDateInDB();
-  $endDate = date("Y-m-d H:i:s"); // NOW()
-  
-  // In case we clicked 'refresh'
-  if (isset($_REQUEST['start']) && isset($_REQUEST['end'])) {
-  
+$action = 'admin';
+
+// We get the first date and the last date
+$startDate = DBStats::firstDateInDB();
+$endDate = date("Y-m-d H:i:s"); // NOW()
+
+// In case we clicked 'refresh'
+if (isset($_REQUEST['start']) && isset($_REQUEST['end'])) {
     $startDate = strftime("%Y-%m-%d %H:%M:%S", strtotime($_REQUEST['start']));
     $endDate = strftime("%Y-%m-%d %H:%M:%S", strtotime($_REQUEST['end']));
-  
-  }
-  
-  // We get the catalogue span
-  $platformsCatalogueSpan = DBStats::platformsCatalogueSpan($startDate, $endDate);
-  
-  // Number of tracks and albums
-  $nbOfAlbums = DBStats::getNbOfAlbums();
-  $nbOfTracks = DBStats::getNbOfTracks();
-  
-  // Most Viewed TRACKS AND ARTISTS
-  $limite = 20;
-  $mostViewedArtists = DBStats::mostViewedArtists($startDate, $endDate, $limite); // STANDARD STAT FUNC
-  $mostViewedTracks = DBStats::mostViewedTracks($startDate, $endDate, $limite); // STANDARD STAT FUNC
+}
 
-  // Platforms HITS
-  $platformsHits = DBStats::platformsHits($startDate, $endDate, 'all'); // STANDARD STAT FUNC
-  $platformsHitsViaSearch = DBStats::platformsHits($startDate, $endDate, 'search'); // STANDARD STAT FUNC
-  $platformsHitsViaShare = DBStats::platformsHits($startDate, $endDate, 'share'); // STANDARD STAT FUNC
-  $totalPlatformsHits = DBStats::totalPlatformsHits($startDate, $endDate, 'all'); // STANDARD STAT FUNC
-  $totalPlatformsHitsViaSearch = DBStats::totalPlatformsHits($startDate, $endDate, 'search'); // STANDARD STAT FUNC
-  $totalPlatformsHitsViaShare = DBStats::totalPlatformsHits($startDate, $endDate, 'share'); // STANDARD STAT FUNC
-  
-  // Search Trends
-  $lastSearches = DBStats::lastSearches($startDate, $endDate, $limite);
-  $popularSearches = DBStats::popularSearches($startDate, $endDate, $limite);
+// We get the catalogue span
+$platformsCatalogueSpan = DBStats::platformsCatalogueSpan($startDate, $endDate);
+
+// Number of tracks and albums
+$nbOfAlbums = DBStats::getNbOfAlbums();
+$nbOfTracks = DBStats::getNbOfTracks();
+
+// Most Viewed TRACKS AND ARTISTS
+$limite = 20;
+$mostViewedArtists = DBStats::mostViewedArtists($startDate, $endDate, $limite); // STANDARD STAT FUNC
+$mostViewedTracks = DBStats::mostViewedTracks($startDate, $endDate, $limite); // STANDARD STAT FUNC
+
+// Platforms HITS
+$platformsHits = DBStats::platformsHits($startDate, $endDate, 'all'); // STANDARD STAT FUNC
+$platformsHitsViaSearch = DBStats::platformsHits($startDate, $endDate, 'search'); // STANDARD STAT FUNC
+$platformsHitsViaShare = DBStats::platformsHits($startDate, $endDate, 'share'); // STANDARD STAT FUNC
+$totalPlatformsHits = DBStats::totalPlatformsHits($startDate, $endDate, 'all'); // STANDARD STAT FUNC
+$totalPlatformsHitsViaSearch = DBStats::totalPlatformsHits($startDate, $endDate, 'search'); // STANDARD STAT FUNC
+$totalPlatformsHitsViaShare = DBStats::totalPlatformsHits($startDate, $endDate, 'share'); // STANDARD STAT FUNC
+
+// Search Trends
+$lastSearches = DBStats::lastSearches($startDate, $endDate, $limite);
+$popularSearches = DBStats::popularSearches($startDate, $endDate, $limite);
   
 ?><!DOCTYPE html>
 <html>
@@ -146,29 +144,31 @@
             </thead>
             <tbody>
         <?php
-          
-          $platforms = API::getPlatforms();
         
-          while (list($pId, $pObject) = each($platforms))
-          {
+        $platforms = API::getPlatforms();
+      
+        while (list($pId, $pObject) = each($platforms)) {
             $id = $pObject->getId();
             $phvsh = (isset($platformsHitsViaShare[$id]))?intval($platformsHitsViaShare[$id]):0;
             $phvse = (isset($platformsHitsViaSearch[$id]))?intval($platformsHitsViaSearch[$id]):0;
-            if (!isset($platformsHits[$id])) $platformsHits[$id] = 0;
+            if (!isset($platformsHits[$id])) {
+                $platformsHits[$id] = 0;
+            }
             
             echo "<tr><td width=\"35px\" class=\"image\"><div class=\"adminIcon\" style=\"background: url("._SITE_URL."/img/platforms/platform_".$id.".png)\"></div></td><td class=\"name\">".$pObject->getName()."</td>";
-            echo "<td><span class=\"color number\">".$phvsh."</span> (" . sprintf("%01.1f",$phvsh/$totalPlatformsHitsViaShare*100) ."%)</td>";
-            echo "<td><span class=\"color number\">".$phvse."</span> (" . sprintf("%01.1f",$phvse/$totalPlatformsHitsViaSearch*100) ."%)</td>";
-            echo "<td><span class=\"color number\">".intval($platformsHits[$id])."</span> (" . sprintf("%01.1f",$platformsHits[$id]/$totalPlatformsHits*100) ."%)</td>" ;
-            echo "<td><span class=\"color\">".$platformsCatalogueSpan[$id]."</span> ".sprintf("(%01.1f%%)",(($platformsCatalogueSpan['total']!=0)?$platformsCatalogueSpan[$id]/$platformsCatalogueSpan['total']*100:0))."</td></tr>";
-          }
-          reset($platforms);
-          
-          echo "<tr class=\"sumup\"><td colspan=\"2\">Total</td>";
-          echo "<td><span class=\"color number\">".$totalPlatformsHitsViaShare."</span> (" . sprintf("%01.1f",$totalPlatformsHitsViaShare/$totalPlatformsHits*100) ."%)</td>";
-          echo "<td><span class=\"color number\">".$totalPlatformsHitsViaSearch."</span> (" . sprintf("%01.1f",$totalPlatformsHitsViaSearch/$totalPlatformsHits*100) ."%)</td>";
-          echo "<td><span class=\"color number\">".$totalPlatformsHits."</span></td>";
-          echo "<td><span class=\"color\">".$platformsCatalogueSpan['total']."</span></td>";
+            echo "<td><span class=\"color number\">".$phvsh."</span> (" . sprintf("%01.1f", $phvsh/$totalPlatformsHitsViaShare*100) ."%)</td>";
+            echo "<td><span class=\"color number\">".$phvse."</span> (" . sprintf("%01.1f", $phvse/$totalPlatformsHitsViaSearch*100) ."%)</td>";
+            echo "<td><span class=\"color number\">".intval($platformsHits[$id])."</span> (" . sprintf("%01.1f", $platformsHits[$id]/$totalPlatformsHits*100) ."%)</td>" ;
+            echo "<td><span class=\"color\">".$platformsCatalogueSpan[$id]."</span> ".sprintf("(%01.1f%%)", (($platformsCatalogueSpan['total']!=0)?$platformsCatalogueSpan[$id]/$platformsCatalogueSpan['total']*100:0))."</td></tr>";
+        }
+
+        reset($platforms);
+        
+        echo "<tr class=\"sumup\"><td colspan=\"2\">Total</td>";
+        echo "<td><span class=\"color number\">".$totalPlatformsHitsViaShare."</span> (" . sprintf("%01.1f", $totalPlatformsHitsViaShare/$totalPlatformsHits*100) ."%)</td>";
+        echo "<td><span class=\"color number\">".$totalPlatformsHitsViaSearch."</span> (" . sprintf("%01.1f", $totalPlatformsHitsViaSearch/$totalPlatformsHits*100) ."%)</td>";
+        echo "<td><span class=\"color number\">".$totalPlatformsHits."</span></td>";
+        echo "<td><span class=\"color\">".$platformsCatalogueSpan['total']."</span></td>";
           
         ?>
             </tbody>
@@ -182,13 +182,10 @@
             <h2 class="txtS">Tracks Statistics >> Most Viewed Artists</h2>
             <div class="boxed">
             <ol class="classement">
-            <?php 
-            
-              while (list($key, $val) = each($mostViewedArtists))
-              {
+            <?php
+            while (list($key, $val) = each($mostViewedArtists)) {
                 echo "<li><span class=\"classement_in\">" . html_entity_decode($key) . " : <span class=\"color\">" . intval($val) . "</span></span></li>" ;
-              }
-            
+            }
             ?>
             </ol>
           </div>
@@ -196,14 +193,11 @@
           <h2 class="txtS">Tracks Statistics >> Most Viewed Tracks</h2>
             <div class="boxed">
             <ol class="classement">
-            <?php 
-            
-              while (list($key, $val) = each($mostViewedTracks))
-              {
+            <?php
+            while (list($key, $val) = each($mostViewedTracks)) {
                 list($id, $artist, $title) = explode("|", $key);
                 echo "<li><span class=\"classement_in\">" . html_entity_decode($artist) . " - <span class=\"link\"><a href=\"" . _SITE_URL."/t/".DBUtils::toUid($id, _BASE_MULTIPLIER). "\">" . html_entity_decode($title) . "</a></span> : <span class=\"color\">" . intval($val) . "</span></span></li>" ;
-              }
-            
+            }
             ?>
             </ol>
           </div>
@@ -217,27 +211,22 @@
             <h2 class="txtS">Tracks Statistics >> Latest Searches</h2>
             <div class="boxed">
             <ol class="classement">
-          <?php 
-          
-            for($i=0; $i<count($lastSearches); $i++){
-              echo "<li><span class=\"classement_in link\"><a href=\"" . _SITE_URL."/?q=".urlencode(html_entity_decode($lastSearches[$i])). "\">" . html_entity_decode($lastSearches[$i]) . "</a></span></li>\n";
+            <?php
+            for ($i=0; $i<count($lastSearches); $i++) {
+                echo "<li><span class=\"classement_in link\"><a href=\"" . _SITE_URL."/?q=".urlencode(html_entity_decode($lastSearches[$i])). "\">" . html_entity_decode($lastSearches[$i]) . "</a></span></li>\n";
             }
-          
-          ?>
+            ?>
             </ol>
             </div>
             <div class="clear" style="height: 10px"></div>
             <h2 class="txtS">Tracks Statistics >> Most Popular Search terms</h2>
             <div class="boxed">
             <ol class="classement">
-          <?php 
-              
-            while (list($key, $val) = each($popularSearches))
-            {
-              echo "<li><span class=\"classement_in\"><span class=\"link\"><a href=\"" . _SITE_URL."/?q=".urlencode(html_entity_decode($key)). "\">" . html_entity_decode($key) . "</a></span> : <span class=\"color\">" . intval($popularSearches[$key]) . "</span></span></li>" ;
+            <?php
+            while (list($key, $val) = each($popularSearches)) {
+                echo "<li><span class=\"classement_in\"><span class=\"link\"><a href=\"" . _SITE_URL."/?q=".urlencode(html_entity_decode($key)). "\">" . html_entity_decode($key) . "</a></span> : <span class=\"color\">" . intval($popularSearches[$key]) . "</span></span></li>" ;
             }
-          
-          ?>
+            ?>
             </ol>
             </div>
           </div>
