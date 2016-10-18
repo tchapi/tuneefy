@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-  require('../config.php');
+require('../config.php');
   
 // Ordre des remplacements
 $str     = file_get_contents("bookmarklet.js");
@@ -9,7 +9,7 @@ $replace = '';
 
 // Traitement.
 $minified = str_replace($order, $replace, $str);
-$minified = str_replace("%s%",_SITE_URL, $minified);
+$minified = str_replace("%s%", _SITE_URL, $minified);
 
 ?><html>
     <head>
