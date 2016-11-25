@@ -8,7 +8,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <?php // jQuery // ?>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
 <?php // Style // ?>
   <link rel="stylesheet" type="text/css" media="all" href="<?php echo _SITE_URL; ?>/css/reset.css" />

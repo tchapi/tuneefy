@@ -18,7 +18,7 @@ div#tuneefy_overlay {
   display: block;
   top: 10px;
   right: 11px;
-  background: url("http://tuneefy.com/img/close.png") no-repeat scroll center top transparent;
+  background: url("//tuneefy.com/img/close.png") no-repeat scroll center top transparent;
   height: 32px;
   width: 32px;
   cursor: pointer;
