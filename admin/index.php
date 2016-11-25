@@ -52,7 +52,7 @@ $popularSearches = DBStats::popularSearches($startDate, $endDate, $limite);
   <link rel="stylesheet" type="text/css" media="all" href="admin.css" />
   
 <?php // jQuery // ?>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   <script type="text/javascript" src="jquery.simplemodal.1.4.4.min.js"></script>
   <script type="text/javascript">
   

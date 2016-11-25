@@ -2,7 +2,7 @@
 
 // We get the request
 if (!isset($_SERVER['SERVER_NAME']) || strpos(_API_URL, $_SERVER['SERVER_NAME']) === false) {
-    header("Location: http://tuneefy.com/404");
+    header("Location: https://tuneefy.com/404");
     exit;
 }
 

@@ -6,19 +6,19 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 <url>
-  <loc>http://www.tuneefy.com/</loc>
+  <loc>https://www.tuneefy.com/</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.tuneefy.com/home</loc>
+  <loc>https://www.tuneefy.com/home</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.tuneefy.com/trends</loc>
+  <loc>https://www.tuneefy.com/trends</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.tuneefy.com/about</loc>
+  <loc>https://www.tuneefy.com/about</loc>
   <changefreq>weekly</changefreq>
 </url>
 </urlset>
