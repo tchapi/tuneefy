@@ -172,7 +172,7 @@
   </script>
   
 <?php // jQuery // ?>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
 <?php // FAVICON ?>
   <link rel="icon" type="image/png" href="<?php echo _SITE_URL; ?>/img/favicon.png" />
