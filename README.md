@@ -1,4 +1,4 @@
-## Hello stranger ! A new version of tuneefy is in the making at [github.com/tchapi/tuneefy-hacklang](https://github.com/tchapi/tuneefy-hacklang) if you want to contribute ...
+## Hello stranger ! A new version of tuneefy is (was) in the making at [github.com/tchapi/tuneefy-hacklang](https://github.com/tchapi/tuneefy-hacklang) if you want to contribute ...
 
 #### If you wanna dive into the actual source code, please read [this wiki page](https://github.com/tchapi/tuneefy/wiki/Before-you-criticize-...) first ...
 - - - -
@@ -195,6 +195,8 @@ In a nutshell, you are free to modify and distribute the code, as long as you do
 ## Sites that use tuneefy ##
 
   * http://www.extremr.com/
+  * http://livingdancing.tumblr.com/
+  * http://next.liberation.fr
   * http://lebidule.org/
   * LaRockArmy (https://www.youtube.com/channel/UCgxUpKe_69MqeCgLHGm5V2Q)
   * http://elx-art.com/wp-content/uploads/2014/05/Spotify-Innovation.pdf
