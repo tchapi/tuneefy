@@ -296,19 +296,21 @@ class SPOTIFY extends Platform
 
         for ($i=0; $i<$length; $i++) {
             $currentItem = $results[$i];
-           
+
             if ($itemType == 'track') { // Track
+                $images = $currentItem->album->images;
                 $data[] = array('title' => $currentItem->name,
                                 'artist' => $currentItem->artists[0]->name,
                                 'album' => $currentItem->album->name,
-                                'picture' => $currentItem->album->images[1]->url,
+                                'picture' => (count($images) > 1? $images[1]->url:null),
                                 'link' => web($currentItem->external_urls->spotify),
                                 'score' => round($currentItem->popularity/$maxPopularity, 2) );
             } elseif ($itemType == 'album') { // Album
+                $images = $currentItem->images;
                 $data[] = array('title' => null,
                                 'artist' => $artists[$currentItem->id], // Motherfucking Spotify !!
                                 'album' => $currentItem->name,
-                                'picture' => $currentItem->images[1]->url,
+                                'picture' => (count($images) > 1? $images[1]->url:null),
                                 'link' => web($currentItem->external_urls->spotify),
                                 'score' => round(1/($i/10+1), 2));
             }
