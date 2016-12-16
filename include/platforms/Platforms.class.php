@@ -2117,18 +2117,20 @@ class XBOX extends Platform
 
         $data = null;
         
-        if ($itemType == 'track') {
+        if ($itemType == 'track' && property_exists($result, 'Tracks')) {
             if (count($result->Tracks->Items) != 0) {
                 $object = $result->Tracks->Items;
             } else {
                 return null;
             }
-        } elseif ($itemType == 'album') {
+        } elseif ($itemType == 'album' && property_exists($result, 'Albums')) {
             if (count($result->Albums->Items) != 0) {
                 $object = $result->Albums->Items;
             } else {
                 return null;
             }
+        } else {
+            return null;
         }
 
         $length = min(count($object), $limit);
