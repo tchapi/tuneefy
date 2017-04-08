@@ -154,10 +154,10 @@ abstract class Platform
         return array( 'url' => $api_url_full, 'data' => $data, 'method' => ($this->api_method) );
     }
 
-    protected function callPlatform($type, $query)
+    protected function callPlatform($type, $query, $headers = null)
     {
         $call = $this->constructCall($type, $query);
-        return $this->makeCall($call, $this->needsOAuth, $this->needsOAuth2);
+        return $this->makeCall($call, $this->needsOAuth, $this->needsOAuth2, $headers);
     }
     
     protected static function unchunkHttp11($data)
@@ -175,7 +175,7 @@ abstract class Platform
         return $outData;
     }
 
-    protected function makeCall($call, $needsOAuth, $needsOAuth2)
+    protected function makeCall($call, $needsOAuth, $needsOAuth2, $headers)
     {
         // In case we need OAuth (simple signed request)
         if ($needsOAuth) {
@@ -222,7 +222,8 @@ abstract class Platform
                     'method'  => 'GET',
                     'timeout' => 5,
                     'header'  => "Content-Type: charset=UTF-8\r\n".
-                                 "Connection: close"
+                                 "Connection: close\r\n".
+                                 $headers
                 ),
                 "ssl" => array(
                   "verify_peer" => false,

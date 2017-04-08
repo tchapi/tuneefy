@@ -2082,9 +2082,10 @@ class XBOX extends Platform
     protected function auth()
     {
         // From the XBOX docs : http://msdn.microsoft.com/en-us/library/dn546688.aspx
+        // and then from https://docs.microsoft.com/en-us/groove/getting-started
 
-        $serviceauth = "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13";
-        $scope = "http://music.xboxlive.com";
+        $serviceauth = "https://login.live.com/accesstoken.srf";
+        $scope = "app.music.xboxlive.com";
         $grantType = "client_credentials";
 
         $requestData = array("client_id" => $this->api_key, "client_secret" => $this->api_secret, "scope" => $scope, "grant_type" => $grantType);
@@ -2109,7 +2110,7 @@ class XBOX extends Platform
         $this->query_options["accessToken"] = sprintf($this->query_options["accessToken"], $token);
         $this->query_album_options["accessToken"] = sprintf($this->query_album_options["accessToken"], $token);
 
-        $result = $this->callPlatform($itemType, $query);
+        $result = $this->callPlatform($itemType, $query, 'Authorization: Bearer '.$token.'\r\n');
 
         if ($result == null) {
             return null;
@@ -2175,7 +2176,7 @@ class XBOX extends Platform
 
         if (preg_match($REGEX_XBOX_TRACK, $permalink, $match)) {
             $this->lookup_endpoint = sprintf($this->lookup_endpoint, $match[1]);
-            $result = $this->callPlatform("lookup", $match[1]);
+            $result = $this->callPlatform("lookup", $match[1], 'Authorization: Bearer '.$token.'\r\n');
 
             if ($result !== null && isset($result->Tracks) && isset($result->Tracks->Items) && count($result->Tracks->Items) > 0) {
                 $object = $result->Tracks->Items[0];
@@ -2195,7 +2196,7 @@ class XBOX extends Platform
             $query = $track['artist']."+".$track['name'];
         } elseif (preg_match($REGEX_XBOX_ALBUM, $permalink, $match)) {
             $this->lookup_endpoint = sprintf($this->lookup_endpoint, $match[1]);
-            $result = $this->callPlatform("lookup", $match[1]);
+            $result = $this->callPlatform("lookup", $match[1], 'Authorization: Bearer '.$token.'\r\n');
 
             if ($result !== null && isset($result->Albums) && isset($result->Albums->Items) && count($result->Albums->Items) > 0) {
                 $object = $result->Albums->Items[0];
