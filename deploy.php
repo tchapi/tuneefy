@@ -46,6 +46,7 @@ set('clear_paths', [
   './package.json',
   './node_modules',
   './deploy',
+  './deploy.php',
 ]);
 
 // Deploy main task
