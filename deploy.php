@@ -91,7 +91,7 @@ task('php-fpm:restart', function () {
 
 desc('Minify production JS');
 task('deploy:minify_js', function() {
-  run("cd {{release_path}} && {{bin/npm}} run minify");
+  run("cd {{release_path}} && {{bin/npm}} install && {{bin/npm}} run minify");
 });
 
 // Hooks
