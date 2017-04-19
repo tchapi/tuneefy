@@ -6,5 +6,10 @@ include/api/test.php
 /.htaccess
 _SOURCES_
 _FEEDBACK_
+_STICKERS_
 insertNewAPIClient*
 TODO*
+node_modules
+
+deploy/*
+!deploy/nginx.conf

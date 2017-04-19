@@ -57,17 +57,6 @@ $popularSearches = DBStats::popularSearches($startDate, $endDate, $limite);
   <script type="text/javascript">
   
   $(document).ready(function(){
-  
-    $(".errorButton").click(function(){
-      $.modal("<div class=\"modal\"><img src=\"<?php echo _SITE_URL. '/img/ajax-loader.gif'?>\" /><br /> Running ....</div>", {overlayClose: true});
-      $.get("minify.php?mode=errors",function(data){
-        $.modal.close();
-        if (data)
-          $.modal(data);
-        else
-          $.modal("<div class=\"modal\">No errors</div>", {overlayClose: true});
-      });
-    });
     
     $(".watchdogButton").click(function(){
       $.modal("<div class=\"modal\"><img src=\"<?php echo _SITE_URL. '/img/ajax-loader.gif'?>\" /><br/> Running ...</div>", {overlayClose: true});
@@ -102,7 +91,6 @@ $popularSearches = DBStats::popularSearches($startDate, $endDate, $limite);
             <h2 class="txtS">Actions</h2>
             <div class="boxed">
             <p class="txtS">Check tuneefy sanity : <a class="btn watchdogButton">Run Watchdog</a></p>
-            <p class="txtS">Get minified JS : <a class="btn errorButton">Errors</a><a class="btn" href="minify.php?adv=0" target="_blank">Output</a><a class="btn" href="minify.php?adv=0&file=1">File (.js)</a></p>
             <p class="txtS">List the <span class="color"><?php echo $nbOfTracks; ?></span> tracks in the database : <a class="btn" href="list.php?type=tracks">list tracks</a></p>
             <p class="txtS">List the <span class="color"><?php echo $nbOfAlbums; ?></span> albums in the database : <a class="btn" href="list.php?type=albums">list albums</a></p>
             </div>

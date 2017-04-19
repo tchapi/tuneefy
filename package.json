@@ -1,0 +1,22 @@
+{
+  "name": "tuneefy.com",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "minify": "uglifyjs --compress --mangle --output js/min/tuneefy.min.js -- js/dev/Model/* js/dev/UI/* js/dev/ControlFreak.class.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tchapi/tuneefy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tchapi/tuneefy/issues"
+  },
+  "homepage": "https://github.com/tchapi/tuneefy#readme",
+  "devDependencies": {
+    "uglify-js": "^2.8.22"
+  }
+}
