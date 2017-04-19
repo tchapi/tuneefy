@@ -3,7 +3,6 @@
 namespace Deployer;
 
 require_once 'recipe/common.php';
-require_once 'recipe/npm.php';
 
 function cronjob_exists($command) {
     $cronjob_exists = false;
@@ -25,6 +24,10 @@ function append_cronjob($command) {
 
 // Configuration
 serverList('deploy/servers.yml');
+
+set('bin/npm', function () {
+    return (string)run('which npm');
+});
 
 set('env', 'prod');
 set('ssh_type', 'native');
