@@ -141,19 +141,10 @@ define('_MOG', 9);
 API::addPlatform(new MOG(null, null, false, false, false, false, _MOG), 99);
 /* ********** */
 
+/* DEPRECATED */
 define('_BEATS', 15);
-API::addPlatform(
-    new BEATSMUSIC(
-        $options['BEATS']['key'],
-        $options['BEATS']['secret'],
-        $options['BEATS']['default'],
-        $options['BEATS']['search'],
-        $options['BEATS']['album_search'],
-        $options['BEATS']['lookup'],
-        _BEATS
-    ),
-    $options['BEATS']['order']
-);
+API::addPlatform(new BEATSMUSIC(null, null, false, false, false, false,_BEATS),99);
+/* ********** */
 
 /* DEPRECATED */
 define('_RDIO', 10);

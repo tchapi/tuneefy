@@ -231,11 +231,11 @@ class SPOTIFY extends Platform
         
         $this->query_endpoint = "search";
         $this->query_term = 'q';
-        $this->query_options = array("type" => "track");
+        $this->query_options = array("type" => "track", "accessToken" => "Bearer %s");
         
         $this->query_album_endpoint = "search";
         $this->query_album_term = $this->query_term;
-        $this->query_album_options = array( "type" => "album");
+        $this->query_album_options = array( "type" => "album", "accessToken" => "Bearer %s");
         
         $this->lookup_endpoint = "%ss/%s";
         $this->lookup_term = null;
@@ -252,10 +252,36 @@ class SPOTIFY extends Platform
     {
         return (strpos($permalink, "spotify:") !== false || strpos($permalink, "open.spotify.") !== false || strpos($permalink, "play.spotify.") !== false);
     }
+
+    protected function auth()
+    {
+        $serviceauth = 'https://accounts.spotify.com/api/token';
+        $grantType = "client_credentials";
+
+        $requestData = array("client_id" => $this->api_key, "client_secret" => $this->api_secret, "grant_type" => $grantType);
+        $options = array(
+            'http' => array(
+                'method'  => 'POST',
+                'content' => http_build_query($requestData),
+            ),
+        );
+        $context  = stream_context_create($options);
+        $response = json_decode(@file_get_contents($serviceauth, false, $context), true);
+        $token = $response['access_token'];
+
+        return $token;
+    }
     
     public function getNormalizedResults($itemType, $query, $limit)
     {
-        $result = $this->callPlatform($itemType, $query);
+
+        // Update token
+        $token = $this->auth();
+        $this->query_options["accessToken"] = sprintf($this->query_options["accessToken"], $token);
+        $this->query_album_options["accessToken"] = sprintf($this->query_album_options["accessToken"], $token);
+
+        $result = $this->callPlatform($itemType, $query, 'Authorization: Bearer '.$token.'\r\n');
+
         if ($result == null) {
             return null;
         }
@@ -287,7 +313,7 @@ class SPOTIFY extends Platform
             // We need to get the artist for each album, FUCK YOU Spotify, you API is SHIT
             $this->lookup_endpoint = "albums";
             $this->lookup_term = "ids";
-            $result_artists = $this->callPlatform("lookup", implode($artists, ","));
+            $result_artists = $this->callPlatform("lookup", implode($artists, ","), 'Authorization: Bearer '.$token.'\r\n');
 
             for ($k=0; $k < count($result_artists->albums); $k++) {
                 $artists[$result_artists->albums[$k]->id] = $result_artists->albums[$k]->artists[0]->name;
@@ -330,15 +356,17 @@ class SPOTIFY extends Platform
         $track = null;
         $valid = false;
         
+
         if (preg_match($REGEX_SPOTIFY_ALL, $permalink, $match)) {
             // We have a nicely formatted share url
           
+            $token = $this->auth();
             $requestType = trim($match[1]);
 
             // We need to change the endpoint according to the type
             $this->lookup_endpoint = $requestType . 's/%s';
 
-            $result = $this->callPlatform("lookup", $match[3]);
+            $result = $this->callPlatform("lookup", $match[3], 'Authorization: Bearer '.$token.'\r\n');
             if ($result == null) {
                 return null;
             }
