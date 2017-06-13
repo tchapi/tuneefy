@@ -226,6 +226,7 @@ class SPOTIFY extends Platform
         $this->id = $id;
 
         $this->api_key = $key;
+        $this->api_secret = $secret;
         $this->api_endpoint = "http://api.spotify.com/v1/";
         $this->api_method = "GET";
         
@@ -255,6 +256,7 @@ class SPOTIFY extends Platform
 
     protected function auth()
     {
+
         $serviceauth = 'https://accounts.spotify.com/api/token';
         $grantType = "client_credentials";
 
