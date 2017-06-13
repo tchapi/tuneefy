@@ -143,7 +143,7 @@ API::addPlatform(new MOG(null, null, false, false, false, false, _MOG), 99);
 
 /* DEPRECATED */
 define('_BEATS', 15);
-API::addPlatform(new BEATSMUSIC(null, null, false, false, false, false,_BEATS),99);
+API::addPlatform(new BEATSMUSIC(null, null, false, false, false, false,_BEATS), 99);
 /* ********** */
 
 /* DEPRECATED */
