@@ -95,18 +95,7 @@ API::addPlatform(
 );
 
 define('_HYPEMACHINE', 6);
-API::addPlatform(
-    new HYPEMACHINE(
-        $options['HYPEMACHINE']['key'],
-        $options['HYPEMACHINE']['secret'],
-        $options['HYPEMACHINE']['default'],
-        $options['HYPEMACHINE']['search'],
-        false,
-        $options['HYPEMACHINE']['lookup'],
-        _HYPEMACHINE
-    ),
-    $options['HYPEMACHINE']['order']
-);
+API::addPlatform(new HYPEMACHINE(null, null, false, false, false, false, _HYPEMACHINE), 92);
 
 define('_YOUTUBE', 7);
 API::addPlatform(

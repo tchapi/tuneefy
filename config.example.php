@@ -50,15 +50,15 @@ $database = "YYYYYYYYYYYY";
 $options['DEEZER']      = array("key" => null, "secret" => null, "default" => true, "search" => true, "album_search" => false, "lookup" => true, "order" => 1);
 $options['SPOTIFY']     = array("key" => null, "secret" => null, "default" => true, "search" => true, "album_search" => false, "lookup" => true, "order" => 2);
 $options['LASTFM']      = array("key" => null, "secret" => null, "default" => true, "search" => true, "album_search" => false, "lookup" => true, "order" => 4);
-$options['GROOVESHARK'] = array("key" => null, "secret" => null, "default" => true, "search" => true, "album_search" => false, "lookup" => true, "order" => 5);
+//$options['GROOVESHARK'] = array("key" => null, "secret" => null, "default" => true, "search" => true, "album_search" => false, "lookup" => true, "order" => 5);
 // DEPRECATED $options['JIWA'] = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false);
 $options['SOUNDCLOUD']  = array("key" => null, "secret" => null, "default" => false, "search" => true, "album_search" => false, "lookup" => true, "order" => 8);
 
-$options['HYPEMACHINE'] = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => true, "order" => 9);
+//$options['HYPEMACHINE'] = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => true, "order" => 9);
 $options['YOUTUBE']     = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 6);
 $options['MIXCLOUD']    = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 10);
 // DEPRECATED $options['MOG']         = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 11);
-$options['RDIO']        = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 7);
+//$options['RDIO']        = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 7);
 $options['ITUNES']      = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 12);
 $options['ECHONEST']    = array("key" => null, "secret" => null, "default" => false, "search" => false, "album_search" => false, "lookup" => false, "order" => 13);
 $options['QOBUZ']       = array("key" => null, "secret" => null, "default" => true, "search" => false, "album_search" => false, "lookup" => false, "order" => 3);
