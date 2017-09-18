@@ -20,9 +20,9 @@ $lang['about_tip'] = "What is it, yo ?";
 
 // API
 $lang['api_title'] ="API";
-$lang['api_intro'] ="Introducing the tuneefy API (beta)";
+$lang['api_intro'] ="The Legacy Tuneefy API";
 $lang['api_overview_title'] = "Overview";
-$lang['api_overview'] = "<p>The tuneefy API is a RESTful API that allows you to lookup, search, and aggregate tracks via tuneefy.</p><p>Two response formats are available : </p><ul><li><span class=\"color\">JSON</span></li><li><span class=\"color\">XML</span></li></ul><p>The server will first check if an '<span class=\"color\">HTTP_ACCEPT</span>' header is present, containing one of the two supported MIME-types. The response type can be overriden with the 'alt' parameter available for each method (see below). By default, the API will return XML.</p><p>All the responses are <span class=\"color\">UTF-8</span> encoded, and so must be all the calls.</p>";
+$lang['api_overview'] = "<p>The legacy tuneefy API is a RESTful API that allows you to lookup, search, and aggregate tracks via tuneefy.</p><p>Two response formats are available : </p><ul><li><span class=\"color\">JSON</span></li><li><span class=\"color\">XML</span></li></ul><p>The server will first check if an '<span class=\"color\">HTTP_ACCEPT</span>' header is present, containing one of the two supported MIME-types. The response type can be overriden with the 'alt' parameter available for each method (see below). By default, the API will return XML.</p><p>All the responses are <span class=\"color\">UTF-8</span> encoded, and so must be all the calls.</p>";
 $lang['api_endpoint_title'] = "API Endpoint";
 $lang['api_auth_title'] = "Authentication";
 $lang['api_auth'] = "<p>Every request to the API must be signed with <span class=\"color\"><a href='http://oauth.net/documentation/getting-started/' target='_blank'>2-legged OAuth</span></a> authentication.</p><p>OAuth allows a server to accept requests only from a client that knows the consumer secret. This is done by a requiring a signature that's a hash of:</p>
@@ -36,7 +36,7 @@ $lang['api_auth'] = "<p>Every request to the API must be signed with <span class
 
 <p><span class=\"color\"><a href=\"http://tools.ietf.org/html/rfc5849#section-3.4\">Section 3.4</a></span> of the OAuth specification describes in detail how to sign requests.</p>
 
-</p><p>To request a consumer key and secret, drop us a line at <a href='mailto:api@tuneefy.com' class='color'>api@tuneefy.com</a>.</p>";
+</p><p>The legacy API is deprecated and will close on July 1st 2018. No api keys can be requested from now on.</p>";
 $lang['api_platforms_title'] = "Available platforms and platforms ids";
 $lang['api_platforms'] = "<p>tuneefy actually supports at most <span class=\"color\">%d</span> platforms (or music services) for search, lookup and/or aggregation.</p><p>Each platform has a unique id that is identified below, along with the supported methods :</p>";
 $lang['api_methods_title'] = "Available methods";
@@ -82,8 +82,8 @@ $lang['api_aggregate_description'] = "This method aggregates searches for a trac
 
 $lang['api_aggregate_warning'] ="<span class=\"color\">This method is extremely slow since it relies on synchronous calls to various third-party APIs. A typical request can take up to 20 secs. You've been warned.</span>";
 
-$lang['api_disclaimer_title'] = "Disclaimer";
-$lang['api_disclaimer'] = "<strong>This is work in progress (as of Jan' 13).</strong> The specifications should not change that much in the meantime but the underlying code may well do, thus changing the response times, parameters, calls, etc .. of the API. This API relies on various APIs, and is thus highly dependent on their availability, health, return codes, timeout, will to respond, apathy, etc ..<br/><br/>The aggregate method is particularly slow for now, but hopefully this will be improved in a near future.";
+$lang['api_disclaimer_title'] = "Warning";
+$lang['api_disclaimer'] = "<strong>This legacy API will close on July 1st 2018. Please migrate your clients to the new API available at <a href='https://data.tuneefy.com'>https://data.tuneefy.com</a>.<br><br>The new API is faster, provides a more secure authentication mechanism, and a lot of new methods.";
 
 // Search
 $lang['query_label'] = "Search for a track, album or paste a link here";

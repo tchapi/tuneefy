@@ -20,13 +20,13 @@ $lang['about_tip']= "C'est quoi, ce truc ?";
 
 // API
 $lang['api_title']="API";
-$lang['api_intro']="Documentation de l'API Rest tuneefy (beta)";
+$lang['api_intro']="Documentation de l'API Rest tuneefy (obsolète)";
 $lang['api_overview_title'] = "Généralités";
 
 $lang['api_overview'] = "<p>L'API tuneefy est une API RESTful vous permettant de rechercher des pistes et albums, traduire des permaliens et aggréger des résultats.</p><p>L'API peut renvoyer ses résultats sous deux formats : </p><ul><li><span class=\"color\">JSON</span></li><li><span class=\"color\">XML</span></li></ul><p>Le serveur vérifiera d'abord la présence d'un header '<span class=\"color\">HTTP_ACCEPT</span>' dans la requête, contenant un des MIME-types correspondants ci-dessus. Le type de retour peut être forcé grace au paramètre 'alt' disponible pour toutes les methodes détaillées ci-dessous. Par défaut, l'API retournera de l'XML.</p><p>Toutes les réponses sont encodées en <span class=\"color\">UTF-8</span>, toutes les requêtes doivent également l'être.</p>";
 $lang['api_endpoint_title'] = "URL de base de l'API";
 $lang['api_auth_title'] = "Authentification";
-$lang['api_auth'] = "<p>Chaque requête à l'API doit être signée suivant le protocole <span class=\"color\">2-legged <a href='http://oauth.net/documentation/getting-started/' target='_blank'>OAuth</a></span>.</p><p>Demandez dès aujourd'hui votre clé publique et privée en nous envoyant un mail : <a href='mailto:api@tuneefy.com' class='color'>api@tuneefy.com</a>.</p>";
+$lang['api_auth'] = "<p>Chaque requête à l'API doit être signée suivant le protocole <span class=\"color\">2-legged <a href='http://oauth.net/documentation/getting-started/' target='_blank'>OAuth</a></span>.</p><p>L'API étant obsolète, elle sera supprimée le 1er juillet 2018, et plus aucune clé n'est délivrée à partir de maintenant..</p>";
 $lang['api_platforms_title'] = "Plateformes disponibles via l'API et leur id correspondant";
 $lang['api_platforms'] = "<p>tuneefy supporte actuellement <span class=\"color\">%d</span> plateformes (ou sites musicaux) pour la recherche, la traduction et l'aggregation.</p><p>Chaque plateforme a un id unique qui est détaillé ci-dessous, avec les méthodes disponibles pour chaque plateforme :</p>";
 $lang['api_methods_title'] = "Méthodes disponibles";
@@ -71,8 +71,8 @@ $lang['api_aggregate_description'] = "Cette méthode aggrège les résultats pou
 
 $lang['api_aggregate_warning'] ="<span class=\"color\">Cette méthode est leeeeeeeeente car elle s'appuie sur des appels synchrones à des API tierces. Cela va changer et s'améliorer rapidement, mais vous ne pourrez pas dire qu'on ne vous a pas prévenus !</span>";
 
-$lang['api_disclaimer_title'] = "Précautions d'usage";
-$lang['api_disclaimer'] = "<strong>L'API est en cours de développement (màj Janvier 2013).</strong> Cette documentation ne va pas varier des masses mais il se peut que les performances de l'API, certains détails des appels de méthodes ou des retours changent de temps en temps alors que nous travaillons dessus. L'API s'appuie fortement sur des API tierces dont les temps de réponses et les performances de manière générale ne sont pas garanties, ce qui peut dégrader le résultats que renvoie l'API tuneefy.<br/><br/>La méthode aggregate notamment, est très lente pour le moment. Nous travaillons à la rendre plus rapide à l'instant même où vous lisez ces lignes.";
+$lang['api_disclaimer_title'] = "Attention";
+$lang['api_disclaimer'] = "<strong>Cette API est maintenant obsolète et sera supprimée au 1er juillet 2018. Veuillez migrer tous vos clients sur la nouvelle API à l'adresse suivante <a href='https://data.tuneefy.com'>https://data.tuneefy.com</a>.<br><br>Cette nouvelle API est plus rapide, plus complète et mieux sécurisée.";
 
 
 // Search
