@@ -87,7 +87,7 @@ desc('Restart PHP-FPM service');
 task('php-fpm:restart', function () {
     // The user must have rights for restart service
     // /etc/sudoers: username ALL=NOPASSWD:/bin/systemctl restart php-fpm.service
-    run('sudo systemctl restart php7.0-fpm.service');
+    run('sudo systemctl restart php7.1-fpm.service');
 });
 
 desc('Minify production JS');
